@@ -1,11 +1,29 @@
-import type { NextPage } from 'next'
+import { BlockInfo, getBlocks } from '@/calls/getBlocks'
+import { Block } from '@/components/blocks/Block'
+import type { GetServerSideProps, NextPage } from 'next'
 
-const BlockIndex: NextPage = () => {
+interface BlockIndexProps {
+  blocks: BlockInfo[]
+}
+
+const BlockIndex: NextPage<BlockIndexProps> = ({ blocks }) => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      Block
+    <div className="flex flex-col space-y-5">
+      {blocks.map((block) => (
+        <Block key={block.block} {...block} />
+      ))}
     </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps<
+  BlockIndexProps
+> = async () => {
+  return {
+    props: {
+      blocks: await getBlocks(),
+    },
+  }
 }
 
 export default BlockIndex
