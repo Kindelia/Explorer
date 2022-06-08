@@ -7,7 +7,7 @@ interface RunProps {
 
 const Run: NextPage<RunProps> = ({ name, run }) => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div className="flex flex-col items-center justify-center py-2">
       {run} {name}
     </div>
   )
@@ -18,7 +18,10 @@ interface RunParams extends NodeJS.Dict<string> {
   run: string
 }
 
-export const getServerSideProps: GetServerSideProps<RunProps, RunParams> = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps<
+  RunProps,
+  RunParams
+> = async ({ params }) => {
   if (!params)
     return {
       notFound: true,

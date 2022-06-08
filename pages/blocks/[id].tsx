@@ -1,23 +1,23 @@
-import type { GetServerSideProps, NextPage } from "next";
+import type { GetServerSideProps, NextPage } from 'next'
 
 interface Props {
-  id: string;
+  id: string
 }
 
 const Block: NextPage<Props> = ({ id }) => {
   // TODO: Why SSR not working with `id` ?
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div className="flex flex-col items-center justify-center">
       Showing block: {id}
     </div>
-  );
-};
+  )
+}
 
-export default Block;
+export default Block
 
 export const getServerSideProps: GetServerSideProps<Props> = async (
   context
 ) => {
-  const id = context.query?.id || "";
-  return { props: { id: id.toString() } };
-};
+  const id = context.query?.id || ''
+  return { props: { id: id.toString() } }
+}

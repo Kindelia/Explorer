@@ -16,7 +16,7 @@ const InteractIndex: NextPage = () => {
   }
 
   return (
-    <div className="flex min-h-screen flex-col py-2 px-8 lg:max-w-5xl lg:mx-auto">
+    <div className="flex flex-col">
       <h1 className="text-2xl mb-5">Interact</h1>
       <Editor
         height="70vh"

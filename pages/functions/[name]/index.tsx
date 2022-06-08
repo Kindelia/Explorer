@@ -19,7 +19,7 @@ const Block: FC<BlockProps> = ({ title, children }) => (
 
 const SingleFunction: NextPage<Function> = ({ code, history, state, name }) => {
   return (
-    <div className="flex min-h-screen flex-col py-2 px-8 lg:max-w-5xl lg:mx-auto">
+    <div className="flex flex-col">
       <h2 className="text-2xl">{name}</h2>
       <Block title="Code">
         <Codeblock>{code}</Codeblock>
