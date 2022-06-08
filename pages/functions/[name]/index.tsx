@@ -1,33 +1,9 @@
-import type { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next'
-import { useRouter } from 'next/router'
-import { PrismAsyncLight } from 'react-syntax-highlighter'
-import { coy as theme } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import type { GetServerSideProps, NextPage } from 'next'
 import Link from 'next/link'
 import { State } from '@/components/functions/State'
 import { FC, ReactNode } from 'react'
-
-const mockCode = `!(Counter action) {
-  !(Counter $(Inc)) = $(IO.take @x $(IO.save (+ x #1) #~ $(IO.done #0)))
-  !(Counter $(Get)) = !(IO.load @x $(IO.done x))
-} = #0 // initial state = #0`
-
-const mockHistory: Run[] = [
-  { id: '1', name: '$(Counter $(Inc))' },
-  { id: '2', name: '$(Counter $(Inc))' },
-  { id: '3', name: '$(Counter $(Inc))' },
-  { id: '4', name: '$(Counter $(Get))' },
-]
-
-interface Run {
-  id: string
-  name: string
-}
-interface SingleFunctionProps {
-  name: string;
-  code: string
-  state: unknown // TODO: checar estrutura do state
-  history: Run[]
-}
+import { getFunction, Function, GetFunctionParams } from '@/calls/getFunction'
+import { Codeblock } from '@/components/Codeblock'
 
 interface BlockProps {
   title: string
@@ -37,21 +13,19 @@ interface BlockProps {
 const Block: FC<BlockProps> = ({ title, children }) => (
   <div className="mt-5">
     <h3 className="text-xl">{title}</h3>
-    {children}
+    <div className="text-gray-600">{children}</div>
   </div>
 )
 
-const SingleFunction: NextPage<SingleFunctionProps> = ({ code, history, state, name }) => {
+const SingleFunction: NextPage<Function> = ({ code, history, state, name }) => {
   return (
     <div className="flex min-h-screen flex-col py-2 px-8 lg:max-w-5xl lg:mx-auto">
       <h2 className="text-2xl">{name}</h2>
       <Block title="Code">
-        <PrismAsyncLight style={theme} language={'javascript'} showLineNumbers>
-          {code}
-        </PrismAsyncLight>
+        <Codeblock>{code}</Codeblock>
       </Block>
       <Block title="State">
-        <State state={state} />
+        <State {...state} />
       </Block>
       <Block title="History">
         <div className="flex flex-col">
@@ -66,13 +40,9 @@ const SingleFunction: NextPage<SingleFunctionProps> = ({ code, history, state, n
   )
 }
 
-interface PageParams extends NodeJS.Dict<string> {
-  name: string
-}
-
 export const getServerSideProps: GetServerSideProps<
-  SingleFunctionProps,
-  PageParams
+  Function,
+  GetFunctionParams
 > = async ({ params }) => {
   if (!params) {
     return {
@@ -80,16 +50,8 @@ export const getServerSideProps: GetServerSideProps<
     }
   }
 
-  const { name } = params
-
-  // TODO: get from api
   return {
-    props: {
-      name,
-      code: mockCode,
-      state: {},
-      history: mockHistory,
-    },
+    props: await getFunction(params),
   }
 }
 

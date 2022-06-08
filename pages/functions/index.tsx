@@ -1,11 +1,30 @@
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
+import Link from 'next/link'
 
-const FunctionsIndex: NextPage = () => {
+interface FunctionIndexProps {
+  functions: string[]
+}
+
+const FunctionsIndex: NextPage<FunctionIndexProps> = ({ functions }) => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      Functions
+      {functions.map((func) => (
+        <Link href={`/functions/${func}`} key={func}>
+          {func}
+        </Link>
+      ))}
     </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps<
+  FunctionIndexProps
+> = async () => {
+  return {
+    props: {
+      functions: ['Counter'],
+    },
+  }
 }
 
 export default FunctionsIndex
