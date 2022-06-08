@@ -22,7 +22,7 @@ const InteractIndex: NextPage = () => {
           <a>Blocks</a>
         </Link>
         <Link href="/functions">
-          <a>Funtions</a>
+          <a>Functions</a>
         </Link>
       </div>
     </nav>
