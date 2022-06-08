@@ -1,14 +1,14 @@
 import { BlockInfo } from '@/calls/getBlocks'
 import Link from 'next/link'
-import { FC, ReactNode } from 'react'
+import { FC, HTMLAttributes, ReactNode } from 'react'
 
-interface InfoProps {
+interface InfoProps extends HTMLAttributes<HTMLDivElement> {
   title: string
   children: ReactNode
 }
 
-const Info: FC<InfoProps> = ({ title, children }) => (
-  <div>
+export const Info: FC<InfoProps> = ({ title, children, ...props }) => (
+  <div {...props}>
     <div>{title}</div>
     <div>{children}</div>
   </div>
