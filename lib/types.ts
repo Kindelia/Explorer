@@ -1,8 +1,8 @@
-import { V } from './util'
+import { Tagged, V } from './util'
 
-type Name = string // TODO: add nominal type tag
-type Hex = string
-type Hash = Hex
+export type Name = Tagged<'Name', string>
+export type Hex = Tagged<'Hex', string>
+export type Hash = Tagged<'Hash', string>
 
 // Raw API data
 // ============
@@ -78,7 +78,7 @@ export interface Var {
 
 interface Ctr {
   name: string
-  args: TermJson[]
+  args: Term[]
 }
 
 interface Num {
