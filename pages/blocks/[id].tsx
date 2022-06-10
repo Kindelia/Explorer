@@ -1,5 +1,6 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import * as api from '@/lib/api'
+import * as HVM from '@/lib/hvm'
 
 interface Props {
   id: string
@@ -9,11 +10,15 @@ interface Props {
 
 const Block: NextPage<Props> = ({ id, data, content }) => {
   // TODO: Why SSR not working with `id` ?
+  console.log(content)
+
+  const term = HVM.read_block_content(content);
+  console.log(term);
+  
+
   return (
     <div className="flex flex-col items-center justify-center">
       Showing block: {id}
-      <p>{JSON.stringify(data)}</p>
-      <p>{JSON.stringify(content)}</p>
     </div>
   )
 }

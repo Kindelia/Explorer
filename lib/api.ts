@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 
 import * as T from './types'
+import * as HVM from './hvm'
 
 type Response<T> =
   | {
@@ -38,7 +39,7 @@ export async function get_block_content(
   if (response.status !== 'ok') {
     throw new Error(`Error getting block content: ${response.error}`)
   }
-  return response.data
+  return response.data;
 }
 
 export async function get_funtions(): Promise<any> {}
