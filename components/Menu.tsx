@@ -1,7 +1,7 @@
-import type { NextPage } from 'next'
 import Link from 'next/link'
+import { FC } from 'react'
 
-const InteractIndex: NextPage = () => {
+const InteractIndex: FC = () => {
   return (
     <nav className="flex justify-between mb-5">
       <Link href="/">
