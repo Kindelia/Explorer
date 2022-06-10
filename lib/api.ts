@@ -14,7 +14,7 @@ type Response<T> =
     }
 
 const fetchApi = async <T>(endpoint: string, init?: RequestInit) => {
-  const response = (await fetch(`${process.env.API_URL}${endpoint}`, init).then(
+  const response = (await fetch(`${process.env.API_URL || 'http://localhost:8000'}${endpoint}`, init).then(
     (res) => res.json()
   )) as Response<T>
 
