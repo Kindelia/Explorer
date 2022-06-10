@@ -31,8 +31,7 @@ export function num_to_name(num: bigint): T.Name {
     let code = num % BigInt(64)
     code = (function () {
       if (code === BigInt(0)) return char_to_bigint('.')
-      if (is_between(code, 1, 10))
-        return code - BigInt(1) + char_to_bigint('0')
+      if (is_between(code, 1, 10)) return code - BigInt(1) + char_to_bigint('0')
       if (is_between(code, 11, 36))
         return code - BigInt(11) + char_to_bigint('A')
       if (is_between(code, 37, 62))
