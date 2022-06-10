@@ -7,6 +7,9 @@ export type Name = Tagged<'Name', string>
 export type Hex = Tagged<'Hex', string>
 export type Hash = Tagged<'Hash', string>
 
+export type BlockId = Hash | bigint
+export type FunctionId = Name | bigint
+
 // Raw API data
 // ============
 

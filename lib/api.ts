@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
 
 import * as T from './types'
-import * as HVM from './hvm'
+import axios from 'axios'
+import { AxiosRequestConfig } from 'axios'
 
-type Response<T> =
+type ApiResponse<T> =
   | {
       status: 'ok'
       data: T
@@ -13,53 +14,39 @@ type Response<T> =
       error: string
     }
 
-const fetchApi = async <T>(endpoint: string, init?: RequestInit) => {
-  const response = (await fetch(`${process.env.API_URL}${endpoint}`, init).then(
-    (res) => res.json()
-  )) as Response<T>
+const fetch_api = async <T>(
+  endpoint: string,
+  cfg?: AxiosRequestConfig
+): Promise<T> => {
+  const host = process?.env?.API_URL ?? 'http://localhost:8000' // TODO
+  const response = await axios.get<ApiResponse<T>>(`${host}${endpoint}`, cfg)
 
-  if (response.status !== 'ok') {
-    throw new Error(response.error)
+  // TODO: handle response error
+
+  let body = response.data
+  if (body.status !== 'ok') {
+    throw new Error(body.error)
   }
-
-  return response.data
+  return body.data
 }
 
-export async function get_blocks(): Promise<any> {
-  const response: any = await fetch(`http://localhost:8000/blocks`).then(
-    (res) => res.json()
-  )
-  return response
-}
+// Node
 
-export async function get_block(id: bigint | string): Promise<any> {
-  const response: any = await fetch(`http://localhost:8000/blocks/${id}`).then(
-    (res) => res.json()
-  )
-  // TODO jsoconversion
+// export const get_tick = () => fetch_api<never>('/tick')
 
-  return response
-}
+// Blocks
 
-export async function get_block_content(
-  id: bigint | string
-): Promise<T.BlockContentJson> {
-  const response = (await fetch(
-    `http://localhost:8000/blocks/${id}/content`
-  ).then((res) => res.json())) as Response<T.BlockContentJson>
+export const get_blocks = (range?: null) => fetch_api<T.BlockJson[]>('blocks')
 
-  if (response.status !== 'ok') {
-    throw new Error(`Error getting block content: ${response.error}`)
-  }
-  return response.data;
-}
+export const get_block = (id: T.BlockId) => fetch_api<T.BlockJson>(`/blocks/${id}`)
 
-export const get_functions = () => fetchApi<string[]>('/functions')
+export const get_block_content = (id: T.BlockId) => fetch_api<T.BlockContentJson>(`/blocks/${id}/content`)
 
-export async function get_function(id: bigint | string): Promise<any> {
-  return fetchApi(`/functions/${id}`)
-}
+// Functions
 
-export const get_function_state = (id: bigint | string) => fetchApi<T.StatementJson>(`/functions/${id}/state`)
+export const get_functions = () => fetch_api<T.Name[]>('/functions')
 
-export const get_tick = () => fetchApi<string>('/tick')
+// export const get_function = (id: FunctionId) => fetch_api<T.Function>(`/functions/${id}`)
+
+export const get_function_state = (id: T.FunctionId) =>
+  fetch_api<T.TermJson>(`/functions/${id}/state`)

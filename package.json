@@ -2,6 +2,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev-inspect": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start"
   },
@@ -9,6 +10,7 @@
     "@headlessui/react": "^1.6.4",
     "@heroicons/react": "^1.0.6",
     "@monaco-editor/react": "^4.4.5",
+    "axios": "^0.27.2",
     "next": "latest",
     "react": "18.1.0",
     "react-dom": "18.1.0",
