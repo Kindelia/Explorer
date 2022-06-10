@@ -1,11 +1,13 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import * as api from '@/lib/api'
 import * as HVM from '@/lib/hvm'
+import { Statement } from '@/components/Statement'
+import { BlockContentJson } from '@/lib/types'
 
 interface Props {
   id: string
   data: any
-  content: any
+  content: BlockContentJson
 }
 
 const Block: NextPage<Props> = ({ id, data, content }) => {
@@ -19,6 +21,9 @@ const Block: NextPage<Props> = ({ id, data, content }) => {
   return (
     <div className="flex flex-col items-center justify-center">
       Showing block: {id}
+      {content.map((statement, index) => (
+        <Statement key={index} {...statement} />
+      ))}
     </div>
   )
 }
