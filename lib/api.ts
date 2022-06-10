@@ -13,6 +13,18 @@ type Response<T> =
       error: string
     }
 
+const fetchApi = async <T>(endpoint: string, init?: RequestInit) => {
+  const response = (await fetch(`${process.env.API_URL}${endpoint}`, init).then(
+    (res) => res.json()
+  )) as Response<T>
+
+  if (response.status !== 'ok') {
+    throw new Error(response.error)
+  }
+
+  return response.data
+}
+
 export async function get_blocks(): Promise<any> {
   const response: any = await fetch(`http://localhost:8000/blocks`).then(
     (res) => res.json()
@@ -42,8 +54,12 @@ export async function get_block_content(
   return response.data;
 }
 
-export async function get_funtions(): Promise<any> {}
+export const get_functions = () => fetchApi<string[]>('/functions')
 
-export async function get_function(id: bigint | string): Promise<any> {}
+export async function get_function(id: bigint | string): Promise<any> {
+  return fetchApi(`/functions/${id}`)
+}
 
-export async function get_function_state(id: bigint | string): Promise<any> {}
+export const get_function_state = (id: bigint | string) => fetchApi<T.StatementJson>(`/functions/${id}/state`)
+
+export const get_tick = () => fetchApi<string>('/tick')
