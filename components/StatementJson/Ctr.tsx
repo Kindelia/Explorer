@@ -1,8 +1,8 @@
-import { StmtCtr } from '@/lib/types'
+import { StmtCtrJson } from '@/lib/types'
 import { V } from '@/lib/util'
 import { FC } from 'react'
 
-export const CtrRender: FC<V<'Ctr', StmtCtr>> = ({ Ctr }) => {
+export const CtrJsonRender: FC<V<'Ctr', StmtCtrJson>> = ({ Ctr }) => {
   const { args, name } = Ctr
 
   return (

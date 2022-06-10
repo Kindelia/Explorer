@@ -1,8 +1,10 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import * as api from '@/lib/api'
 import * as HVM from '@/lib/hvm'
-import { Statement } from '@/components/Statement'
+import { StatementJsonRender } from '@/components/StatementJsonRender'
 import { BlockContentJson } from '@/lib/types'
+import { StatementRender } from '@/components/StatementRender'
+import { ParsedUrlQuery } from 'querystring'
 
 interface Props {
   id: string
@@ -12,17 +14,17 @@ interface Props {
 
 const Block: NextPage<Props> = ({ id, data, content }) => {
   // TODO: Why SSR not working with `id` ?
-  console.log(content)
-
-  const term = HVM.read_block_content(content);
-  console.log(term);
-  
+  const terms = HVM.read_block_content(content)
+  console.log(terms)
 
   return (
     <div className="flex flex-col items-center justify-center">
       Showing block: {id}
       {content.map((statement, index) => (
-        <Statement key={index} {...statement} />
+        <StatementJsonRender key={index} {...statement} />
+      ))}
+      {terms.map((term, index) => (
+        <StatementRender key={index} {...term} />
       ))}
     </div>
   )
@@ -30,11 +32,16 @@ const Block: NextPage<Props> = ({ id, data, content }) => {
 
 export default Block
 
-export const getServerSideProps: GetServerSideProps<Props> = async (
-  context
-) => {
-  const _id = context.query?.id ?? ''
-  const id = typeof _id === 'string' ? _id : _id[0]
+interface Params extends ParsedUrlQuery {
+  id: string
+}
+
+export const getServerSideProps: GetServerSideProps<Props, Params> = async ({
+  params,
+}) => {
+  if (!params) return { notFound: true }
+
+  const { id } = params
   // TODO validate id and parse hex
   const data = await api.get_block(id)
   const content = await api.get_block_content(id)
