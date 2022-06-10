@@ -2,7 +2,7 @@ import type { GetServerSideProps, NextPage } from 'next'
 import * as api from '@/lib/api'
 import * as HVM from '@/lib/hvm'
 import { Statement } from '@/components/Statement'
-import { BlockContentJson } from '@/lib/types'
+import { BlockContentJson, Hash } from '@/lib/types'
 
 interface Props {
   id: string
@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   const _id = context.query?.id ?? ''
   const id = typeof _id === 'string' ? _id : _id[0]
   // TODO validate id and parse hex
-  const data = await api.get_block(id)
+  const data = await api.get_block(id as Hash) // TODO resolve this typing
   const content = await api.get_block_content(id)
   return { props: { id, data, content } }
 }
