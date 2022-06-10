@@ -66,6 +66,12 @@ const Num: FC<T.Num> = (num) => {
 }
 
 const Ctr: FC<T.Ctr> = (ctr) => {
+  // Pretty prints
+  if (ctr.name.startsWith('IO')) {
+    return <IO {...ctr} />
+  }
+
+  // Default
   return (
     <>
       <span>
@@ -73,13 +79,53 @@ const Ctr: FC<T.Ctr> = (ctr) => {
         {`${ctr.name}`}
         {ctr.args.map((arg, i) => (
           <>
-            {` `} <Term {...arg} key={ctr.name} />
+            {` `}
+            <Term {...arg} key={ctr.name} />
           </>
         ))}
         {`}`}
       </span>
     </>
   )
+}
+
+const IO: FC<T.Ctr> = (ctr) => {
+  let name = ctr.name.substring(3).toLowerCase()
+  let leng = ctr.args.length
+  let prps = ctr.args.slice(0, leng - 1)
+  let cont = ctr.args[leng - 1]
+
+  let value = flatten_enum<T.Term_Variants>(cont)
+
+  if (value.$ === 'Lam') {
+    let lamb_name = value.name === '___' ? '~' : value.name
+    return (
+      <>
+        <span>{`!${name} @${lamb_name}`}</span>
+        {prps.map((prop, i) => (
+          <>
+            {` `}
+            <Term {...prop} key={i} />
+          </>
+        ))}
+        <br />
+        {`  `}
+        <Term {...value.body} />
+      </>
+    )
+  } else {
+    return (
+      <>
+        <span>{`!${name}`}</span>
+        {ctr.args.map((arg, i) => (
+          <>
+            {` `}
+            <Term {...arg} key={i} />
+          </>
+        ))}
+      </>
+    )
+  }
 }
 
 const Fun: FC<T.Fun> = (fun) => {
@@ -125,10 +171,11 @@ const App: FC<T.App> = (app) => {
 }
 
 const Lam: FC<T.Lam> = (lam) => {
+  let name = lam.name === '___' ? '~' : lam.name
   return (
     <>
       <span>
-        {`@${lam.name} `}
+        {`@${name} `}
         <Term {...lam.body} />
       </span>
     </>
@@ -166,7 +213,8 @@ const Ident: FC<{ n: number; children: React.ReactNode }> = ({
 }) => {
   return (
     <>
-      {` `.repeat(n)} {children}
+      {` `.repeat(n)}
+      {children}
     </>
   )
 }

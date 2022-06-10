@@ -15,10 +15,10 @@ const Block: NextPage<Props> = ({ id, data, content }) => {
   const term = HVM.read_block_content(content)
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      Showing block: {id}
-      <pre className="whitespace-pre-wrap">
-        <code>
+    <div className="flex flex-col items-center justify-center space-y-5">
+      <h1>Showing block: {id}</h1>
+      <pre className="w-full whitespace-pre text-sm rounded-md bg-gray-100 max-w-full overflow-auto py-3 pl-3">
+        <code className="block max-w-full">
           {term.map((statement, index) => (
             <Statement key={index} {...statement} />
           ))}
