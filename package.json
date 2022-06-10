@@ -6,6 +6,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.4",
+    "@heroicons/react": "^1.0.6",
     "@monaco-editor/react": "^4.4.5",
     "next": "latest",
     "react": "18.1.0",
