@@ -1,5 +1,5 @@
 import * as T from '@/lib/types'
-import { get_variant, V } from '@/lib/util'
+import { flatten_enum } from '@/lib/util'
 import { FC } from 'react'
 
 const StmtCtr: FC<T.StmtCtr> = (ctr) => {
@@ -34,8 +34,8 @@ const Rule: FC<T.Rule> = (rule) => {
 }
 
 const Term: FC<T.Term> = (term) => {
-  let [tag, value] = get_variant(T.TermJson_TAGS, term)
-  switch (tag) {
+  let value = flatten_enum<T.Term_Variants>(term)
+  switch (value.$) {
     case 'Var':
       return <Var {...value} />
     case 'Ctr':
@@ -73,7 +73,7 @@ const Ctr: FC<T.Ctr> = (ctr) => {
         {`${ctr.name}`}
         {ctr.args.map((arg, i) => (
           <>
-            {` `} <Term {...arg} key={i} />
+            {` `} <Term {...arg} key={ctr.name} />
           </>
         ))}
         {`}`}
@@ -90,7 +90,7 @@ const Fun: FC<T.Fun> = (fun) => {
         {`${fun.name}`}
         {fun.args.map((arg, i) => (
           <>
-            {` `} <Term {...arg} key={i} />
+            {` `} <Term {...arg} key={fun.name} />
           </>
         ))}
         {`)`}
@@ -172,8 +172,8 @@ const Ident: FC<{ n: number; children: React.ReactNode }> = ({
 }
 
 export const Statement: FC<T.Statement> = (statement) => {
-  let [tag, value] = get_variant(T.StatementJson_TAGS, statement)
-  switch (tag) {
+  let value = flatten_enum<T.Statement_Variants>(statement)
+  switch (value.$) {
     case 'Ctr':
       return <StmtCtr {...value} />
     case 'Fun':
