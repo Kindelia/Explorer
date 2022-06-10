@@ -124,10 +124,13 @@ export interface Block {
 
 export type BlockContent = Statement[]
 
-export type Statement =
-  | Variant<'Ctr', StmtCtr>
-  | Variant<'Fun', StmtFun>
-  | Variant<'Run', StmtRun>
+export interface Statement_Variants {
+  Ctr: StmtCtr
+  Fun: StmtFun
+  Run: StmtRun
+}
+
+export type Statement = Enum<Statement_Variants>
 
 export interface StmtCtr {
   name: Name
@@ -148,15 +151,17 @@ export interface Rule {
   rhs: Term
 }
 
-export type Term =
-  | V<'Var', Var>
-  | V<'Dup', Dup>
-  | V<'Lam', Lam>
-  | V<'App', App>
-  | V<'Ctr', Ctr>
-  | V<'Fun', Fun>
-  | V<'Num', Num>
-  | V<'Op2', Op2>
+export interface Term_Variants {
+  Var: Var
+  Dup: Dup
+  Lam: Lam
+  App: App
+  Ctr: Ctr
+  Fun: Fun
+  Num: Num
+  Op2: Op2
+}
+export type Term = Enum<Term_Variants>
 
 export interface Var {
   name: Name

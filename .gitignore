@@ -39,3 +39,6 @@ yarn-error.log*
 
 # locks
 package-lock.json
+
+# enviroment
+.env
