@@ -1,24 +1,41 @@
-import { json } from 'stream/consumers'
 import * as T from './types'
+import { flatten_enum } from './util'
 
-let is_betweeen = (num: bigint, min: number, max: number): boolean => {
+// TODO: bigint literals
+
+let is_between = (num: bigint, min: number, max: number): boolean => {
   return num >= min && num <= max
 }
+
 let char_to_bigint = (char: string): bigint => {
   return BigInt(char.charCodeAt(0))
 }
 
+/** '1234567890' -> 1234567890n */
+export function read_num(str: T.StrNum): bigint {
+  let num = BigInt(0)
+  for (let i = 0; i < str.length; i++) {
+    num = num * BigInt(10) + char_to_bigint(str[i])
+  }
+  return num
+}
+
+/**
+ * Inverse of `name_to_num`.
+ *
+ * ```bigint -> 'Nat.add'```
+ */
 export function num_to_name(num: bigint): T.Name {
   let name = ''
   while (num > 0) {
     let code = num % BigInt(64)
     code = (function () {
       if (code === BigInt(0)) return char_to_bigint('.')
-      if (is_betweeen(code, 1, 10))
+      if (is_between(code, 1, 10))
         return code - BigInt(1) + char_to_bigint('0')
-      if (is_betweeen(code, 11, 36))
+      if (is_between(code, 11, 36))
         return code - BigInt(11) + char_to_bigint('A')
-      if (is_betweeen(code, 37, 62))
+      if (is_between(code, 37, 62))
         return code - BigInt(37) + char_to_bigint('a')
       if (code === BigInt(63)) return char_to_bigint('_')
       throw new Error('Invalid character') // TODO?
@@ -31,6 +48,11 @@ export function num_to_name(num: bigint): T.Name {
   return name as T.Name
 }
 
+/**
+ * Inverse of `num_to_name`.
+ *
+ * 'Nat.add' -> bigint
+ */
 export function name_to_num(name: T.Name): bigint {
   let num = BigInt(0)
   for (let i = 0; i < name.length; i++) {
@@ -67,23 +89,9 @@ export function read_block_content(block: T.BlockContentJson): T.BlockContent {
   return block.map(read_stmt)
 }
 
-function get_variant<T extends string, V extends object>(
-  tags: T[],
-  value: any
-): [T, any] {
-  for (let tag of tags) {
-    if (value.hasOwnProperty(tag)) {
-      return [tag as T, value[tag]]
-    }
-  }
-  throw new Error(
-    `Invalid variant '${JSON.stringify(value)}' for tags' ${tags}.`
-  )
-}
-
-export function read_stmt(stmt: T.StatementJson): T.Statement {
-  let [tag, value] = get_variant(T.StatementJson_TAGS, stmt)
-  switch (tag) {
+export function read_stmt(_stmt: T.StatementJson): T.Statement {
+  let value = flatten_enum<T.StatementJson_Variants>(_stmt)
+  switch (value.$) {
     case 'Ctr':
       return {
         Ctr: {
@@ -97,7 +105,7 @@ export function read_stmt(stmt: T.StatementJson): T.Statement {
           name: value.name,
           args: value.args,
           func: read_rules(value.func),
-          init: read_term(value.term),
+          init: read_term(value.init),
         },
       }
     case 'Run':
@@ -106,8 +114,6 @@ export function read_stmt(stmt: T.StatementJson): T.Statement {
           body: read_term(value.body),
         },
       }
-    default:
-      throw new Error(`Invalid statement tag '${tag}'.`)
   }
 }
 
@@ -122,9 +128,9 @@ export function read_rule(rule: T.RuleJson): T.Rule {
   }
 }
 
-export function read_term(term: T.TermJson): T.Term {
-  let [tag, value] = get_variant(T.TermJson_TAGS, term)
-  switch (tag) {
+export function read_term(_term: T.TermJson): T.Term {
+  let value = flatten_enum<T.TermJson_Variants>(_term)
+  switch (value.$) {
     case 'Var':
       return {
         Var: {
@@ -177,12 +183,10 @@ export function read_term(term: T.TermJson): T.Term {
     case 'Op2':
       return {
         Op2: {
-          oper: value.oper,
+          oper: read_num(value.oper),
           val0: read_term(value.val0),
           val1: read_term(value.val1),
         },
       }
-    default:
-      throw new Error(`Invalid term tag '${tag}'.`)
   }
 }

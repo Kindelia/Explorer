@@ -1,5 +1,8 @@
-import { Tagged, V } from './util'
+import { Tagged, Enum, FlatEnum, Variant } from './util'
+import { Variant as V } from './util'
 
+// TODO: comment
+export type StrNum = Tagged<'StrNum', string>
 export type Name = Tagged<'Name', string>
 export type Hex = Tagged<'Hex', string>
 export type Hash = Tagged<'Hash', string>
@@ -16,20 +19,20 @@ export interface BlockJson {
 
 export type BlockContentJson = StatementJson[]
 
-export const StatementJson_TAGS = ['Ctr', 'Fun', 'Run']
-
-export type StatementJson =
-  | V<'Ctr', StmtCtrJson>
-  | V<'Fun', StmtFunJson>
-  | V<'Run', StmtRunJson>
+export type StatementJson = Enum<StatementJson_Variants>
+export interface StatementJson_Variants {
+  Ctr: StmtCtrJson
+  Fun: StmtFunJson
+  Run: StmtRunJson
+}
 
 export interface StmtCtrJson {
-  name: string
-  args: string[]
+  name: Name
+  args: Name[]
 }
 export interface StmtFunJson {
-  name: string
-  args: string[]
+  name: Name
+  args: Name[]
   func: RuleJson[]
   init: TermJson
 }
@@ -53,29 +56,31 @@ export const TermJson_TAGS = [
   'Op2',
 ]
 
-export type TermJson =
-  | V<'Var', VarJson>
-  | V<'Dup', DupJson>
-  | V<'Lam', LamJson>
-  | V<'App', AppJson>
-  | V<'Ctr', CtrJson>
-  | V<'Fun', FunJson>
-  | V<'Num', NumJson>
-  | V<'Op2', Op2Json>
+export interface TermJson_Variants {
+  Var: VarJson
+  Dup: DupJson
+  Lam: LamJson
+  App: AppJson
+  Ctr: CtrJson
+  Fun: FunJson
+  Num: NumJson
+  Op2: Op2Json
+}
+export type TermJson = Enum<TermJson_Variants>
 
 export interface VarJson {
-  name: string
+  name: Name
 }
 
 export interface DupJson {
-  nam0: string
-  nam1: string
-  expr: Term
-  cont: Term
+  nam0: Name
+  nam1: Name
+  expr: TermJson
+  body: TermJson
 }
 
 export interface LamJson {
-  name: string
+  name: Name
   body: TermJson
 }
 
@@ -85,23 +90,23 @@ export interface AppJson {
 }
 
 export interface CtrJson {
-  name: string
+  name: Name
   args: TermJson[]
 }
 
 export interface FunJson {
-  name: string
+  name: Name
   args: TermJson[]
 }
 
 export interface Op2Json {
-  oper: string
+  oper: StrNum
   val0: TermJson
   val1: TermJson
 }
 
 export interface NumJson {
-  numb: string
+  numb: StrNum
 }
 
 // Kindelia Types
@@ -117,9 +122,9 @@ export interface Block {
 export type BlockContent = Statement[]
 
 export type Statement =
-  | V<'Ctr', StmtCtr>
-  | V<'Fun', StmtFun>
-  | V<'Run', StmtRun>
+  | Variant<'Ctr', StmtCtr>
+  | Variant<'Fun', StmtFun>
+  | Variant<'Run', StmtRun>
 
 export interface StmtCtr {
   name: Name
@@ -186,7 +191,7 @@ export interface Num {
 }
 
 export interface Op2 {
-  oper: Name
+  oper: bigint // TODO: parse this tag
   val0: Term
   val1: Term
 }
