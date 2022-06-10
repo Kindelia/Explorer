@@ -12,18 +12,18 @@ interface Props {
 
 const Block: NextPage<Props> = ({ id, data, content }) => {
   // TODO: Why SSR not working with `id` ?
-  console.log(content)
-
-  const term = HVM.read_block_content(content);
-  console.log(term);
-  
+  const term = HVM.read_block_content(content)
 
   return (
     <div className="flex flex-col items-center justify-center">
       Showing block: {id}
-      {content.map((statement, index) => (
-        <Statement key={index} {...statement} />
-      ))}
+      <pre className="whitespace-pre-wrap">
+        <code>
+          {term.map((statement, index) => (
+            <Statement key={index} {...statement} />
+          ))}
+        </code>
+      </pre>
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import { json } from 'stream/consumers'
 import * as T from './types'
+import { get_variant } from './util'
 
 let is_betweeen = (num: bigint, min: number, max: number): boolean => {
   return num >= min && num <= max
@@ -65,20 +66,6 @@ export function name_to_num(name: T.Name): bigint {
 
 export function read_block_content(block: T.BlockContentJson): T.BlockContent {
   return block.map(read_stmt)
-}
-
-function get_variant<T extends string, V extends object>(
-  tags: T[],
-  value: any
-): [T, any] {
-  for (let tag of tags) {
-    if (value.hasOwnProperty(tag)) {
-      return [tag as T, value[tag]]
-    }
-  }
-  throw new Error(
-    `Invalid variant '${JSON.stringify(value)}' for tags' ${tags}.`
-  )
 }
 
 export function read_stmt(stmt: T.StatementJson): T.Statement {
