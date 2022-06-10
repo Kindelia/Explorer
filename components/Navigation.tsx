@@ -31,7 +31,7 @@ export default function Navigation() {
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
         <>
-          <div className="max-w-4xl m-auto px-2 sm:px-6 lg:px-8">
+          <div className="max-w-full m-auto px-2 sm:px-6 lg:px-8">
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -86,7 +86,7 @@ export default function Navigation() {
                   onChange={(e) => setSearch(e.currentTarget.value)}
                   value={search}
                   placeholder="🔎 Search"
-                  className="hidden sm:block rounded px-3 w-50 py-2 mr-3 bg-gray-700 text-white placeholder:text-gray-400"
+                  className="hidden sm:block rounded px-3 w-50 py-2 mr-3 bg-gray-700 text-white placeholder:text-gray-400 w-full max-w-xs"
                 />
                 <button
                   type="button"
