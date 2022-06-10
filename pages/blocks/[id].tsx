@@ -1,28 +1,23 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import * as api from '@/lib/api'
 import * as HVM from '@/lib/hvm'
-import { StatementJsonRender } from '@/components/StatementJsonRender'
-import { BlockContentJson } from '@/lib/types'
+import { BlockContentJson, BlockJson } from '@/lib/types'
 import { StatementRender } from '@/components/StatementRender'
 import { ParsedUrlQuery } from 'querystring'
 
 interface Props {
   id: string
-  data: any
+  data: BlockJson
   content: BlockContentJson
 }
 
 const Block: NextPage<Props> = ({ id, data, content }) => {
   // TODO: Why SSR not working with `id` ?
   const terms = HVM.read_block_content(content)
-  console.log(terms)
-
+  console.log({ terms, data })
   return (
     <div className="flex flex-col items-center justify-center">
       Showing block: {id}
-      {content.map((statement, index) => (
-        <StatementJsonRender key={index} {...statement} />
-      ))}
       {terms.map((term, index) => (
         <StatementRender key={index} {...term} />
       ))}

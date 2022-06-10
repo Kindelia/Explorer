@@ -36,5 +36,5 @@ export const TermRender: FC<Term> = (term) => {
 
   if (isOp2(term)) return <Op2Render {...term} />
 
-  return <div>w</div>
+  return <div>TODO: implement Render</div>
 }
