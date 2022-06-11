@@ -14,7 +14,8 @@
     "next": "latest",
     "react": "18.1.0",
     "react-dom": "18.1.0",
-    "react-syntax-highlighter": "^15.5.0"
+    "react-syntax-highlighter": "^15.5.0",
+    "zustand": "^4.0.0-rc.1"
   },
   "devDependencies": {
     "@types/node": "17.0.35",
