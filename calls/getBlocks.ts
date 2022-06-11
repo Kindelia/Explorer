@@ -12,7 +12,7 @@ const mockBlock: BlockInfo[] = [
   {
     height: '731',
     hash: '0x18168080',
-    mana: 8000,
+    mana: 80000,
     size: 2000,
     ctrs: 0,
     funs: 0,

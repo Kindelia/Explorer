@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Navigation />
-      <div className="mx-auto max-w-full lg:max-w-4xl py-5 px-5">
+      <div className="mx-auto max-w-full lg:max-w-4xl p-2 sm:p-5">
         <Head>
           <title>Kind Explorer</title>
           <link
