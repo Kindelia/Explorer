@@ -78,10 +78,10 @@ const Ctr: FC<T.Ctr> = (ctr) => {
         {`{`}
         {`${ctr.name}`}
         {ctr.args.map((arg, i) => (
-          <>
+          <div key={i} className="inline">
             {` `}
-            <Term {...arg} key={ctr.name} />
-          </>
+            <Term {...arg} />
+          </div>
         ))}
         {`}`}
       </span>
@@ -104,10 +104,10 @@ const IO: FC<T.Ctr> = (ctr) => {
         <span>{`!${name} ${lamb_name}`}</span>
         {/* TODO: first term is function id, prettify to name */}
         {prps.map((prop, i) => (
-          <>
+          <div className="inline" key={i}>
             {` `}
-            <Term {...prop} key={i} />
-          </>
+            <Term {...prop} />
+          </div>
         ))}
         <br />
         {`  `}
@@ -119,10 +119,10 @@ const IO: FC<T.Ctr> = (ctr) => {
       <>
         <span>{`!${name}`}</span>
         {ctr.args.map((arg, i) => (
-          <>
+          <div className="inline" key={i}>
             {` `}
-            <Term {...arg} key={i} />
-          </>
+            <Term {...arg} />
+          </div>
         ))}
       </>
     )
@@ -136,9 +136,9 @@ const Fun: FC<T.Fun> = (fun) => {
         {`(`}
         {`${fun.name}`}
         {fun.args.map((arg, i) => (
-          <>
-            {` `} <Term {...arg} key={fun.name} />
-          </>
+          <div className="inline" key={i}>
+            {` `} <Term {...arg} />
+          </div>
         ))}
         {`)`}
       </span>
