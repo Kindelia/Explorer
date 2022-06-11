@@ -12,7 +12,7 @@ const FunctionsIndex: NextPage<FunctionIndexProps> = ({ functions }) => {
     <div className="flex flex-col space-y-5 ">
       {functions.map((name) => (
         <Link href={`/functions/${name}`} key={name}>
-          <a className="flex justify-between border-2 px-4 py-2 border-gray-700">
+          <a className="flex justify-between border-2 px-4 py-2 border-gray-500">
             <Info title="Name" className="w-1/3">
               {name}
             </Info>

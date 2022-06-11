@@ -101,7 +101,8 @@ const IO: FC<T.Ctr> = (ctr) => {
     let lamb_name = value.name === '___' ? '~' : value.name
     return (
       <>
-        <span>{`!${name} @${lamb_name}`}</span>
+        <span>{`!${name} ${lamb_name}`}</span>
+        {/* TODO: first term is function id, prettify to name */}
         {prps.map((prop, i) => (
           <>
             {` `}

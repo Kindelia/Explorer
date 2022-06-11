@@ -15,8 +15,9 @@ const Block: NextPage<Props> = ({ id, data, content }) => {
 
   return (
     <div className="flex flex-col items-center justify-center space-y-5">
-      <h1>Showing block: {id}</h1>
-      <pre className="w-full whitespace-pre text-sm rounded-md bg-gray-100 max-w-full overflow-auto py-3 pl-3">
+      <h1> { `Showing block: ${id}` } </h1>
+      {/* TODO: block info */}
+      <pre className="w-full whitespace-pre text-sm rounded-md bg-gray-50 max-w-full overflow-auto py-3 pl-3">
         <code className="block max-w-full">
           {term.map((statement, index) => (
             <Statement key={index} {...statement} />

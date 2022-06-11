@@ -28,7 +28,7 @@ export default function Navigation() {
   }, [asPath])
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-gray-50">
       {({ open }) => (
         <>
           <div className="max-w-7xl m-auto px-2 sm:px-6 lg:px-8">
@@ -68,9 +68,9 @@ export default function Navigation() {
                         <a
                           className={classNames(
                             item.current
-                              ? 'bg-gray-900 text-white'
-                              : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                            'px-3 py-2 rounded-md text-sm font-medium'
+                              ? 'border-2 border-gray-300'
+                              : 'border-2 border-transparent hover:bg-gray-700 hover:text-white',
+                            'px-3 py-2 rounded-md font-medium'
                           )}
                           aria-current={item.current ? 'page' : undefined}
                         >
@@ -85,12 +85,12 @@ export default function Navigation() {
                 <input
                   onChange={(e) => setSearch(e.currentTarget.value)}
                   value={search}
-                  placeholder="🔎 Search"
-                  className="hidden sm:block rounded px-3 w-50 py-2 mr-3 bg-gray-700 text-white placeholder:text-gray-400 flex-1 max-w-sm"
+                  placeholder="🔎 Search" // TODO: minimalist icon
+                  className="hidden sm:block rounded-md px-3 w-50 py-2 mr-3 bg-gray-000 flex-1 max-w-sm"
                 />
                 <button
                   type="button"
-                  className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                  className="bg-gray-200 p-1 rounded-full text-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                 >
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />

@@ -16,10 +16,10 @@ export const Info: FC<InfoProps> = ({ title, children, ...props }) => (
 
 export const Block: FC<BlockInfo> = (props) => {
   return (
-    <Link href={`/blocks/${props.hash}`}>
+    <Link href={`/blocks/${props.height}`}>
       <a>
-        <div className="flex flex-row justify-between border-2 px-4 py-2 border-gray-700">
-          <Info title="Block">#{props.block}</Info>
+        <div className="flex flex-row justify-between border-2 px-4 py-2 border-gray-500">
+          <Info title="Block">#{props.height}</Info>
           <Info title="Hash">{props.hash}</Info>
           <Info title="Mana">{props.mana}</Info>
           <Info title="Space">
