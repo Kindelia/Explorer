@@ -1,13 +1,12 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useEffect, useState } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
+import { useEffect, useState } from 'react'
+import { Disclosure, Menu } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-
-function classNames(...classes: any) {
-  return classes.filter(Boolean).join(' ')
-}
+import { SelectNode } from './SelectNode'
+import { classNames } from '@/utils/classnames'
+import { DropdownTransition } from './dropdown/DropdownTransition'
 
 export default function Navigation() {
   const { asPath } = useRouter()
@@ -49,20 +48,15 @@ export default function Navigation() {
                   <Link href="/">
                     <a>
                       <img
-                        className="block lg:hidden h-8 w-auto"
-                        src="https://kindelia.org/static/images/kindelia_icon.svg"
-                        alt="Workflow"
-                      />
-                      <img
-                        className="hidden lg:block h-8 w-auto"
-                        src="https://kindelia.org/static/images/kindelia_icon.svg"
+                        className="block h-8 w-auto"
+                        src="https://kindelia.org/_next/static/media/kindelia_logo.94d30f0d.svg"
                         alt="Workflow"
                       />
                     </a>
                   </Link>
                 </div>
                 <div className="hidden sm:block sm:ml-6">
-                  <div className="flex space-x-4">
+                  <div className="flex space-x-2">
                     {navigation.map((item) => (
                       <Link key={item.name} href={item.href}>
                         <a
@@ -78,6 +72,7 @@ export default function Navigation() {
                         </a>
                       </Link>
                     ))}
+                    <SelectNode />
                   </div>
                 </div>
               </div>
@@ -86,7 +81,7 @@ export default function Navigation() {
                   onChange={(e) => setSearch(e.currentTarget.value)}
                   value={search}
                   placeholder="🔎 Search" // TODO: minimalist icon
-                  className="hidden sm:block rounded-md px-3 w-50 py-2 mr-3 bg-gray-000 flex-1 max-w-sm"
+                  className="hidden sm:block rounded-md px-3 py-2 mr-3 bg-gray-000 flex-1 max-w-xs"
                 />
                 <button
                   type="button"
@@ -108,15 +103,7 @@ export default function Navigation() {
                       />
                     </Menu.Button>
                   </div>
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
+                  <DropdownTransition>
                     <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <Menu.Item>
                         {({ active }) => (
@@ -158,7 +145,7 @@ export default function Navigation() {
                         )}
                       </Menu.Item>
                     </Menu.Items>
-                  </Transition>
+                  </DropdownTransition>
                 </Menu>
               </div>
             </div>
