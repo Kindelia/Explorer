@@ -14,11 +14,11 @@ export const SelectNode: FC = () => {
   return (
     <Menu
       as="div"
-      className="border-2 border-transparent px-1 py-1 mx-2 my-1 rounded-md font-medium relative bg-gray-100"
+      className="border-2 border-transparent px-1 mx-2 my-2 rounded-md font-medium relative bg-gray-100 border-x border-y border-gray-600"
     >
       <Menu.Button className="w-14 text-sm">{selectedNode}</Menu.Button>
       <DropdownTransition>
-        <Menu.Items className="origin-bottom z-10 flex flex-col absolute right-0 mt-2 w-28 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="z-10 flex flex-col absolute mt-2 w-28 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
           {nodes.map((node) => (
             <Menu.Item key={node} disabled={selectedNode === node}>
               {({ disabled }) => (
