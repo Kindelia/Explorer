@@ -1,5 +1,6 @@
 import { Button } from '@/components/Button'
 import { Card } from '@/components/homepage/Card'
+import { Section } from '@/components/homepage/Section'
 import { Socials } from '@/components/homepage/Socials'
 import { Subscribe } from '@/components/homepage/Subscribe'
 import { getGithubInfo, GithubInfo } from '@/utils/getGithubInfo'
@@ -12,18 +13,18 @@ interface HomeProps {
 
 const Home: NextPage<HomeProps> = ({ hvm, kind }) => {
   return (
-    <div className="flex flex-col space-y-10">
-      <img
-        className="self-center pt-6"
-        alt="Kindelia logo"
-        height="200px"
-        width="200px"
-        src="https://kindelia.org/_next/static/media/kindelia_logo.94d30f0d.svg"
-      />
+    <div className="flex flex-col">
+      <Section>
+        <img
+          className="self-center pt-6 h-28 sm:h-48"
+          alt="Kindelia logo"
+          src="https://kindelia.org/_next/static/media/kindelia_logo.94d30f0d.svg"
+        />
 
-      <Button className="h-11 self-center">Explore Kindelia</Button>
+        <Button className="h-11 self-center">Explore Kindelia</Button>
+      </Section>
 
-      <div className="space-y-4">
+      <Section>
         <Card title="0-bug contracts" description="..." repo={kind} />
 
         <Card
@@ -32,11 +33,12 @@ const Home: NextPage<HomeProps> = ({ hvm, kind }) => {
           repo={hvm}
           reverse
         />
-      </div>
+      </Section>
 
-      <Subscribe />
-
-      <Socials />
+      <Section>
+        <Subscribe />
+        <Socials />
+      </Section>
     </div>
   )
 }
