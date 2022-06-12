@@ -3,6 +3,8 @@ import type { GetServerSideProps, NextPage } from 'next'
 import * as api from '@/lib/api'
 import * as hvm from '@/lib/hvm'
 import { Statement } from '@/components/Statement'
+import { Codeblock } from '@/components/Codeblock'
+import { ParsedUrlQuery } from 'querystring'
 
 interface Props {
   id: T.BlockId
@@ -15,28 +17,30 @@ const Block: NextPage<Props> = ({ id, data, content }) => {
 
   return (
     <div className="flex flex-col items-center justify-center space-y-5">
-      <h1> { `Showing block: ${id}` } </h1>
+      <h1> {`Showing block: ${id}`} </h1>
       {/* TODO: block info */}
-      <pre className="w-full whitespace-pre text-sm rounded-md bg-gray-50 max-w-full overflow-auto py-3 pl-3">
-        <code className="block max-w-full">
-          {term.map((statement, index) => (
-            <Statement key={index} {...statement} />
-          ))}
-        </code>
-      </pre>
+      <Codeblock>
+        {term.map((statement, index) => (
+          <Statement key={index} {...statement} />
+        ))}
+      </Codeblock>
     </div>
   )
 }
 
 export default Block
 
-export const getServerSideProps: GetServerSideProps<Props> = async (
-  context
-) => {
-  const _id = context.query?.id ?? ''
-  const __id = typeof _id === 'string' ? _id : _id[0]
-  // TODO validate id and parse hex
-  const id = __id as T.BlockId
+interface BlockParams extends ParsedUrlQuery {
+  id: string
+}
+
+export const getServerSideProps: GetServerSideProps<
+  Props,
+  BlockParams
+> = async (context) => {
+  if (!context.params) return { notFound: true }
+
+  const id = context.params.id as T.BlockId
   const data = await api.get_block(id)
   const content = await api.get_block_content(id)
   return { props: { id, data, content } }
