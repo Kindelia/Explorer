@@ -14,7 +14,7 @@ interface HomeProps {
 const Home: NextPage<HomeProps> = ({ hvm, kind }) => {
   return (
     <div className="flex flex-col">
-      <Section>
+      <Section className="justify-evenly">
         <img
           className="self-center pt-6 h-28 sm:h-48"
           alt="Kindelia logo"
@@ -24,7 +24,7 @@ const Home: NextPage<HomeProps> = ({ hvm, kind }) => {
         <Button className="h-11 self-center">Explore Kindelia</Button>
       </Section>
 
-      <Section>
+      <Section className="justify-evenly">
         <Card title="0-bug contracts" description="..." repo={kind} />
 
         <Card
@@ -35,7 +35,7 @@ const Home: NextPage<HomeProps> = ({ hvm, kind }) => {
         />
       </Section>
 
-      <Section>
+      <Section className="justify-around">
         <Subscribe />
         <Socials />
       </Section>
