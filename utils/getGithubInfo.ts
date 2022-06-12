@@ -5,6 +5,8 @@ export interface GithubInfo {
   language: string
   full_name: string
   name: string
+  forks_count: string
+  description: string
 }
 
 export const getGithubInfo = async (
@@ -15,12 +17,21 @@ export const getGithubInfo = async (
     `https://api.github.com/repos/${user}/${repository}`
   )
 
-  const { full_name, language, stargazers_count, name } = res.data
+  const {
+    full_name,
+    language,
+    stargazers_count,
+    name,
+    forks_count,
+    description,
+  } = res.data
 
   return {
     full_name,
     language,
     stargazers_count,
     name,
+    forks_count,
+    description,
   }
 }

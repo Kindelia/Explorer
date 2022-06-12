@@ -1,15 +1,23 @@
 import { classNames } from '@/utils/classnames'
 import { GithubInfo } from '@/utils/getGithubInfo'
 import { FC } from 'react'
+import { GithubCard } from './GithubCard'
 
 interface CardProps {
   title: string
   description: string
   repo: GithubInfo
   reverse?: boolean
+  showLanguage?: boolean
 }
 
-export const Card: FC<CardProps> = ({ title, description, repo, reverse }) => {
+export const Card: FC<CardProps> = ({
+  title,
+  description,
+  repo,
+  reverse,
+  showLanguage = true,
+}) => {
   return (
     <div
       className={classNames(
@@ -21,10 +29,7 @@ export const Card: FC<CardProps> = ({ title, description, repo, reverse }) => {
         <div className="text-lg font-semibold">{title}</div>
         <div>{description}</div>
       </div>
-      <div className="w-36 flex flex-col items-center h-full justify-center">
-        <div>{repo.name}</div>
-        <div>{repo.stargazers_count}*</div>
-      </div>
+      <GithubCard {...repo} showLanguage={showLanguage} />
     </div>
   )
 }

@@ -25,7 +25,12 @@ const Home: NextPage<HomeProps> = ({ hvm, kind }) => {
       </Section>
 
       <Section className="justify-evenly">
-        <Card title="0-bug contracts" description="..." repo={kind} />
+        <Card
+          title="0-bug contracts"
+          description="..."
+          repo={kind}
+          showLanguage={false}
+        />
 
         <Card
           title="Cheap state and computation"
