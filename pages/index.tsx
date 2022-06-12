@@ -29,7 +29,7 @@ const Home: NextPage<HomeProps> = ({ hvm, kind }) => {
           title="0-bug contracts"
           description="..."
           repo={kind}
-          showLanguage={false}
+          languageColor="#7582CD"
         />
 
         <Card
@@ -37,6 +37,7 @@ const Home: NextPage<HomeProps> = ({ hvm, kind }) => {
           description="Games, etc"
           repo={hvm}
           reverse
+          languageColor="#7A0410"
         />
       </Section>
 
@@ -55,7 +56,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   return {
     props: {
       hvm,
-      kind,
+      kind: { ...kind, language: 'Kind' },
     },
     revalidate: 3600,
   }

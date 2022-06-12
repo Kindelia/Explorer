@@ -8,7 +8,7 @@ interface CardProps {
   description: string
   repo: GithubInfo
   reverse?: boolean
-  showLanguage?: boolean
+  languageColor: string
 }
 
 export const Card: FC<CardProps> = ({
@@ -16,7 +16,7 @@ export const Card: FC<CardProps> = ({
   description,
   repo,
   reverse,
-  showLanguage = true,
+  languageColor,
 }) => {
   return (
     <div
@@ -29,7 +29,7 @@ export const Card: FC<CardProps> = ({
         <div className="text-lg font-semibold">{title}</div>
         <div>{description}</div>
       </div>
-      <GithubCard {...repo} showLanguage={showLanguage} />
+      <GithubCard {...repo} languageColor={languageColor} />
     </div>
   )
 }

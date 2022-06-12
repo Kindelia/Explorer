@@ -4,10 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBook, faCodeFork, faStar } from '@fortawesome/free-solid-svg-icons'
 
 export interface GithubCardProps extends GithubInfo {
-  showLanguage?: boolean
+  languageColor: string
 }
 
-export const GithubCard: FC<GithubCardProps> = ({ showLanguage, ...repo }) => (
+export const GithubCard: FC<GithubCardProps> = (repo) => (
   <a
     href={`https://github.com/${repo.full_name}`}
     target="_blank"
@@ -22,12 +22,10 @@ export const GithubCard: FC<GithubCardProps> = ({ showLanguage, ...repo }) => (
     </div>
     <div className="text-sm">{repo.description}</div>
     <div className="flex flex-row space-x-3 items-center text-sm">
-      {showLanguage && (
-        <div className="flex flex-row space-x-1 items-center">
-          <div style={{ color: '#7A0410' }}>●</div>
-          <div>{repo.language}</div>
-        </div>
-      )}
+      <div className="flex flex-row space-x-1 items-center">
+        <div style={{ color: repo.languageColor }}>●</div>
+        <div>{repo.language}</div>
+      </div>
       <div className="flex flex-row space-x-1 items-center">
         <FontAwesomeIcon icon={faStar} />
         <div>{repo.stargazers_count}</div>
