@@ -12,22 +12,22 @@ export const Subscribe: FC<SubscribeProps> = ({ className, ...props }) => {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
 
-    const formData = e.target as typeof e.target & SubscribeFormData
+    const { email } = e.target as typeof e.target & SubscribeFormData
 
-    console.log('subscribe', formData.email.value)
+    console.log('subscribe', email.value)
   }
 
   return (
     <form
       className={classNames(
         className ?? '',
-        'flex flex-col mx-auto items-center bg-gray-100 px-4 sm:px-14 py-4 rounded-sm space-y-6'
+        'flex flex-col mx-auto items-center bg-gray-100 px-4 sm:px-14 py-4 space-y-1 w-full sm:max-w-min'
       )}
       onSubmit={handleSubmit}
       {...props}
     >
       <div className="uppercase font-bold text-3xl">NEWSLETTER</div>
-      <div>Keep up with out latest news and events.</div>
+      <div className="pb-4">Keep up with our latest news and events.</div>
       <div className="sm:space-x-4 flex sm:flex-row flex-col justify-center items-center space-y-2 sm:space-y-0 w-full">
         <input
           placeholder="Email Address"

@@ -21,7 +21,7 @@ const Home: NextPage<HomeProps> = ({ hvm, kind }) => {
         src="https://kindelia.org/_next/static/media/kindelia_logo.94d30f0d.svg"
       />
 
-      <Button className="w-64 self-center">Explore Kindelia</Button>
+      <Button className="h-11 self-center">Explore Kindelia</Button>
 
       <div className="space-y-4">
         <Card title="0-bug contracts" description="..." repo={kind} />

@@ -23,17 +23,20 @@ const socials: SocialProps[] = [
 ]
 
 const Social: FC<SocialProps> = ({ href, ...props }) => (
-  <a href={href}>
-    <img {...props} />
+  <a href={href} target="_blank" rel="noreferrer">
+    <img {...props} alt={props.alt} />
   </a>
 )
 
 export const Socials: FC = () => {
   return (
-    <div className="flex space-x-4 items-center justify-center">
-      {socials.map((social) => (
-        <Social key={social.href} {...social} />
-      ))}
+    <div className="flex flex-col items-center space-y-2">
+      <div className="text-xl">Join Us</div>
+      <div className="flex space-x-4 items-center justify-center">
+        {socials.map((social) => (
+          <Social key={social.href} {...social} />
+        ))}
+      </div>
     </div>
   )
 }
