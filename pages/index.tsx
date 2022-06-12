@@ -1,5 +1,6 @@
 import { Button } from '@/components/Button'
 import { Card } from '@/components/homepage/Card'
+import { Socials } from '@/components/homepage/Socials'
 import { Subscribe } from '@/components/homepage/Subscribe'
 import { getGithubInfo, GithubInfo } from '@/utils/getGithubInfo'
 import type { GetStaticProps, NextPage } from 'next'
@@ -34,6 +35,8 @@ const Home: NextPage<HomeProps> = ({ hvm, kind }) => {
       </div>
 
       <Subscribe />
+
+      <Socials />
     </div>
   )
 }
