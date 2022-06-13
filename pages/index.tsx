@@ -29,7 +29,7 @@ const Home: NextPage<HomeProps> = ({ hvm, kind }) => {
           title="0-bug contracts"
           description="..."
           repo={kind}
-          languageColor="#7582CD"
+          languageColor="#CA1E8E"
         />
 
         <Card
