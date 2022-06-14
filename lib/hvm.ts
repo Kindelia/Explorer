@@ -13,11 +13,7 @@ let char_to_bigint = (char: string): bigint => {
 
 /** '1234567890' -> 1234567890n */
 export function read_num(str: T.StrNum): bigint {
-  let num = BigInt(0)
-  for (let i = 0; i < str.length; i++) {
-    num = num * BigInt(10) + char_to_bigint(str[i])
-  }
-  return num
+  return BigInt(str)
 }
 
 /**
@@ -82,6 +78,45 @@ export function name_to_num(name: T.Name): bigint {
     }
   }
   return num
+}
+
+export function num_to_oper(num: bigint): string {
+  switch (num) {
+    case BigInt(0):
+      return '+'
+    case BigInt(1):
+      return '-'
+    case BigInt(2):
+      return '*'
+    case BigInt(3):
+      return '/'
+    case BigInt(4):
+      return '%'
+    case BigInt(5):
+      return '&'
+    case BigInt(6):
+      return '|'
+    case BigInt(7):
+      return '^'
+    case BigInt(8):
+      return '<<'
+    case BigInt(9):
+      return '>>'
+    case BigInt(10):
+      return '<'
+    case BigInt(11):
+      return '<='
+    case BigInt(12):
+      return '='
+    case BigInt(13):
+      return '>='
+    case BigInt(14):
+      return '>'
+    case BigInt(15):
+      return '!='
+    default:
+      return '?'
+  }
 }
 
 export function read_block_content(block: T.BlockContentJson): T.BlockContent {

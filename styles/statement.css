@@ -1,0 +1,19 @@
+.statement-io {
+  color: darkred;
+}
+
+.statement-ctr {
+  color: green;
+}
+
+.statement-fun {
+  color: rgb(65, 209, 159);
+}
+
+.statement-keyword {
+  color: blue;
+}
+
+.statement-reference {
+  color: lightslategrey;
+}

@@ -1,11 +1,18 @@
+import { num_to_name, num_to_oper } from '@/lib/hvm'
 import * as T from '@/lib/types'
 import { flatten_enum } from '@/lib/util'
+import Link from 'next/link'
 import { FC } from 'react'
 
 const StmtCtr: FC<T.StmtCtr> = (ctr) => {
   return (
     <div>
-      <span>{`(${ctr.name} ${ctr.args.join(' ')} )`}</span>
+      <span className="statement-keyword">ctr</span>
+      <span> </span>
+      <span>{`{`}</span>
+      <span className="statement-ctr">{ctr.name}</span>
+      <span>{ctr.args.map((arg) => ' ' + arg)}</span>
+      <span>{`}`}</span>
     </div>
   )
 }
@@ -13,23 +20,48 @@ const StmtCtr: FC<T.StmtCtr> = (ctr) => {
 const StmtFun: FC<T.StmtFun> = (fun) => {
   return (
     <div>
-      <span>{`(${fun.name} ${fun.args.join(' ')}) {`}</span> <br />
+      <span className="statement-keyword">fun</span>
+      <span> </span>
+      <span>(</span>
+      <Link href={`/functions/${fun.name}`}>
+        <a className="statement-fun">{`${fun.name}`}</a>
+      </Link>
+      <span>{`${fun.args.map((arg) => ' ' + arg)}`}</span>
+      <span>)</span>
+      <span> </span>
+      <span>{`{`}</span>
+      <br />
       {fun.func.map((rule, i) => (
-        <Rule {...rule} key={i} />
+        <Indent n={2} key={i}>
+          <Rule {...rule} />
+          <br />
+        </Indent>
       ))}
+      <span>{`} `}</span>
+      <span className="statement-keyword">with</span>
+      <span>{` {`}</span>
+      <br />
+      <Indent n={2}>
+        <Term {...fun.init} />{' '}
+      </Indent>
+      <br />
+      <span>{`}`}</span>
     </div>
   )
 }
 
 const Rule: FC<T.Rule> = (rule) => {
   return (
-    <div>
-      <span>{'('}</span> <Term {...rule.lhs} /> <span>{')'}</span>
+    <>
+      <Term {...rule.lhs} />
+      <span> </span>
       <span>=</span>
-      <span>
+      <span> </span>
+      <br />
+      <Indent n={4}>
         <Term {...rule.rhs} />
-      </span>
-    </div>
+      </Indent>
+    </>
   )
 }
 
@@ -74,19 +106,50 @@ const Ctr: FC<T.Ctr> = (ctr) => {
   // Default
   return (
     <>
-      <span>
-        {`{`}
-        {`${ctr.name}`}
-        {ctr.args.map((arg, i) => (
-          <div key={i} className="inline">
-            {` `}
-            <Term {...arg} />
-          </div>
-        ))}
-        {`}`}
-      </span>
+      <span>{`{`}</span>
+      <span className="statement-ctr">{ctr.name}</span>
+      {ctr.args.map((arg, i) => (
+        <div key={i} className="inline">
+          {` `}
+          <Term {...arg} />
+        </div>
+      ))}
+      <span>{`}`}</span>
     </>
   )
+}
+
+// Pretty print of IO args
+const IO_ARGS: FC<{ term: T.Term; io: T.Ctr }> = ({ term, io }) => {
+  let value = flatten_enum<T.Term_Variants>(term)
+  if (io.name === 'IO.CALL' && value.$ === 'Num') {
+    let name = num_to_name(value.numb)
+    return (
+      <Link href={`/functions/${name}`}>
+        <a className="statement-reference">{name}</a>
+      </Link>
+    )
+  } else if (
+    io.name === 'IO.CALL' &&
+    value.$ === 'Ctr' &&
+    value.name.startsWith('Tuple')
+  ) {
+    let leng = value.args.length
+    return (
+      <>
+        <span>[</span>
+        {value.args.map((arg, i) => (
+          <div className="inline" key={i}>
+            <Term {...arg} />
+            {i < leng - 1 ? <span>, </span> : null}
+          </div>
+        ))}
+        <span>]</span>
+      </>
+    )
+  } else {
+    return <Term {...term} />
+  }
 }
 
 const IO: FC<T.Ctr> = (ctr) => {
@@ -101,23 +164,26 @@ const IO: FC<T.Ctr> = (ctr) => {
     let lamb_name = value.name === '___' ? '~' : value.name
     return (
       <>
-        <span>{`!${name} ${lamb_name}`}</span>
+        <span className="statement-io">{`!${name}`}</span>
+        <span> </span>
+        <span>{lamb_name}</span>
         {/* TODO: first term is function id, prettify to name */}
         {prps.map((prop, i) => (
           <div className="inline" key={i}>
             {` `}
-            <Term {...prop} />
+            <IO_ARGS term={prop} io={ctr} />
           </div>
         ))}
         <br />
-        {`  `}
-        <Term {...value.body} />
+        <Indent n={4}>
+          <Term {...value.body} />
+        </Indent>
       </>
     )
   } else {
     return (
       <>
-        <span>{`!${name}`}</span>
+        <span className="statement-io">{`!${name}`}</span>
         {ctr.args.map((arg, i) => (
           <div className="inline" key={i}>
             {` `}
@@ -130,18 +196,24 @@ const IO: FC<T.Ctr> = (ctr) => {
 }
 
 const Fun: FC<T.Fun> = (fun) => {
+  // Pretty prints
+  if (fun.name.startsWith('IO')) {
+    return <IO {...fun} />
+  }
+
   return (
     <>
-      <span>
-        {`(`}
-        {`${fun.name}`}
-        {fun.args.map((arg, i) => (
-          <div className="inline" key={i}>
-            {` `} <Term {...arg} />
-          </div>
-        ))}
-        {`)`}
-      </span>
+      <span>(</span>
+      <Link href={`/functions/${fun.name}`}>
+        <a className="statement-fun">{fun.name}</a>
+      </Link>
+      {fun.args.map((arg, i) => (
+        <div className="inline" key={i}>
+          {` `}
+          <Term {...arg} />
+        </div>
+      ))}
+      <span>)</span>
     </>
   )
 }
@@ -149,12 +221,13 @@ const Fun: FC<T.Fun> = (fun) => {
 const Op2: FC<T.Op2> = (op2) => {
   return (
     <>
-      <span>
-        {`(`}
-        {`${op2.oper} `}
-        <Term {...op2.val0} /> {` `}
-        <Term {...op2.val0} />
-      </span>
+      <span>(</span>
+      <span className="statement-op2">{num_to_oper(op2.oper)}</span>
+      <span> </span>
+      <Term {...op2.val0} />
+      <span> </span>
+      <Term {...op2.val1} />
+      <span>)</span>
     </>
   )
 }
@@ -186,29 +259,37 @@ const Lam: FC<T.Lam> = (lam) => {
 const Dup: FC<T.Dup> = (dup) => {
   return (
     <>
-      <span>
-        {`dup ${dup.nam0} ${dup.nam1} = `}
-        <Term {...dup.expr} /> {` `}
+      <span className="statement-keyword">dup</span>
+      <span> </span>
+      <span>{dup.nam0}</span>
+      <span> </span>
+      <span>{dup.nam1}</span>
+      <span> = </span>
+      <Term {...dup.expr} />
+      <span>;</span>
+      <br />
+      <Indent n={4}>
         <Term {...dup.body} />
-      </span>
+      </Indent>
     </>
   )
 }
 
 const StmtRun: FC<T.StmtRun> = (run) => {
   return (
-    <>
-      <span>{'run {'}</span> <br />
-      <Ident n={2}>
+    <div>
+      <span className="statement-keyword">run</span>
+      <span>{' {'}</span> <br />
+      <Indent n={4}>
         <Term {...run.body} />
-      </Ident>
+      </Indent>
       <br />
       <span>{'}'}</span>
-    </>
+    </div>
   )
 }
 
-const Ident: FC<{ n: number; children: React.ReactNode }> = ({
+const Indent: FC<{ n: number; children: React.ReactNode }> = ({
   n,
   children,
 }) => {
@@ -232,4 +313,17 @@ export const Statement: FC<T.Statement> = (statement) => {
     default:
       return <>no</>
   }
+}
+
+export const Statements: FC<{ statements: T.Statement[] }> = (prop) => {
+  return (
+    <>
+      {prop.statements.map((statement, i) => (
+        <div className="statement" key={i}>
+          <Statement {...statement} />
+          <br />
+        </div>
+      ))}
+    </>
+  )
 }
