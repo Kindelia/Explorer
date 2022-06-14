@@ -5,7 +5,17 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      scale: {
+        102: '1.02',
+      },
+      height: {
+        '80-screen': '80vh',
+      },
+      borderWidth: {
+        1: '1px',
+      },
+    },
   },
   plugins: [],
 }
