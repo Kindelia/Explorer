@@ -139,13 +139,13 @@ export function read_stmt(_stmt: T.StatementJson): T.Statement {
           name: value.name,
           args: value.args,
           func: read_rules(value.func),
-          init: read_term(value.init),
+          init: read_term(value.init, 0),
         },
       }
     case 'Run':
       return {
         Run: {
-          body: read_term(value.body),
+          body: read_term(value.body, 0),
         },
       }
   }
@@ -157,70 +157,79 @@ export function read_rules(rules: T.RuleJson[]): T.Rule[] {
 
 export function read_rule(rule: T.RuleJson): T.Rule {
   return {
-    lhs: read_term(rule.lhs),
-    rhs: read_term(rule.rhs),
+    lhs: read_term(rule.lhs, 0),
+    rhs: read_term(rule.rhs, 0),
   }
 }
 
-export function read_term(_term: T.TermJson): T.Term {
-  let value = flatten_enum<T.TermJson_Variants>(_term)
-  switch (value.$) {
-    case 'Var':
-      return {
-        Var: {
-          name: value.name,
-        },
-      }
-    case 'Dup':
-      return {
-        Dup: {
-          nam0: value.nam0,
-          nam1: value.nam1,
-          expr: read_term(value.expr),
-          body: read_term(value.body),
-        },
-      }
-    case 'Lam':
-      return {
-        Lam: {
-          name: value.name,
-          body: read_term(value.body),
-        },
-      }
-    case 'App':
-      return {
-        App: {
-          argm: read_term(value.argm),
-          func: read_term(value.func),
-        },
-      }
-    case 'Ctr':
-      return {
-        Ctr: {
-          name: value.name,
-          args: value.args.map(read_term),
-        },
-      }
-    case 'Fun':
-      return {
-        Fun: {
-          name: value.name,
-          args: value.args.map(read_term),
-        },
-      }
-    case 'Num':
-      return {
-        Num: {
-          numb: BigInt(value.numb),
-        },
-      }
-    case 'Op2':
-      return {
-        Op2: {
-          oper: read_num(value.oper),
-          val0: read_term(value.val0),
-          val1: read_term(value.val1),
-        },
-      }
+export function read_term(_term: T.TermJson, depth: number): T.Term {
+  const MAX_DEPTH = 10
+  if (depth > MAX_DEPTH) {
+    return {
+      Var: {
+        name: '...' as T.Name,
+      },
+    }
+  } else {
+    let value = flatten_enum<T.TermJson_Variants>(_term)
+    switch (value.$) {
+      case 'Var':
+        return {
+          Var: {
+            name: value.name,
+          },
+        }
+      case 'Dup':
+        return {
+          Dup: {
+            nam0: value.nam0,
+            nam1: value.nam1,
+            expr: read_term(value.expr, depth + 1),
+            body: read_term(value.body, depth + 1),
+          },
+        }
+      case 'Lam':
+        return {
+          Lam: {
+            name: value.name,
+            body: read_term(value.body, depth + 1),
+          },
+        }
+      case 'App':
+        return {
+          App: {
+            argm: read_term(value.argm, depth + 1),
+            func: read_term(value.func, depth + 1),
+          },
+        }
+      case 'Ctr':
+        return {
+          Ctr: {
+            name: value.name,
+            args: value.args.map((arg) => read_term(arg, depth + 1)),
+          },
+        }
+      case 'Fun':
+        return {
+          Fun: {
+            name: value.name,
+            args: value.args.map((arg) => read_term(arg, depth + 1)),
+          },
+        }
+      case 'Num':
+        return {
+          Num: {
+            numb: BigInt(value.numb),
+          },
+        }
+      case 'Op2':
+        return {
+          Op2: {
+            oper: read_num(value.oper),
+            val0: read_term(value.val0, depth + 1),
+            val1: read_term(value.val1, depth + 1),
+          },
+        }
+    }
   }
 }
