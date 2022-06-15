@@ -41,7 +41,7 @@ const StmtFun: FC<T.StmtFun> = (fun) => {
       <span className="statement-keyword">with</span>
       <span>{` {`}</span>
       <br />
-      <Indent n={2}>
+      <Indent n={4}>
         <Term {...fun.init} />{' '}
       </Indent>
       <br />
