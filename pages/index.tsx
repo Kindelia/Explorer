@@ -3,6 +3,7 @@ import { Card } from '@/components/homepage/Card'
 import { Section } from '@/components/homepage/Section'
 import { Socials } from '@/components/homepage/Socials'
 import { Subscribe } from '@/components/homepage/Subscribe'
+import Logo from '@/components/Logo'
 import { getGithubInfo, GithubInfo } from '@/utils/getGithubInfo'
 import type { GetStaticProps, NextPage } from 'next'
 
@@ -15,12 +16,7 @@ const Home: NextPage<HomeProps> = ({ hvm, kind }) => {
   return (
     <div className="flex flex-col">
       <Section className="justify-evenly">
-        <img
-          className="self-center pt-6 h-28 sm:h-48"
-          alt="Kindelia logo"
-          src="https://kindelia.org/_next/static/media/kindelia_logo.94d30f0d.svg"
-        />
-
+        <Logo className="self-center pt-6 h-28 sm:h-48" />
         <Button className="h-11 self-center">Explore Kindelia</Button>
       </Section>
 

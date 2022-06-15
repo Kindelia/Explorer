@@ -5,6 +5,7 @@ import * as hvm from '@/lib/hvm'
 import { Statements } from '@/components/Statement'
 import { Codeblock } from '@/components/Codeblock'
 import { ParsedUrlQuery } from 'querystring'
+import { AxiosError } from 'axios'
 
 interface Props {
   id: T.BlockId
@@ -37,9 +38,14 @@ export const getServerSideProps: GetServerSideProps<
   BlockParams
 > = async (context) => {
   if (!context.params) return { notFound: true }
-
-  const id = context.params.id as T.BlockId
-  const data = await api.get_block(id)
-  const content = await api.get_block_content(id)
-  return { props: { id, data, content } }
+  try {
+    const id = context.params.id as T.BlockId
+    let [data, content] = await Promise.all([
+      api.get_block(id),
+      api.get_block_content(id),
+    ])
+    return { props: { id, data, content } }
+  } catch (err) {
+    return { notFound: true }
+  }
 }

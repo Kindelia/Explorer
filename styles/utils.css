@@ -1,0 +1,8 @@
+.center-vertical-screen {
+  width: 100%;
+  min-height: calc(max(100vh, 640px) - calc(64px + 2.5rem));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
