@@ -53,10 +53,12 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const hvm = await getGithubInfo('kindelia', 'hvm')
   const kind = await getGithubInfo('kindelia', 'kind')
 
+  kind.language = 'Kind'
+
   return {
     props: {
       hvm,
-      kind: { ...kind, language: 'Kind' },
+      kind,
     },
     revalidate: 3600,
   }
