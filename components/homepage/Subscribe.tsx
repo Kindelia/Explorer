@@ -1,6 +1,7 @@
 import { classNames } from '@/utils/classnames'
-import { FC, FormEventHandler, HTMLAttributes, useState } from 'react'
+import { FC, FormEventHandler, HTMLAttributes, useRef } from 'react'
 import { Button } from '../Button'
+import { useMailchimp } from '@/hooks/useMailchimp'
 
 interface SubscribeProps extends HTMLAttributes<HTMLFormElement> {}
 
@@ -9,19 +10,29 @@ interface SubscribeFormData {
 }
 
 export const Subscribe: FC<SubscribeProps> = ({ className, ...props }) => {
+  const formRef = useRef<HTMLFormElement>(null)
+
+  const [subscribe, { loading, message, status }] = useMailchimp({
+    url: process.env.NEXT_PUBLIC_MAILCHIMP_URL as string,
+    onSuccess: () => {
+      formRef.current?.reset()
+    },
+  })
+
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
 
     const { email } = e.target as typeof e.target & SubscribeFormData
 
-    console.log('subscribe', email.value)
+    subscribe({ EMAIL: email.value })
   }
 
   return (
     <form
+      ref={formRef}
       className={classNames(
         className ?? '',
-        'flex flex-col mx-auto items-center bg-gray-100 px-4 sm:px-14 py-4 space-y-1 w-full sm:max-w-min'
+        'flex flex-col mx-auto items-center bg-gray-100 px-4 sm:px-14 py-4 space-y-3 w-full sm:max-w-min'
       )}
       onSubmit={handleSubmit}
       {...props}
@@ -38,10 +49,19 @@ export const Subscribe: FC<SubscribeProps> = ({ className, ...props }) => {
         />
         <Button
           type="submit"
-          className="uppercase bg-gray-700 text-white hover:bg-gray-800"
+          className="uppercase bg-gray-700 text-white hover:bg-gray-800 disabled:bg-gray-300"
+          disabled={loading}
         >
           Subscribe
         </Button>
+      </div>
+      <div
+        className={classNames(
+          status === 'error' ? 'text-red-400' : 'text-green-600',
+          'text-xs h-3 pb-4 text-center'
+        )}
+      >
+        {message?.toString()}
       </div>
     </form>
   )
