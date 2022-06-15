@@ -235,11 +235,11 @@ const Op2: FC<T.Op2> = (op2) => {
 const App: FC<T.App> = (app) => {
   return (
     <>
-      <span>
-        {`(! `}
-        <Term {...app.func} /> {` `}
-        <Term {...app.argm} />
-      </span>
+      <span>(!</span>
+      <Term {...app.func} />
+      <span> </span>
+      <Term {...app.argm} />
+      <span>)</span>
     </>
   )
 }
@@ -248,10 +248,10 @@ const Lam: FC<T.Lam> = (lam) => {
   let name = lam.name === '___' ? '~' : lam.name
   return (
     <>
-      <span>
-        {`@${name} `}
-        <Term {...lam.body} />
-      </span>
+      <span>@</span>
+      <span>{name}</span>
+      <span> </span>
+      <Term {...lam.body} />
     </>
   )
 }
