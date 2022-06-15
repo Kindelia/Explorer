@@ -321,7 +321,7 @@ export const Statements: FC<{ statements: T.Statement[] }> = (prop) => {
       {prop.statements.map((statement, i) => (
         <div className="statement" key={i}>
           <Statement {...statement} />
-          <br />
+          {i < prop.statements.length - 1 ? <br /> : null}
         </div>
       ))}
     </>
