@@ -36,11 +36,14 @@ const fetch_api = async <T>(
 
 // Blocks
 
-export const get_blocks = (range?: null) => fetch_api<T.BlockJson[]>('blocks')
+export const get_blocks = (range?: null) =>
+  fetch_api<T.BlockInfoJson[]>('/blocks')
 
-export const get_block = (id: T.BlockId) => fetch_api<T.BlockJson>(`/blocks/${id}`)
+export const get_block = (id: T.BlockId) =>
+  fetch_api<T.BlockJson>(`/blocks/${id}`)
 
-export const get_block_content = (id: T.BlockId) => fetch_api<T.BlockContentJson>(`/blocks/${id}/content`)
+export const get_block_content = (id: T.BlockId) =>
+  fetch_api<T.BlockContentJson>(`/blocks/${id}/content`)
 
 // Functions
 

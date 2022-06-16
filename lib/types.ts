@@ -10,8 +10,22 @@ export type Hash = Tagged<'Hash', string>
 export type BlockId = Hash | bigint
 export type FunctionId = Name | bigint
 
+export type Result<T, E> = Enum<Result_Variants<T, E>>
+export interface Result_Variants<T, E> {
+  Ok: T
+  Err: E
+}
+
 // Raw API data
 // ============
+
+export interface BlockInfoJson {
+  block: BlockJson
+  content: BlockContentJson
+  hash: Hash
+  height: number
+  results: BlockResultsJson[]
+}
 
 export interface BlockJson {
   time: string
@@ -111,6 +125,36 @@ export interface Op2Json {
 export interface NumJson {
   numb: StrNum
 }
+
+export interface StmtCtrInfoJson {
+  name: Name
+  args: Name[]
+}
+
+export interface StmtFunInfoJson {
+  name: Name
+  args: Name[]
+}
+
+export interface StmtRunInfoJson {
+  done_term: TermJson
+  end_size: StrNum
+  size_diff: StrNum
+  used_mana: StrNum
+}
+
+export type StatementInfoJson = Enum<StatementInfoJson_Variants>
+export interface StatementInfoJson_Variants {
+  Ctr: StmtCtrInfoJson
+  Fun: StmtFunInfoJson
+  Run: StmtRunInfoJson
+}
+
+export type BlockResultsJson = Result<StatementInfoJson, { err: string }>
+export type BlockResultsJson_Variants = Result_Variants<
+  StatementInfoJson,
+  { err: string }
+>
 
 // Kindelia Types
 // ==============
