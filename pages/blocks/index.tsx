@@ -31,6 +31,7 @@ export const getServerSideProps: GetServerSideProps<
   //   console.log(err)
   //   return { redirect: { destination: '/', permanent: true } }
   // }
+  // TODO: proper error handling, should we create an error page?
 }
 
 export default BlockIndex
