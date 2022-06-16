@@ -15,9 +15,11 @@ export type FlatEnum<T> = { [K in keyof T]: FlatVariant<K, T[K]> }[keyof T]
 
 export function flatten_enum<V>(value: Enum<V>): FlatEnum<V> {
   for (let tag in value) {
-    let _result = value[tag]
-    let result = { $: tag, ..._result }
-    return result
+    if (tag !== '$') {
+      let _result = value[tag]
+      let result = { $: tag, ..._result }
+      return result
+    }
   }
   throw new Error(`Variant is empty: '${value}'.`)
 }
