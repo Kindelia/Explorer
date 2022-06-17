@@ -11,11 +11,14 @@ type Placeholder = typeof PLACEHOLDER
 
 // Magic as far as I'm concerned.
 // Taken from https://stackoverflow.com/a/50375286/3229534
-type UnionToIntersection<U> =
-  (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
+type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (
+  k: infer I
+) => void
+  ? I
+  : never
 
 // This utility lets T be indexed by any key
-type Indexify<T> = T & { [str: Key]: Placeholder; }
+type Indexify<T> = T & { [str: Key]: Placeholder }
 
 // To make a type where all values are undefined, so that in AllUnionKeys<T>
 // TS doesn't remove the keys whose values are incompatible, e.g. string & number
@@ -25,4 +28,6 @@ type UndefinedVals<T> = { [K in keyof T]: unknown }
 type AllUnionKeys<T> = keyof UnionToIntersection<T>
 
 // Where the (rest of the) magic happens ✨
-export type AllFields<T> = { [K in AllUnionKeys<T>]: Exclude<Indexify<T>[K], Placeholder> }
+export type AllFields<T> = {
+  [K in AllUnionKeys<T>]: Exclude<Indexify<T>[K], Placeholder>
+}

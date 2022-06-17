@@ -1,6 +1,6 @@
+import { classNames } from '@/utils/classnames'
 import { Disclosure, Menu } from '@headlessui/react'
 
-import { classNames } from '@/utils/classnames'
 import { DropdownTransition } from './DropdownTransition'
 
 export default function ProfileDropdown() {

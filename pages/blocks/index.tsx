@@ -1,7 +1,8 @@
+import type { GetServerSideProps, NextPage } from 'next'
+
 import { Block } from '@/components/blocks/Block'
 import { get_blocks } from '@/lib/api'
 import { BlockInfoJson, BlockJson } from '@/lib/types'
-import type { GetServerSideProps, NextPage } from 'next'
 
 interface BlockIndexProps {
   blocks: BlockInfoJson[]

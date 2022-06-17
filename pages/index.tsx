@@ -1,4 +1,5 @@
 import type { GetStaticProps, NextPage } from 'next'
+
 import { Button } from '@/components/Button'
 import { Card } from '@/components/homepage/Card'
 import { Section } from '@/components/homepage/Section'

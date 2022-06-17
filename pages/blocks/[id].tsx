@@ -1,12 +1,12 @@
 import type { GetServerSideProps, NextPage } from 'next'
-import { Statements } from '@/components/Statement'
-import { Codeblock } from '@/components/Codeblock'
-import { ParsedUrlQuery } from 'querystring'
 
-import { hash_hex_from } from '@/lib/hex'
-import * as T from '@/lib/types'
+import { Codeblock } from '@/components/Codeblock'
+import { Statements } from '@/components/Statement'
 import * as api from '@/lib/api'
+import { hash_hex_from } from '@/lib/hex'
 import * as hvm from '@/lib/hvm'
+import * as T from '@/lib/types'
+import { ParsedUrlQuery } from 'querystring'
 
 interface Props {
   block_info: T.BlockInfoJson
@@ -20,15 +20,19 @@ const Block: NextPage<Props> = ({ block_info }) => {
 
   return (
     <div className="flex flex-col items-center justify-center space-y-5">
-      <h1> Block hash: <code> {hash} </code> </h1>
-      <div> Block height: <code> {height} </code> </div>
+      <h1>
+        {' '}
+        Block hash: <code> {hash} </code>{' '}
+      </h1>
+      <div>
+        {' '}
+        Block height: <code> {height} </code>{' '}
+      </div>
       <Codeblock>
         <Statements statements={statements} />
       </Codeblock>
       <h2> Results: </h2>
-      <pre>
-        { result_txts.join("\n\n") }
-      </pre>
+      <pre>{result_txts.join('\n\n')}</pre>
     </div>
   )
 }

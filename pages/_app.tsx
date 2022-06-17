@@ -1,12 +1,12 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
-import '@fortawesome/fontawesome-svg-core/styles.css'
-import { config } from '@fortawesome/fontawesome-svg-core'
 
+import Navbar from '@/components/Navbar/'
+import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
 import '@/styles/globals.css'
 import '@/styles/utils.css'
 import '@/styles/statement.css'
-import Navbar from '@/components/Navbar/'
 
 config.autoAddCss = false
 

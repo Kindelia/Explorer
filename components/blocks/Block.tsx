@@ -1,3 +1,6 @@
+import Link from 'next/link'
+import { FC, HTMLAttributes, ReactNode } from 'react'
+
 import { read_num } from '@/lib/hvm'
 import {
   BlockContentJson,
@@ -7,8 +10,6 @@ import {
   StmtRunInfoJson,
 } from '@/lib/types'
 import { const_, flatten_enum, if_let, match } from '@/lib/util'
-import Link from 'next/link'
-import { FC, HTMLAttributes, ReactNode } from 'react'
 
 interface InfoProps extends HTMLAttributes<HTMLDivElement> {
   title: string

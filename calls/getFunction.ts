@@ -1,4 +1,5 @@
 import { ParsedUrlQuery } from 'querystring'
+
 import { Run } from './getRun'
 
 const mockedFunction: Function = {

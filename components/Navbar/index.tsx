@@ -1,9 +1,10 @@
-import { classNames } from '@/utils/classnames'
-import { Disclosure, Menu } from '@headlessui/react'
-import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+
+import { classNames } from '@/utils/classnames'
+import { Disclosure, Menu } from '@headlessui/react'
+import { MenuIcon, XIcon } from '@heroicons/react/outline'
 
 import ProfileDropdown from './ProfileDropdown'
 import Searchbar from './Searchbar'

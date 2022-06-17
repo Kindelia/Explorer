@@ -1,10 +1,11 @@
-import { Option } from './util'
 import * as T from './types'
+import { Option } from './util'
 
 const HASH_HEX_LENGTH = 64 + 2 // '0x' + 64 hex chars
 
 export function hex_str_from(txt: string): Option<T.Hex> {
-  if (!txt.startsWith('0x')) { // ??
+  if (!txt.startsWith('0x')) {
+    // ??
     return null
   }
   for (let i = 2; i < txt.length; i++) {
@@ -38,10 +39,10 @@ const HEX_DIGITS = {
   '7': 7n,
   '8': 8n,
   '9': 9n,
-  'a': 10n,
-  'b': 11n,
-  'c': 12n,
-  'd': 13n,
-  'e': 14n,
-  'f': 15n,
+  a: 10n,
+  b: 11n,
+  c: 12n,
+  d: 13n,
+  e: 14n,
+  f: 15n,
 }
