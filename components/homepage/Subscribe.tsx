@@ -13,7 +13,6 @@ export const Subscribe: FC<SubscribeProps> = ({ className, ...props }) => {
   const formRef = useRef<HTMLFormElement>(null)
 
   const [subscribe, { loading, message, status }] = useMailchimp({
-    url: process.env.NEXT_PUBLIC_MAILCHIMP_URL as string,
     onSuccess: () => {
       formRef.current?.reset()
     },
