@@ -1,9 +1,17 @@
 import { AllFields } from './magic'
 
+// Functional
+// ==========
+
 export const const_ =
   <T>(v: T) =>
   (): T =>
     v
+
+// Types
+// =====
+
+export type Option<T> = T | null
 
 // Enums
 // =====

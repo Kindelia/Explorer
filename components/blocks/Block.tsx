@@ -84,27 +84,20 @@ const calculate_size = reduce_run_results(0n)(
   (acc, s) => acc + read_num(s.size_diff)
 )
 
-function count_statements(content: BlockContentJson): {
+interface StmtCount {
   ctrs: number
   funs: number
   runs: number
-} {
-  let res = {
-    ctrs: 0,
-    funs: 0,
-    runs: 0,
-  }
-  return content.reduce((acc, stmt) => {
-    let value = flatten_enum<StatementJson_Variants>(stmt)
-    if (value.$ === 'Ctr') {
-      return { ...acc, ctrs: acc.ctrs + 1 }
-    }
-    if (value.$ === 'Fun') {
-      return { ...acc, funs: acc.funs + 1 }
-    }
-    if (value.$ === 'Run') {
-      return { ...acc, runs: acc.runs + 1 }
-    }
-    return acc
-  }, res)
 }
+const StmtCount_default = { ctrs: 0, funs: 0, runs: 0 }
+
+const count_statements = (content: BlockContentJson): StmtCount =>
+  content.reduce(
+    (acc, stmt) =>
+      match(stmt)({
+        Ctr: (_) => ({ ...acc, ctrs: acc.ctrs + 1 }),
+        Fun: (_) => ({ ...acc, funs: acc.funs + 1 }),
+        Run: (_) => ({ ...acc, runs: acc.runs + 1 }),
+      }),
+    StmtCount_default
+  )

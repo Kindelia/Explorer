@@ -1,28 +1,34 @@
-import * as T from '@/lib/types'
 import type { GetServerSideProps, NextPage } from 'next'
-import * as api from '@/lib/api'
-import * as hvm from '@/lib/hvm'
 import { Statements } from '@/components/Statement'
 import { Codeblock } from '@/components/Codeblock'
 import { ParsedUrlQuery } from 'querystring'
-import { AxiosError } from 'axios'
+
+import { hash_hex_from } from '@/lib/hex'
+import * as T from '@/lib/types'
+import * as api from '@/lib/api'
+import * as hvm from '@/lib/hvm'
 
 interface Props {
-  id: T.BlockId
-  data: T.BlockJson
-  content: T.BlockContentJson
+  block_info: T.BlockInfoJson
 }
 
-const Block: NextPage<Props> = ({ id, data, content }) => {
+const Block: NextPage<Props> = ({ block_info }) => {
+  let { hash, height, content, results } = block_info
   const statements = hvm.read_block_content(content)
+
+  let result_txts = results.map((result) => JSON.stringify(result))
 
   return (
     <div className="flex flex-col items-center justify-center space-y-5">
-      <h1> {`Showing block: ${id}`} </h1>
-      {/* TODO: block info */}
+      <h1> Block hash: <code> {hash} </code> </h1>
+      <div> Block height: <code> {height} </code> </div>
       <Codeblock>
         <Statements statements={statements} />
       </Codeblock>
+      <h2> Results: </h2>
+      <pre>
+        { result_txts.join("\n\n") }
+      </pre>
     </div>
   )
 }
@@ -39,12 +45,12 @@ export const getServerSideProps: GetServerSideProps<
 > = async (context) => {
   if (!context.params) return { notFound: true }
   try {
-    const id = context.params.id as T.BlockId
-    let [data, content] = await Promise.all([
-      api.get_block(id),
-      api.get_block_content(id),
-    ])
-    return { props: { id, data, content } }
+    const id = context.params.id
+    let hex = hash_hex_from(id)
+    if (hex == null) return { notFound: true }
+    let block_info = await api.get_block(hex)
+    if (block_info == null) return { notFound: true }
+    return { props: { block_info } }
   } catch (err) {
     return { notFound: true }
   }
