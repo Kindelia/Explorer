@@ -1,6 +1,8 @@
 import jsonp from 'jsonp'
 import { useEffect, useRef, useState } from 'react'
 
+// TODO: replace JSONP by CORS config or do this only server side(?)
+
 type MailchimpResponse =
   | {
       result: 'success'

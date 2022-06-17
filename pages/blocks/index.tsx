@@ -11,7 +11,7 @@ const BlockIndex: NextPage<BlockIndexProps> = ({ blocks }) => {
   return (
     <div className="flex flex-col space-y-5">
       {blocks.map((block) => (
-        <Block key={block.height} {...block} />
+        <Block key={block.hash} {...block} />
       ))}
     </div>
   )

@@ -3,12 +3,10 @@ import {
   BlockContentJson,
   BlockInfoJson,
   BlockResultsJson,
-  BlockResultsJson_Variants,
-  StatementInfoJson_Variants,
   StatementJson_Variants,
   StmtRunInfoJson,
 } from '@/lib/types'
-import { flatten_enum } from '@/lib/util'
+import { const_, flatten_enum, if_let, match } from '@/lib/util'
 import Link from 'next/link'
 import { FC, HTMLAttributes, ReactNode } from 'react'
 
@@ -40,7 +38,7 @@ export const Block: FC<BlockInfoJson> = ({
   let size = calculate_size(results)
   let { ctrs, funs, runs } = count_statements(content)
   return (
-    <Link href={`/blocks/${height}`}>
+    <Link href={`/blocks/${hash}`}>
       <a>
         <div className="flex flex-row sm:space-x-6 justify-between border-2 sm:px-4 py-2 border-gray-500">
           <Info className="w-16" title="Block">
@@ -65,28 +63,24 @@ export const Block: FC<BlockInfoJson> = ({
   )
 }
 
-function reduce_run_results<T>(i: T, f: (acc: T, s: StmtRunInfoJson) => T) {
-  return (results: BlockResultsJson[]) => {
-    return results.reduce((acc, result) => {
-      let value = flatten_enum<BlockResultsJson_Variants>(result)
-      if (value.$ === 'Ok') {
-        let stmt_type = flatten_enum<StatementInfoJson_Variants>(value)
-        if (stmt_type.$ === 'Run') {
-          return f(acc, stmt_type)
-        }
-      }
-      return acc
-    }, i)
-  }
-}
+const reduce_run_results =
+  <T,>(init: T) =>
+  (f: (acc: T, s: StmtRunInfoJson) => T) =>
+  (results: BlockResultsJson[]) =>
+    results.reduce(
+      (acc, block_result) =>
+        match(block_result)({
+          Err: (_) => acc,
+          Ok: (stmt) =>
+            if_let(stmt)('Run')((stmt_run) => f(acc, stmt_run))(const_(acc)),
+        }),
+      init
+    )
 
-const calculate_mana = reduce_run_results(
-  BigInt(0),
+const calculate_mana = reduce_run_results(0n)(
   (acc, s) => acc + read_num(s.used_mana)
 )
-
-const calculate_size = reduce_run_results(
-  BigInt(0),
+const calculate_size = reduce_run_results(0n)(
   (acc, s) => acc + read_num(s.size_diff)
 )
 

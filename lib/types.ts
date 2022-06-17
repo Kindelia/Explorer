@@ -1,13 +1,12 @@
-import { Tagged, Enum, FlatEnum, Variant } from './util'
-import { Variant as V } from './util'
+import { Tagged, Enum } from './util'
 
 // TODO: comment
 export type StrNum = Tagged<'StrNum', string>
 export type Name = Tagged<'Name', string>
 export type Hex = Tagged<'Hex', string>
-export type Hash = Tagged<'Hash', string>
+export type HashHex = Tagged<'Hash', string>
 
-export type BlockId = Hash | bigint
+export type BlockId = HashHex
 export type FunctionId = Name | bigint
 
 export type Result<T, E> = Enum<Result_Variants<T, E>>
@@ -21,9 +20,9 @@ export interface Result_Variants<T, E> {
 
 export interface BlockInfoJson {
   block: BlockJson
-  content: BlockContentJson
-  hash: Hash
+  hash: HashHex
   height: number
+  content: BlockContentJson
   results: BlockResultsJson[]
 }
 
@@ -62,17 +61,7 @@ export interface RuleJson {
   rhs: TermJson
 }
 
-export const TermJson_TAGS = [
-  'Var',
-  'Dup',
-  'Lam',
-  'App',
-  'Ctr',
-  'Fun',
-  'Num',
-  'Op2',
-]
-
+export type TermJson = Enum<TermJson_Variants>
 export interface TermJson_Variants {
   Var: VarJson
   Dup: DupJson
@@ -83,7 +72,6 @@ export interface TermJson_Variants {
   Num: NumJson
   Op2: Op2Json
 }
-export type TermJson = Enum<TermJson_Variants>
 
 export interface VarJson {
   name: Name
@@ -162,7 +150,7 @@ export type BlockResultsJson_Variants = Result_Variants<
 export interface Block {
   time: Date
   rand: null
-  prev: Hash
+  prev: HashHex
   body: null
 }
 
