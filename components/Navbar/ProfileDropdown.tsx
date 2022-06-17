@@ -1,7 +1,9 @@
 import { Disclosure, Menu } from '@headlessui/react'
+
+import { classNames } from '@/utils/classnames'
 import { DropdownTransition } from './DropdownTransition'
 
-export default function () {
+export default function ProfileDropdown() {
   return (
     <Menu as="div" className="ml-3 relative">
       <div>

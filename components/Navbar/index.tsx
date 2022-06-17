@@ -1,17 +1,15 @@
-/* This example requires Tailwind CSS v2.0+ */
-import { useEffect, useState } from 'react'
+import { classNames } from '@/utils/classnames'
 import { Disclosure, Menu } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { SelectNode } from './SelectNode'
-import { classNames } from '@/utils/classnames'
-import ToggleTheme from "./ToggleTheme";
-import Searchbar from "./Searchbar";
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+
 import ProfileDropdown from './ProfileDropdown'
+import Searchbar from './Searchbar'
+import { SelectNode } from './SelectNode'
+import ToggleTheme from './ToggleTheme'
 import ViewNotification from './ViewNotification'
-
-
 
 export default function Navigation() {
   const { asPath } = useRouter()
@@ -53,7 +51,7 @@ export default function Navigation() {
                     <a>
                       <img
                         className="block h-8 w-auto"
-                        src={process.env.logo2}
+                        src="kindelia_icon.svg"
                         alt="Workflow"
                       />
                     </a>
@@ -84,7 +82,7 @@ export default function Navigation() {
                 <Searchbar className="hidden sm:block rounded-md  mr-3 bg-gray-000 flex-1 max-w-xs" />
                 <ToggleTheme />
 
-                <ViewNotification /> 
+                <ViewNotification />
                 <ProfileDropdown />
               </div>
             </div>
@@ -108,8 +106,7 @@ export default function Navigation() {
                   </Disclosure.Button>
                 </Link>
               ))}
-              <Searchbar className="rounded bg-gray-700 text-white placeholder:text-gray-400 block w-full"/>
-
+              <Searchbar className="rounded bg-gray-700 text-white placeholder:text-gray-400 block w-full" />
             </div>
           </Disclosure.Panel>
         </>

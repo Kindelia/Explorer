@@ -1,5 +1,5 @@
 import { BellIcon } from '@heroicons/react/outline'
-export default function () {
+export default function ViewNotification() {
   return (
     <button
       type="button"

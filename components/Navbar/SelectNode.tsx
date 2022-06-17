@@ -1,7 +1,8 @@
+import { FC } from 'react'
+import { Menu } from '@headlessui/react'
+
 import { useNodeStore } from '@/store/useNodeStore'
 import { classNames } from '@/utils/classnames'
-import { Menu } from '@headlessui/react'
-import { FC } from 'react'
 import { DropdownTransition } from './DropdownTransition'
 
 export const SelectNode: FC = () => {
