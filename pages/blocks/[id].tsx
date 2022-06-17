@@ -20,15 +20,17 @@ const Block: NextPage<Props> = ({ block_info }) => {
 
   return (
     <div className="flex flex-col items-center justify-center space-y-5">
-      <h1> Block hash: <code> {hash} </code> </h1>
-      <div> Block height: <code> {height} </code> </div>
+      <h1>
+        Block hash: <code> {hash} </code>
+      </h1>
+      <div>
+        Block height: <code> {height} </code>
+      </div>
       <Codeblock>
         <Statements statements={statements} />
       </Codeblock>
       <h2> Results: </h2>
-      <pre>
-        { result_txts.join("\n\n") }
-      </pre>
+      <pre>{result_txts.join('\n\n')}</pre>
     </div>
   )
 }
