@@ -16,7 +16,11 @@ const Home: NextPage<HomeProps> = ({ hvm, kind }) => {
   return (
     <div className="flex flex-col">
       <Section className="justify-evenly">
-        <Logo className="self-center pt-6 h-28 sm:h-48" />
+        <img
+          className="self-center pt-6 h-28 sm:h-48"
+          alt="Kindelia logo"
+          src={process.env.logo2}
+        />
         <Button className="h-11 self-center">Explore Kindelia</Button>
       </Section>
 
