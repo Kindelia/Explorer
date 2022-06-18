@@ -1,22 +1,25 @@
 import type { GetServerSideProps, NextPage } from 'next'
+import Link from 'next/link'
+import { ParsedUrlQuery } from 'querystring'
 
-import { Codeblock } from '@/components/Codeblock'
-import { Statements } from '@/components/Statement'
 import * as api from '@/lib/api'
 import { hash_hex_from } from '@/lib/hex'
 import * as hvm from '@/lib/hvm'
 import * as T from '@/lib/types'
-import { ParsedUrlQuery } from 'querystring'
+
+import { Codeblock } from '@/components/Codeblock'
+import { Statements } from '@/components/Statement'
 
 interface Props {
   block_info: T.BlockInfoJson
 }
 
 const Block: NextPage<Props> = ({ block_info }) => {
-  let { hash, height, content, results } = block_info
-  const statements = hvm.read_block_content(content)
+  let { hash, height, content, results, block } = block_info
 
-  let result_txts = results.map((result) => JSON.stringify(result))
+  const statements = hvm.read_block_content(content)
+  const result_txts = results.map((result) => JSON.stringify(result))
+  const parent = block.prev
 
   return (
     <div className="flex flex-col items-center justify-center space-y-5">
@@ -25,6 +28,13 @@ const Block: NextPage<Props> = ({ block_info }) => {
       </h1>
       <div>
         Block height: <code> {height} </code>
+      </div>
+      <div>
+        <Link href={`/blocks/${parent}`}>
+          <a>
+            Block Parent: <span className="text-blue-800"> {parent} </span>
+          </a>
+        </Link>
       </div>
       <Codeblock>
         <Statements statements={statements} />
