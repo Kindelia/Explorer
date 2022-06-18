@@ -1,7 +1,8 @@
 import type { NextPage } from 'next'
-import Editor from '@monaco-editor/react'
 import { useRef } from 'react'
+
 import { Button } from '@/components/Button'
+import Editor from '@monaco-editor/react'
 
 const InteractIndex: NextPage = () => {
   const editorRef = useRef<any>(null)

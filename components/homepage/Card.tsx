@@ -1,6 +1,8 @@
+import { FC } from 'react'
+
 import { classNames } from '@/utils/classnames'
 import { GithubInfo } from '@/utils/getGithubInfo'
-import { FC } from 'react'
+
 import { GithubCard } from './GithubCard'
 
 interface CardProps {

@@ -1,5 +1,6 @@
-import { classNames } from '@/utils/classnames'
 import { FC, HTMLAttributes, ReactNode } from 'react'
+
+import { classNames } from '@/utils/classnames'
 
 interface SectionProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode

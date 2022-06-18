@@ -1,5 +1,6 @@
-import { Transition } from '@headlessui/react'
 import { FC, Fragment, ReactNode } from 'react'
+
+import { Transition } from '@headlessui/react'
 
 export const DropdownTransition: FC<{ children: ReactNode }> = ({
   children,

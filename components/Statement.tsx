@@ -1,8 +1,9 @@
+import Link from 'next/link'
+import { FC } from 'react'
+
 import { num_to_name, num_to_oper } from '@/lib/hvm'
 import * as T from '@/lib/types'
 import { flatten_enum } from '@/lib/util'
-import Link from 'next/link'
-import { FC } from 'react'
 
 const StmtCtr: FC<T.StmtCtr> = (ctr) => {
   return (

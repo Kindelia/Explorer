@@ -1,7 +1,8 @@
-import { GithubInfo } from '@/utils/getGithubInfo'
 import { FC } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import { GithubInfo } from '@/utils/getGithubInfo'
 import { faBook, faCodeFork, faStar } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export interface GithubCardProps extends GithubInfo {
   languageColor: string

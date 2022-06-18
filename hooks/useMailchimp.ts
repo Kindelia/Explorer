@@ -1,6 +1,7 @@
+import { useEffect, useRef, useState } from 'react'
+
 import { MailchimpResponse } from '@/pages/api/subscribe'
 import axios from 'axios'
-import { useEffect, useRef, useState } from 'react'
 
 interface UseMailChimpConfig {
   onError?: (error: string | Error) => void
