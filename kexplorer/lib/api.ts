@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { AxiosRequestConfig } from 'axios'
 
+import { Option } from 'kindelia-sites-lib/dist/util'
+
 import * as T from './types'
-import { Option } from './util'
 
 type ApiResponse<T> =
   | {

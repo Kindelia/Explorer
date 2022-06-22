@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "workspaces": [
+    "lib",
+    "kexplorer"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "dev": "turbo run dev"
+  },
+  "devDependencies": {
+    "turbo": "^1.2.16"
+  }
+}

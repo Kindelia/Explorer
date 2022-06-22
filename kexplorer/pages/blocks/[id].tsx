@@ -2,8 +2,9 @@ import type { GetServerSideProps, NextPage } from 'next'
 import Link from 'next/link'
 import { ParsedUrlQuery } from 'querystring'
 
+import { hash_hex_from } from 'kindelia-sites-lib/dist/hex'
+
 import * as api from '@/lib/api'
-import { hash_hex_from } from '@/lib/hex'
 import * as hvm from '@/lib/hvm'
 import * as T from '@/lib/types'
 

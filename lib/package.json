@@ -1,0 +1,19 @@
+{
+  "name": "kindelia-sites-lib",
+  "version": "0.1.0",
+  "main": "dist/",
+  "types": "dist/",
+  "__exports": {
+    ".": "./dist/index",
+    "./*": "./dist/*.js"
+  },
+  "__files": [
+    "dist/**"
+  ],
+  "author": "Kelvin Santos",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "tsc"
+  }
+}

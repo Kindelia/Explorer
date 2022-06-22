@@ -1,9 +1,11 @@
-import * as T from './types'
-import { Option } from './util'
+import { Option, Tagged } from './util'
+
+export type Hex = Tagged<'Hex', string>
+export type HashHex = Tagged<'Hash', string>
 
 const HASH_HEX_LENGTH = 64 + 2 // '0x' + 64 hex chars
 
-export function hex_str_from(_txt: string): Option<T.Hex> {
+export function hex_str_from(_txt: string): Option<Hex> {
   let txt = _txt.toLowerCase()
   // ??
   if (!txt.startsWith('0x')) {
@@ -16,10 +18,10 @@ export function hex_str_from(_txt: string): Option<T.Hex> {
       return null
     }
   }
-  return txt as T.Hex
+  return txt as Hex
 }
 
-export function hash_hex_from(txt: string): Option<T.HashHex> {
+export function hash_hex_from(txt: string): Option<HashHex> {
   let hex = hex_str_from(txt)
   if (hex == null) {
     return null
@@ -27,7 +29,7 @@ export function hash_hex_from(txt: string): Option<T.HashHex> {
   if (hex.length !== HASH_HEX_LENGTH) {
     return null
   }
-  return txt as T.HashHex
+  return txt as HashHex
 }
 
 const HEX_DIGITS = {

@@ -76,24 +76,3 @@ export const if_let =
   <R>(th: (v: VariantsFrom<E>[K]) => R) =>
   (el: () => R): R =>
     flatten_enum_f(value)(({ $, val }) => ($ === tag ? th(val) : el()))
-
-// Experiments
-
-// export function get_variant<V, T extends keyof V, E extends Enum<V>>(
-//   tags: T[],
-//   value: E
-// ): [T, E[T]] {
-//   for (let tag of tags) {
-//     if (tag in value) {
-//       return [tag, value[tag]]
-//     }
-//   }
-//   throw new Error(`Invalid variant '${value}' for tags' ${tags}.`)
-// }
-//
-// export const is_variant = <V, K extends keyof V>(
-//   value: V[K],
-//   tag: K
-// ): value is V[typeof tag] => {
-//   return tag in value
-// }

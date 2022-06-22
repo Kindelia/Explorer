@@ -1,0 +1,12 @@
+node_modules
+
+/.yarn/
+yarn-debug.log*
+
+*.tsbuildinfo
+
+.turbo
+
+/*/build
+/*/dist
+/*/.next

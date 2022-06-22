@@ -1,5 +1,10 @@
 {
+  "name": "kexplorer",
   "private": true,
+  "version": "0.1.0",
+  "repository": "https://github.com/Kindelia/Explorer",
+  "author": "Kelvin Santos",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "dev-inspect": "NODE_OPTIONS='--inspect' next dev",
@@ -14,6 +19,7 @@
     "@heroicons/react": "^1.0.6",
     "@monaco-editor/react": "^4.4.5",
     "axios": "^0.27.2",
+    "kindelia-sites-lib": "*",
     "next": "latest",
     "react": "18.1.0",
     "react-dom": "18.1.0",
