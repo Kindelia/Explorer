@@ -10,9 +10,9 @@ module.exports = {
       scale: {
         102: '1.02',
       },
-      height: {
-        '80-screen': '80vh',
-      },
+      // height: {
+      //   '80-screen': '80vh',
+      // },
       borderWidth: {
         1: '1px',
       },

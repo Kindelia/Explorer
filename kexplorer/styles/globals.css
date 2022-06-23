@@ -6,3 +6,9 @@
 .Disclosure {
   @apply ;
 } */
+
+@for $i from 0 to 100 {
+  .h-$(i)-screen {
+    height: $(i)vh;
+  }
+}

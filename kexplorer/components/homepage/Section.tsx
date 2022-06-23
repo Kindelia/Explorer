@@ -12,7 +12,7 @@ export const Section: FC<SectionProps> = ({
   ...props
 }) => (
   <div
-    className={classNames(className || '', 'h-80-screen flex flex-col')}
+    className={classNames(className || '', 'b-40 h-50-screen flex flex-col')}
     {...props}
   >
     {children}
