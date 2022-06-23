@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import axios from 'axios'
+import { config } from '@/lib/config'
 
 export type MailchimpResponse =
   | {
@@ -20,7 +21,7 @@ export default async function handler(
 
   try {
     const { data } = await axios.get<MailchimpResponse>(
-      `${process.env.MAILCHIMP_URL}&${params.toString()}`
+      `${config.mailchimp_url}&${params.toString()}`
     )
     res.status(200).json(data)
   } catch (err) {
