@@ -1,11 +1,11 @@
 import type { GetStaticProps, NextPage } from 'next'
 
-import { Button } from '@/components/Button'
 import { Card } from '@/components/homepage/Card'
 import { Section } from '@/components/homepage/Section'
 import { Socials } from '@/components/homepage/Socials'
 import { Subscribe } from '@/components/homepage/Subscribe'
-import { getGithubInfo, GithubInfo } from '@/utils/getGithubInfo'
+import { get_github_info, GithubInfo } from '@kindelia/lib/api/get_github_info'
+import { Button } from '@kindelia/lib/ui/Button'
 
 interface HomeProps {
   kind: GithubInfo
@@ -50,8 +50,8 @@ const Home: NextPage<HomeProps> = ({ hvm, kind }) => {
 }
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-  const hvm = await getGithubInfo('kindelia', 'hvm')
-  const kind = await getGithubInfo('kindelia', 'kind')
+  const hvm = await get_github_info('kindelia', 'hvm')
+  const kind = await get_github_info('kindelia', 'kind')
 
   kind.language = 'Kind'
 

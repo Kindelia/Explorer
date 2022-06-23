@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { AxiosRequestConfig } from 'axios'
 
-import { Option } from 'kindelia-sites-lib/dist/util'
+import { Option } from '@kindelia/lib/utils/enum'
 
 import * as T from './types'
 

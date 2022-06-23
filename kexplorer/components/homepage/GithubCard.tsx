@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { GithubInfo } from '@/utils/getGithubInfo'
+import { GithubInfo } from '@kindelia/lib/api/get_github_info'
 import { faBook, faCodeFork, faStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 

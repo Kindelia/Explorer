@@ -1,4 +1,4 @@
-import { Option, Tagged } from './util'
+import { Option, Tagged } from './enum'
 
 export type Hex = Tagged<'Hex', string>
 export type HashHex = Tagged<'Hash', string>
@@ -9,7 +9,6 @@ export function hex_str_from(_txt: string): Option<Hex> {
   let txt = _txt.toLowerCase()
   // ??
   if (!txt.startsWith('0x')) {
-
     return null
   }
   for (let i = 2; i < txt.length; i++) {

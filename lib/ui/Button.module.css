@@ -1,0 +1,3 @@
+.button {
+  @apply border-gray-500 hover:bg-slate-300 active:bg-slate-400
+}

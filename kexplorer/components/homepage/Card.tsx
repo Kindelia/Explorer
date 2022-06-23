@@ -1,9 +1,8 @@
 import { FC } from 'react'
 
-import { classNames } from '@/utils/classnames'
-import { GithubInfo } from '@/utils/getGithubInfo'
-
 import { GithubCard } from './GithubCard'
+import { GithubInfo } from '@kindelia/lib/api/get_github_info'
+import { classNames } from '@kindelia/lib/react/classNames'
 
 interface CardProps {
   title: string

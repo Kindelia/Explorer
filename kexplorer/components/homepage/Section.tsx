@@ -1,6 +1,5 @@
 import { FC, HTMLAttributes, ReactNode } from 'react'
-
-import { classNames } from '@/utils/classnames'
+import { classNames } from '@kindelia/lib/react/classNames'
 
 interface SectionProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode

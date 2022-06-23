@@ -9,7 +9,7 @@ export interface GithubInfo {
   description: string
 }
 
-export const getGithubInfo = async (
+export const get_github_info = async (
   user: string,
   repository: string
 ): Promise<GithubInfo> => {

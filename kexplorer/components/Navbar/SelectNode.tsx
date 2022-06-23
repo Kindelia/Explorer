@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
 import { useNodeStore } from '@/store/useNodeStore'
-import { classNames } from '@/utils/classnames'
+import { classNames } from '@kindelia/lib/react/classNames'
 import { Menu } from '@headlessui/react'
 
 import { DropdownTransition } from './DropdownTransition'
