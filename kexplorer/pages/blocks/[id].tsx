@@ -1,6 +1,5 @@
-import type { GetServerSideProps, NextPage } from 'next'
+import type { NextPage } from 'next'
 import Link from 'next/link'
-import { ParsedUrlQuery } from 'querystring'
 
 import { hash_hex_from } from '@kindelia/lib/utils/hex'
 
@@ -10,12 +9,17 @@ import * as T from '@/lib/types'
 
 import { Codeblock } from '@/components/Codeblock'
 import { Statements } from '@/components/Statement'
+import { useNodeStore } from '@/store/useNodeStore'
+import { Error } from '@kindelia/lib/ui'
 
 interface Props {
-  block_info: T.BlockInfoJson
+  block_info?: T.BlockInfoJson
+  error?: string
 }
 
-const Block: NextPage<Props> = ({ block_info }) => {
+const Block: NextPage<Props> = ({ block_info, error }) => {
+  if (error) return <Error message={error} />
+
   let { hash, height, content, results, block } = block_info
 
   const statements = hvm.read_block_content(content)
@@ -46,25 +50,20 @@ const Block: NextPage<Props> = ({ block_info }) => {
   )
 }
 
-export default Block
-
-interface BlockParams extends ParsedUrlQuery {
-  id: string
-}
-
-export const getServerSideProps: GetServerSideProps<
-  Props,
-  BlockParams
-> = async (context) => {
-  if (!context.params) return { notFound: true }
+Block.getInitialProps = async (ctx) => {
   try {
-    const id = context.params.id
-    let hex = hash_hex_from(id)
-    if (hex == null) return { notFound: true }
-    let block_info = await api.get_block(hex)
-    if (block_info == null) return { notFound: true }
-    return { props: { block_info } }
+    const id = ctx.query.id as string
+    const hex = hash_hex_from(id)
+
+    return {
+      block_info: await api.get_block(
+        hex,
+        useNodeStore.getState().selectedNode.url
+      ),
+    }
   } catch (err) {
-    return { notFound: true }
+    return { error: err.message }
   }
 }
+
+export default Block
