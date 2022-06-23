@@ -1,6 +1,6 @@
-import type { GetStaticProps, NextPage } from 'next'
+import type { NextPage } from 'next'
 
-import { Button } from '@kindelia/lib/ui/Button'
+import { Button } from '@kindelia/lib/ui'
 
 const Home: NextPage = () => {
   return (

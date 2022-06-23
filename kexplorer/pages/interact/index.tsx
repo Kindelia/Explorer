@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import { useRef } from 'react'
 
 import Editor from '@monaco-editor/react'
-import { Button } from '@kindelia/lib/ui/Button'
+import { Button } from '@kindelia/lib/ui'
 
 const InteractIndex: NextPage = () => {
   const editorRef = useRef<any>(null)
