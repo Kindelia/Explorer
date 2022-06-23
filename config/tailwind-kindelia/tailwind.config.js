@@ -10,9 +10,10 @@ module.exports = {
       scale: {
         102: '1.02',
       },
-      height: {
-        '80-screen': '80vh',
-      },
+      height: [...Array(101).keys()].reduce((prev, i) => {
+        prev[`${i}-screen`] = `${i}vh`
+        return prev
+      }, {}),
       borderWidth: {
         1: '1px',
       },
