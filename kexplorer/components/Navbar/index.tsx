@@ -52,8 +52,8 @@ export default function Navigation() {
                     <a>
                       <img
                         className="block h-8 w-auto"
-                        src="kindelia_icon.svg"
-                        alt="Workflow"
+                        src="/kindelia_icon.svg"
+                        alt="Kindelia logo"
                       />
                     </a>
                   </Link>
