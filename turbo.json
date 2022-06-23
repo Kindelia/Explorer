@@ -21,6 +21,5 @@
     "dev": {
       "cache": false
     }
-  },
-  "__": "TODO: `kexplorer` etc depends on `lib`"
+  }
 }
