@@ -21,13 +21,17 @@ const fetch_api = async <T>(
   node: string = config.nodes[0],
   cfg?: AxiosRequestConfig
 ): Promise<T> => {
-  // TODO: remove this and uncomment bellow after SSL is implemented
-  const host =
-    typeof window !== 'undefined' && !node.includes('localhost')
-      ? '/api'
-      : `http://${node}:8000` ?? 'http://localhost:8000'
+  let host = `http://${node}:8000` ?? 'http://localhost:8000'
 
-  // const host = `http://${node}:8000` ?? 'http://localhost:8000' // TODO
+  // TODO: remove this after SSL is implemented
+  if (typeof window === 'undefined') {
+    host = `http://${config.nodes[0]}:8000`
+  } else {
+    host = node.includes('api')
+      ? node
+      : `http://${node}:8000` ?? 'http://localhost:8000'
+  }
+
   const response = await axios.get<ApiResponse<T>>(`${host}${endpoint}`, cfg)
   // TODO: handle response error
 
@@ -56,7 +60,8 @@ export const get_block = (hex: T.BlockId, node?: string) =>
 
 // Functions
 
-export const get_functions = () => fetch_api<T.Name[]>('/functions')
+export const get_functions = (node?: string) =>
+  fetch_api<T.Name[]>('/functions', node)
 
 // export const get_function = (id: FunctionId) => fetch_api<T.Function>(`/functions/${id}`)
 

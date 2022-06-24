@@ -11,6 +11,10 @@ const nodes: Node[] = config.nodes.map((url, i) => ({
   url,
 }))
 
+nodes.unshift({ name: 'api', url: '/api' })
+
+nodes.push({ name: 'localhost:8000', url: 'localhost' })
+
 type NodeStore = {
   nodes: Node[]
   selectedNode: Node
@@ -20,7 +24,7 @@ type NodeStore = {
 }
 
 export const useNodeStore = create<NodeStore>((set, get) => ({
-  nodes: [...nodes, { name: 'localhost:8000', url: 'localhost' }],
+  nodes,
 
   selectedNode: nodes[0],
 

@@ -3,12 +3,17 @@ import Link from 'next/link'
 
 import { Info } from '@/components/blocks/Block'
 import { get_functions } from '@/lib/api'
+import { Error } from '@kindelia/lib/ui'
+import { useNodeStore } from '@/store/useNodeStore'
 
 interface FunctionIndexProps {
-  functions: string[]
+  functions?: string[]
+  error?: string
 }
 
-const FunctionsIndex: NextPage<FunctionIndexProps> = ({ functions }) => {
+const FunctionsIndex: NextPage<FunctionIndexProps> = ({ functions, error }) => {
+  if (error) return <Error message={error} />
+
   return (
     <div className="flex flex-col space-y-5 ">
       {functions.map((name) => (
@@ -24,14 +29,15 @@ const FunctionsIndex: NextPage<FunctionIndexProps> = ({ functions }) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps<
-  FunctionIndexProps
-> = async () => {
-  return {
-    props: {
-      functions: await get_functions(),
-    },
+FunctionsIndex.getInitialProps = async () => {
+  try {
+    return {
+      functions: await get_functions(useNodeStore.getState().selectedNode.url),
+    }
+  } catch (err) {
+    return {
+      error: err.message,
+    }
   }
 }
-
 export default FunctionsIndex
