@@ -3,9 +3,9 @@ const height = require('./height')
 /** @type {import('tailwindcss/tailwind-config').TailwindConfig} */
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-    './ui/**/*.{ts,tsx,css}',
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    '../lib/ui/**/*.{ts,tsx}',
   ],
   darkMode: 'class',
   theme: {
