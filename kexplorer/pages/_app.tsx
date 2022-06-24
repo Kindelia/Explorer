@@ -18,6 +18,12 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Head>
           <title>Kind Explorer</title>
           <link rel="shortcut icon" href="/kindelia_icon.svg" />
+          {process.env.NODE_ENV === 'production' && (
+            <meta
+              httpEquiv="Content-Security-Policy"
+              content="upgrade-insecure-requests"
+            />
+          )}
         </Head>
         <Component {...pageProps} />
       </div>
