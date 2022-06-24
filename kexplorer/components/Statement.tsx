@@ -67,7 +67,7 @@ const Rule: FC<T.Rule> = (rule) => {
   )
 }
 
-const Term: FC<T.Term> = (term) => {
+export const Term: FC<T.Term> = (term) => {
   let value = flatten_enum<T.Term_Variants>(term)
   switch (value.$) {
     case 'Var':
