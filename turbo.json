@@ -2,12 +2,7 @@
   "$schema": "https://turborepo.org/schema.json",
   "baseBranch": "origin/master",
   "pipeline": {
-    "kindelia-sites-lib#build": {
-      "dependsOn": ["^build"],
-      "inputs": ["*.json", "src/**"],
-      "outputs": ["dist/**"]
-    },
-    "kexplorer#build": {
+    "build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**"]
     },
@@ -22,6 +17,9 @@
     "deploy": {
       "dependsOn": ["build", "test", "lint"],
       "outputs": []
+    },
+    "dev": {
+      "cache": false
     }
   }
 }

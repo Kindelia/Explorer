@@ -1,9 +1,10 @@
 import axios from 'axios'
 import { AxiosRequestConfig } from 'axios'
 
-import { Option } from 'kindelia-sites-lib/dist/util'
+import { Option } from '@kindelia/lib/utils/enum'
 
 import * as T from './types'
+import { config } from './config'
 
 type ApiResponse<T> =
   | {
@@ -17,11 +18,11 @@ type ApiResponse<T> =
 
 const fetch_api = async <T>(
   endpoint: string,
+  node: string = config.nodes[0],
   cfg?: AxiosRequestConfig
 ): Promise<T> => {
-  const host = process?.env?.API_URL ?? 'http://localhost:8000' // TODO
+  const host = `http://${node}:8000` ?? 'http://localhost:8000' // TODO
   const response = await axios.get<ApiResponse<T>>(`${host}${endpoint}`, cfg)
-
   // TODO: handle response error
 
   let body = response.data
@@ -37,11 +38,11 @@ const fetch_api = async <T>(
 
 // Blocks
 
-export const get_blocks = (range?: null) =>
-  fetch_api<T.BlockInfoJson[]>('/blocks')
+export const get_blocks = (node?: string) =>
+  fetch_api<T.BlockInfoJson[]>('/blocks', node)
 
-export const get_block = (hex: T.BlockId) =>
-  fetch_api<Option<T.BlockInfoJson>>(`/blocks/${hex}`)
+export const get_block = (hex: T.BlockId, node?: string) =>
+  fetch_api<Option<T.BlockInfoJson>>(`/blocks/${hex}`, node)
 
 // // REMOVED
 // export const get_block_content = (id: T.BlockId) =>

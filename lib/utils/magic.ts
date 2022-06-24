@@ -1,4 +1,4 @@
-import type { Key } from './util'
+import type { Key } from './enum'
 
 // Magic from
 // https://stackoverflow.com/questions/65750673/collapsing-a-discriminated-union-derive-an-umbrella-type-with-all-possible-key

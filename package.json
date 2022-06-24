@@ -2,15 +2,24 @@
   "private": true,
   "workspaces": [
     "lib",
-    "kexplorer"
+    "kexplorer",
+    "config/*",
+    "sale"
   ],
   "scripts": {
     "build": "turbo run build",
     "test": "turbo run test",
     "lint": "turbo run lint",
-    "dev": "turbo run dev"
+    "dev": "turbo run dev --parallel"
   },
   "devDependencies": {
+    "@types/tailwindcss": "^3.0.10",
+    "autoprefixer": "^10.4.7",
+    "eslint": "^8.18.0",
+    "eslint-config-kindelia": "*",
+    "postcss": "^8.4.14",
+    "prettier": "^2.7.1",
+    "tailwindcss": "^3.1.4",
     "turbo": "^1.2.16"
   }
 }

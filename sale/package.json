@@ -1,0 +1,29 @@
+{
+  "name": "sale",
+  "private": true,
+  "version": "0.1.0",
+  "repository": "https://github.com/Kindelia/Explorer",
+  "author": "Rafael Santos",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev --port 3001",
+    "dev-inspect": "NODE_OPTIONS='--inspect' next dev --port 3001",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@kindelia/lib": "*",
+    "next": "latest",
+    "react": "18.1.0",
+    "react-dom": "18.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "17.0.35",
+    "@types/react": "18.0.9",
+    "@types/react-dom": "18.0.5",
+    "next-transpile-modules": "^9.0.0",
+    "tailwind-kindelia": "*",
+    "tsconfig": "*",
+    "typescript": "4.7.2"
+  }
+}

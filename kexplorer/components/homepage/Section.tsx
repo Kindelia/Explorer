@@ -1,6 +1,5 @@
 import { FC, HTMLAttributes, ReactNode } from 'react'
-
-import { classNames } from '@/utils/classnames'
+import { classNames } from '@kindelia/lib/react/classNames'
 
 interface SectionProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode
@@ -12,7 +11,7 @@ export const Section: FC<SectionProps> = ({
   ...props
 }) => (
   <div
-    className={classNames(className || '', 'b-40 h-50-screen flex flex-col')}
+    className={classNames(className || '', 'h-50-screen flex flex-col b-40')}
     {...props}
   >
     {children}

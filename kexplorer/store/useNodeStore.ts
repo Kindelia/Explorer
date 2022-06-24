@@ -1,16 +1,28 @@
+import { config } from '@/lib/config'
 import create from 'zustand'
 
+type Node = {
+  name: string
+  url: string
+}
+
+const nodes: Node[] = config.nodes.map((url, i) => ({
+  name: `kf-node-${i + 1}`,
+  url,
+}))
+
 type NodeStore = {
-  nodes: string[]
-  selectedNode: string
-  selectNode: (node: string) => void
-  setNodes: (nodes: string[]) => void
+  nodes: Node[]
+  selectedNode: Node
+  selectNode: (node: Node) => void
+  setNodes: (nodes: Node[]) => void
+  addNode: (node: Node) => void
 }
 
 export const useNodeStore = create<NodeStore>((set, get) => ({
-  nodes: ['node-1', 'node-2', 'node-3', 'node-4'],
+  nodes: [...nodes, { name: 'localhost:8000', url: 'localhost' }],
 
-  selectedNode: 'node-1',
+  selectedNode: nodes[0],
 
   selectNode(node) {
     set({ selectedNode: node })
@@ -18,5 +30,9 @@ export const useNodeStore = create<NodeStore>((set, get) => ({
 
   setNodes(nodes) {
     set({ nodes })
+  },
+
+  addNode(node) {
+    set((prev) => ({ nodes: [...prev.nodes, node] }))
   },
 }))

@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import { FC, HTMLAttributes, ReactNode } from 'react'
 
-import { const_, if_let, match } from 'kindelia-sites-lib/dist/util'
+import { if_let, match } from '@kindelia/lib/utils/enum'
+import { const_ } from '@kindelia/lib/utils/functional'
 
 import { read_num } from '@/lib/hvm'
 import {
