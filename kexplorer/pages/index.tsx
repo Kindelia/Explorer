@@ -1,8 +1,5 @@
 import type { GetStaticProps, NextPage } from 'next'
-
-import { Card } from '@/components/homepage/Card'
-import { Section } from '@/components/homepage/Section'
-import { Socials } from '@/components/homepage/Socials'
+import { Card, Section, Socials } from '@kindelia/lib/ui/homepage'
 import { Subscribe } from '@/components/homepage/Subscribe'
 import {
   get_github_info,
@@ -29,18 +26,18 @@ const Home: NextPage<HomeProps> = ({ hvm, kind }) => {
 
       <Section className="justify-evenly">
         <Card
-          title="0-bug contracts"
-          description="..."
-          repo={kind}
-          languageColor="#CA1E8E"
+          title="Cheap state and computation"
+          description="By storing the global state as reversible runtime heaps, it can run highly dynamic applications with massively reduced costs, making layer 1 virtual worlds economically viable."
+          repo={hvm}
+          languageColor="#7A0410"
         />
 
         <Card
-          title="Cheap state and computation"
-          description="Games, etc"
-          repo={hvm}
+          title="0-bug contracts"
+          description="By leveraging a functional virtual machine, the HVM, Kindelia is able to run formally verified DApps cheaply and efficiently, making it the most secure peer-to-peer computer."
+          repo={kind}
           reverse
-          languageColor="#7A0410"
+          languageColor="#CA1E8E"
         />
       </Section>
 

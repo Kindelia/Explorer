@@ -23,11 +23,11 @@ export const Card: FC<CardProps> = ({
     <div
       className={classNames(
         reverse ? 'flex-row-reverse' : 'flex-row',
-        'flex h-36 items-center border-x border-y rounded-md shadow hover:scale-102 transition-all'
+        'flex h-36 items-center rounded-md transition-all'
       )}
     >
       <div className="flex flex-col flex-1 h-full justify-center px-5">
-        <div className="text-lg font-semibold">{title}</div>
+        <div className="text-lg font-bold">{title}</div>
         <div>{description}</div>
       </div>
       <GithubCard {...repo} languageColor={languageColor} />

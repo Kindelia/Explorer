@@ -1,2 +1,3 @@
-export { Button } from './Button/Button'
+export { Button } from './Button'
 export { Error } from './Error'
+export { Main } from './Main'

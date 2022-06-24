@@ -7,12 +7,6 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <link rel="shortcut icon" href="/kindelia_icon.svg" />
-          {process.env.NODE_ENV === 'production' && (
-            <meta
-              httpEquiv="Content-Security-Policy"
-              content="upgrade-insecure-requests"
-            />
-          )}
         </Head>
         <body className="bg-bg-light dark:bg-bg-dark text-font-light dark:text-font-dark">
           <Main />
