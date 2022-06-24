@@ -6,7 +6,6 @@ import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import '@kindelia/lib/ui/globals.css'
 import '@/styles/utils.css'
-import '@/styles/statement.css'
 
 config.autoAddCss = false
 

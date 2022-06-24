@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { FC } from 'react'
-
+import styles from './Statement.module.css'
 import { flatten_enum } from '@kindelia/lib/utils/enum'
 
 import { num_to_name, num_to_oper } from '@/lib/hvm'
@@ -9,10 +9,10 @@ import * as T from '@/lib/types'
 const StmtCtr: FC<T.StmtCtr> = (ctr) => {
   return (
     <div>
-      <span className="statement-keyword">ctr</span>
+      <span className={styles.statement_keyword}>ctr</span>
       <span> </span>
       <span>{`{`}</span>
-      <span className="statement-ctr">{ctr.name}</span>
+      <span className={styles.statement_ctr}>{ctr.name}</span>
       <span>{ctr.args.map((arg) => ' ' + arg)}</span>
       <span>{`}`}</span>
     </div>
@@ -22,11 +22,11 @@ const StmtCtr: FC<T.StmtCtr> = (ctr) => {
 const StmtFun: FC<T.StmtFun> = (fun) => {
   return (
     <div>
-      <span className="statement-keyword">fun</span>
+      <span className={styles.statement_keyword}>fun</span>
       <span> </span>
       <span>(</span>
       <Link href={`/functions/${fun.name}`}>
-        <a className="statement-fun">{`${fun.name}`}</a>
+        <a className={styles.statement_fun}>{`${fun.name}`}</a>
       </Link>
       <span>{`${fun.args.map((arg) => ' ' + arg)}`}</span>
       <span>)</span>
@@ -40,7 +40,7 @@ const StmtFun: FC<T.StmtFun> = (fun) => {
         </Indent>
       ))}
       <span>{`} `}</span>
-      <span className="statement-keyword">with</span>
+      <span className={styles.statement_keyword}>with</span>
       <span>{` {`}</span>
       <br />
       <Indent n={4}>
@@ -109,7 +109,7 @@ const Ctr: FC<T.Ctr> = (ctr) => {
   return (
     <>
       <span>{`{`}</span>
-      <span className="statement-ctr">{ctr.name}</span>
+      <span className={styles.statement_ctr}>{ctr.name}</span>
       {ctr.args.map((arg, i) => (
         <div key={i} className="inline">
           {` `}
@@ -128,7 +128,7 @@ const IO_ARGS: FC<{ term: T.Term; io: T.Ctr }> = ({ term, io }) => {
     let name = num_to_name(value.numb)
     return (
       <Link href={`/functions/${name}`}>
-        <a className="statement-reference">{name}</a>
+        <a className={styles.statement_reference}>{name}</a>
       </Link>
     )
   } else if (
@@ -166,7 +166,7 @@ const IO: FC<T.Ctr> = (ctr) => {
     let lamb_name = value.name === '___' ? '~' : value.name
     return (
       <>
-        <span className="statement-io">{`!${name}`}</span>
+        <span className={styles.statement_io}>{`!${name}`}</span>
         <span> </span>
         <span>{lamb_name}</span>
         {/* TODO: first term is function id, prettify to name */}
@@ -185,7 +185,7 @@ const IO: FC<T.Ctr> = (ctr) => {
   } else {
     return (
       <>
-        <span className="statement-io">{`!${name}`}</span>
+        <span className={styles.statement_io}>{`!${name}`}</span>
         {ctr.args.map((arg, i) => (
           <div className="inline" key={i}>
             {` `}
@@ -207,7 +207,7 @@ const Fun: FC<T.Fun> = (fun) => {
     <>
       <span>(</span>
       <Link href={`/functions/${fun.name}`}>
-        <a className="statement-fun">{fun.name}</a>
+        <a className={styles.statement_fun}>{fun.name}</a>
       </Link>
       {fun.args.map((arg, i) => (
         <div className="inline" key={i}>
@@ -224,7 +224,7 @@ const Op2: FC<T.Op2> = (op2) => {
   return (
     <>
       <span>(</span>
-      <span className="statement-op2">{num_to_oper(op2.oper)}</span>
+      <span className={styles.statement_op2}>{num_to_oper(op2.oper)}</span>
       <span> </span>
       <Term {...op2.val0} />
       <span> </span>
@@ -261,7 +261,7 @@ const Lam: FC<T.Lam> = (lam) => {
 const Dup: FC<T.Dup> = (dup) => {
   return (
     <>
-      <span className="statement-keyword">dup</span>
+      <span className={styles.statement_keyword}>dup</span>
       <span> </span>
       <span>{dup.nam0}</span>
       <span> </span>
@@ -280,7 +280,7 @@ const Dup: FC<T.Dup> = (dup) => {
 const StmtRun: FC<T.StmtRun> = (run) => {
   return (
     <div>
-      <span className="statement-keyword">run</span>
+      <span className={styles.statement_keyword}>run</span>
       <span>{' {'}</span> <br />
       <Indent n={4}>
         <Term {...run.body} />
@@ -321,7 +321,7 @@ export const Statements: FC<{ statements: T.Statement[] }> = (prop) => {
   return (
     <>
       {prop.statements.map((statement, i) => (
-        <div className="statement" key={i}>
+        <div className={styles.statement} key={i}>
           <Statement {...statement} />
           {i < prop.statements.length - 1 ? <br /> : null}
         </div>
