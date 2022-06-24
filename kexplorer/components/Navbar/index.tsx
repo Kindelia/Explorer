@@ -74,15 +74,13 @@ export default function Navigation() {
                         </a>
                       </Link>
                     ))}
-                    <SelectNode />
                   </div>
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex flex-1 justify-end items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <Searchbar className={styles.searchbar} />
+                <SelectNode />
                 <ToggleTheme />
-
-                <ViewNotification />
                 <ProfileDropdown />
               </div>
             </div>

@@ -20,7 +20,7 @@ const Home: NextPage<HomeProps> = ({ hvm, kind }) => {
     <div className="flex flex-col">
       <Section className="justify-evenly">
         <img
-          className="self-center pt-6 h-28 sm:h-48"
+          className="self-center pt-6 h-28 sm:h-48 dark:invert"
           alt="Kindelia logo"
           src="kindelia_logo.svg"
         />
