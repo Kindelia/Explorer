@@ -6,7 +6,7 @@ import { Option } from '@kindelia/lib/utils/enum'
 import * as T from './types'
 import { config } from './config'
 
-type ApiResponse<T> =
+export type ApiResponse<T> =
   | {
       status: 'ok'
       data: T
@@ -21,7 +21,13 @@ const fetch_api = async <T>(
   node: string = config.nodes[0],
   cfg?: AxiosRequestConfig
 ): Promise<T> => {
-  const host = `http://${node}:8000` ?? 'http://localhost:8000' // TODO
+  // TODO: remove this and uncomment bellow after SSL is implemented
+  const host =
+    typeof window !== 'undefined' && !node.includes('localhost')
+      ? '/api'
+      : `http://${node}:8000` ?? 'http://localhost:8000'
+
+  // const host = `http://${node}:8000` ?? 'http://localhost:8000' // TODO
   const response = await axios.get<ApiResponse<T>>(`${host}${endpoint}`, cfg)
   // TODO: handle response error
 
