@@ -1,0 +1,29 @@
+.nav {
+  @apply sticky top-0 shadow z-10 bg-bg-light dark:bg-bg-dark;
+}
+
+.btn {
+  @apply border-2 border-transparent;
+}
+
+.btn:hover {
+    @apply bg-searchbar-light dark:bg-searchbar-dark;
+}
+
+.btn_current {
+  @apply border-2 border-font-light dark:border-font-dark pointer-events-none;
+  /* bg-gray-900 text-white */
+}
+
+.searchbar_common {
+  @apply bg-searchbar-light placeholder:text-fontPlaceHolder-light px-3 py-2;
+  @apply dark:bg-searchbar-dark dark:placeholder:text-fontPlaceHolder-dark;
+}
+
+.searchbar {
+  @apply hidden sm:block rounded-md mr-3 flex-1 max-w-xs;
+}
+
+.searchbar_mobile {
+  @apply rounded block w-full;
+}

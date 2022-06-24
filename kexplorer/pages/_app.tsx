@@ -12,7 +12,7 @@ config.autoAddCss = false
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className="bg-white dark:bg-black">
+    <div className="bg-bg-light dark:bg-bg-dark text-font-light dark:text-font-dark">
       <Navbar />
       <div className="mx-auto max-w-full lg:max-w-4xl p-2 sm:p-5">
         <Head>

@@ -11,6 +11,7 @@ import { SelectNode } from './SelectNode'
 import ToggleTheme from './ToggleTheme'
 import ViewNotification from './ViewNotification'
 import { classNames } from '@kindelia/lib/react/classNames'
+import styles from './Navbar.module.css'
 
 export default function Navigation() {
   const { asPath } = useRouter()
@@ -30,7 +31,7 @@ export default function Navigation() {
   }, [asPath])
 
   return (
-    <Disclosure as="nav" className="bg-gray-50 sticky top-0 shadow z-10">
+    <Disclosure as="nav" className={styles.nav}>
       {({ open }) => (
         <>
           <div className="max-w-7xl m-auto px-2 sm:px-6 lg:px-8">
@@ -64,10 +65,8 @@ export default function Navigation() {
                       <Link key={item.name} href={item.href}>
                         <a
                           className={classNames(
-                            item.current
-                              ? 'border-2 border-gray-300'
-                              : 'border-2 border-transparent hover:bg-gray-700 hover:text-white',
-                            'px-3 py-2 rounded-md font-medium'
+                            item.current ? styles.btn_current : styles.btn,
+                            'px-3 py-2 rounded-md font-medium transition-all'
                           )}
                           aria-current={item.current ? 'page' : undefined}
                         >
@@ -80,7 +79,7 @@ export default function Navigation() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex flex-1 justify-end items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <Searchbar className="hidden sm:block rounded-md  mr-3 bg-gray-000 flex-1 max-w-xs" />
+                <Searchbar className={styles.searchbar} />
                 <ToggleTheme />
 
                 <ViewNotification />
@@ -96,9 +95,7 @@ export default function Navigation() {
                   <Disclosure.Button
                     as="a"
                     className={classNames(
-                      item.current
-                        ? 'bg-gray-900 text-white'
-                        : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                      item.current ? styles.btn_current : styles.btn,
                       'block px-3 py-2 rounded-md text-base font-medium'
                     )}
                     aria-current={item.current ? 'page' : undefined}
@@ -107,7 +104,7 @@ export default function Navigation() {
                   </Disclosure.Button>
                 </Link>
               ))}
-              <Searchbar className="rounded bg-gray-700 text-white placeholder:text-gray-400 block w-full" />
+              <Searchbar className={styles.searchbar_mobile} />
             </div>
           </Disclosure.Panel>
         </>
