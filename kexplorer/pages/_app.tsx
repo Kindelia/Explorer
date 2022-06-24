@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
-
+import { ThemeProvider } from 'next-themes'
 import Navbar from '@/components/Navbar/'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
@@ -12,7 +12,7 @@ config.autoAddCss = false
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className="bg-bg-light dark:bg-bg-dark text-font-light dark:text-font-dark">
+    <ThemeProvider attribute="class">
       <Navbar />
       <div className="mx-auto max-w-full lg:max-w-4xl p-2 sm:p-5">
         <Head>
@@ -27,7 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Head>
         <Component {...pageProps} />
       </div>
-    </div>
+    </ThemeProvider>
   )
 }
 

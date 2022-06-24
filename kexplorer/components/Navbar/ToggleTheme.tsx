@@ -1,33 +1,31 @@
-function toggleTheme() {
-  if (typeof window != 'undefined') {
-    console.log('entrando if')
-    if (
-      localStorage.getItem('theme') === 'dark' ||
-      localStorage.getItem('theme') === null
-    ) {
-      document.documentElement.classList.remove('dark')
-      localStorage.setItem('theme', 'light')
-    } else {
-      document.documentElement.classList.add('dark')
-      localStorage.setItem('theme', 'dark')
-    }
-  }
-}
-
-// const style = {
-// color: "yellow"
-// style={style}
-// ajeitar
-// };
+import { classNames } from '@kindelia/lib/react/classNames'
+import { useTheme } from 'next-themes'
+import { useEffect, useState } from 'react'
 
 export default function ToggleTheme() {
+  const [mounted, setMounted] = useState(false)
+  const { theme, setTheme } = useTheme()
+
+  useEffect(() => setMounted(true), [])
+
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light')
+  }
+
   return (
-    <div>
+    <div className="self-center flex pr-2">
       <button id="toggleTheme" onClick={toggleTheme}>
         <label htmlFor="toggleTheme" className="cursor-pointer">
-          <div className="w-9 h-5 flex items-center bg-gray-300 rounded-full p2">
-            <div className="w-4 h-4 bg-white rounded-full shadow"></div>
-          </div>
+          {mounted && (
+            <div className="w-9 h-5 flex items-center bg-gray-300 rounded-full relative">
+              <div
+                className={classNames(
+                  'w-4 h-4 bg-white rounded-full shadow absolute transition-all',
+                  theme === 'light' ? 'right-5' : 'right-0'
+                )}
+              />
+            </div>
+          )}
         </label>
       </button>
     </div>
