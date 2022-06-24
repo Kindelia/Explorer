@@ -9,7 +9,11 @@ export default function Searchbar(props: { className: any }) {
       onChange={(e) => setSearch(e.currentTarget.value)}
       value={search}
       placeholder="🔎 Search"
-      className={classNames(styles.searchbar_common, props.className)}
+      className={classNames(
+        'bg-searchbar-light placeholder:text-fontPlaceHolder-light px-3 py-2',
+        'dark:bg-searchbar-dark dark:placeholder:text-fontPlaceHolder-dark',
+        props.className
+      )}
     />
   )
 }

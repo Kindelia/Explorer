@@ -31,7 +31,10 @@ export default function Navigation() {
   }, [asPath])
 
   return (
-    <Disclosure as="nav" className={styles.nav}>
+    <Disclosure
+      as="nav"
+      className="sticky top-0 shadow z-10 bg-bg-light dark:bg-bg-dark"
+    >
       {({ open }) => (
         <>
           <div className="max-w-7xl m-auto px-2 sm:px-6 lg:px-8">
@@ -78,7 +81,7 @@ export default function Navigation() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex flex-1 justify-end items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <Searchbar className={styles.searchbar} />
+                <Searchbar className="hidden sm:block rounded-md mr-3 flex-1 max-w-xs" />
                 <SelectNode />
                 <ToggleTheme />
                 <ProfileDropdown />
@@ -102,7 +105,7 @@ export default function Navigation() {
                   </Disclosure.Button>
                 </Link>
               ))}
-              <Searchbar className={styles.searchbar_mobile} />
+              <Searchbar className="rounded block w-full" />
             </div>
           </Disclosure.Panel>
         </>
