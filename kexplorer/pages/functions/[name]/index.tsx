@@ -1,10 +1,14 @@
-import type { GetServerSideProps, NextPage } from 'next'
+import type { NextPage } from 'next'
 import Link from 'next/link'
 import { FC, ReactNode } from 'react'
 
-import { getFunction, Function, GetFunctionParams } from '@/calls/getFunction'
+import { getFunction, Function } from '@/calls/getFunction'
 import { Codeblock } from '@/components/Codeblock'
-import { State } from '@/components/functions/State'
+import { get_function_state } from '@/lib/api'
+import { TermJson } from '@/lib/types'
+import { Error } from '@kindelia/lib/ui'
+import { read_term } from '@/lib/hvm'
+import { Term } from '@/components/Statement'
 
 interface BlockProps {
   title: string
@@ -18,7 +22,22 @@ const Block: FC<BlockProps> = ({ title, children }) => (
   </div>
 )
 
-const SingleFunction: NextPage<Function> = ({ code, history, state, name }) => {
+interface SingleFunctionProps {
+  state?: TermJson
+  fun?: Function
+  error?: string
+}
+
+const SingleFunction: NextPage<SingleFunctionProps> = ({
+  fun,
+  state,
+  error,
+}) => {
+  if (error) return <Error message={error} />
+
+  const { code, history, name } = fun
+  const teste = read_term(state, 0)
+
   return (
     <div className="flex flex-col">
       <h2 className="text-2xl">{name}</h2>
@@ -26,12 +45,12 @@ const SingleFunction: NextPage<Function> = ({ code, history, state, name }) => {
         <Codeblock>{code}</Codeblock>
       </Block>
       <Block title="State">
-        <State {...state} />
+        <Term {...teste} />
       </Block>
       <Block title="History">
         <div className="flex flex-col">
           {history.map((run) => (
-            <Link href={`${name}/${run.id}`} key={run.id}>
+            <Link href={`/functions/${name}/${run.id}`} key={run.id}>
               <a>{run.name}</a>
             </Link>
           ))}
@@ -41,18 +60,21 @@ const SingleFunction: NextPage<Function> = ({ code, history, state, name }) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps<
-  Function,
-  GetFunctionParams
-> = async ({ params }) => {
-  if (!params) {
-    return {
-      notFound: true,
-    }
-  }
+SingleFunction.getInitialProps = async (ctx) => {
+  try {
+    const name = ctx.query.name as string
 
-  return {
-    props: await getFunction(params),
+    const state = await get_function_state(name as any)
+    const fun = await getFunction({ name })
+
+    return {
+      fun,
+      state,
+    }
+  } catch (err) {
+    return {
+      error: err.message,
+    }
   }
 }
 

@@ -14,9 +14,6 @@ const mockedFunction: Function = {
     !(Counter $(Inc)) = $(IO.take @x $(IO.save (+ x #1) #~ $(IO.done #0)))
     !(Counter $(Get)) = !(IO.load @x $(IO.done x))
   } = #0 // initial state = #0`,
-  state: {
-    todo: '#129',
-  },
 }
 
 // TODO: checar estrutura do state
@@ -27,7 +24,6 @@ export interface FunctionState {
 export interface Function {
   name: string
   code: string
-  state: FunctionState
   history: Pick<Run, 'id' | 'name'>[]
 }
 
