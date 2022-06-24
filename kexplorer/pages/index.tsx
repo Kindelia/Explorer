@@ -4,7 +4,10 @@ import { Card } from '@/components/homepage/Card'
 import { Section } from '@/components/homepage/Section'
 import { Socials } from '@/components/homepage/Socials'
 import { Subscribe } from '@/components/homepage/Subscribe'
-import { get_github_info, GithubInfo } from '@kindelia/lib/api/get_github_info'
+import {
+  get_github_info,
+  GithubInfo,
+} from '@kindelia/lib/github/get_github_info'
 import { Button } from '@kindelia/lib/ui'
 
 interface HomeProps {
