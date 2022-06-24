@@ -11,7 +11,7 @@ const nodes: Node[] = config.nodes.map((url, i) => ({
   url,
 }))
 
-nodes.unshift({ name: 'api', url: '/api' })
+nodes.unshift({ name: 'Default', url: '/api' })
 
 nodes.push({ name: 'localhost:8000', url: 'localhost' })
 
