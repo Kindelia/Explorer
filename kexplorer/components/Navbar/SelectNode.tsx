@@ -32,9 +32,9 @@ export const SelectNode: FC = () => {
       as="div"
       className="border-2 px-1 mx-2 my-2 rounded-md font-medium relative border-x border-y border-font-light dark:border-font-dark"
     >
-      <Menu.Button className="w-28 text-sm">{selectedNode.name}</Menu.Button>
+      <Menu.Button className="w-28 text-sm ">{selectedNode.name}</Menu.Button>
       <DropdownTransition>
-        <Menu.Items className="z-10 flex flex-col absolute mt-2 w-28 rounded-md shadow-lg py-1 ring-1 ring-font-light dark:ring-font-dark focus:outline-none">
+        <Menu.Items className="z-10 flex flex-col absolute mt-2 w-28 rounded-md shadow-lg py-1 ring-1 ring-font-light dark:ring-font-dark focus:outline-none bg-bg-light dark:bg-bg-dark">
           {nodes.map((node) => (
             <Menu.Item key={node.name} disabled={selectedNode === node}>
               {({ disabled }) => (
