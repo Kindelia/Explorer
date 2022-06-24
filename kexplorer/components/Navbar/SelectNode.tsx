@@ -40,7 +40,9 @@ export const SelectNode: FC = () => {
               {({ disabled }) => (
                 <button
                   className={classNames(
-                    disabled ? 'font-bold border-8 hover:bg-searchbar-light dark:hover:bg-searchbar-dark border-searchbar-light dark:border-searchbar-dark' : 'hover:bg-searchbar-light dark:hover:bg-searchbar-dark',
+                    disabled
+                      ? 'font-bold border-8 hover:bg-searchbar-light dark:hover:bg-searchbar-dark border-searchbar-light dark:border-searchbar-dark'
+                      : 'hover:bg-searchbar-light dark:hover:bg-searchbar-dark',
                     'text-sm py-2'
                   )}
                   disabled={disabled}
