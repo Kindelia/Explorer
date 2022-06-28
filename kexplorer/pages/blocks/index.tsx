@@ -5,6 +5,7 @@ import { get_blocks } from '@/lib/api'
 import { BlockInfoJson, BlockJson } from '@/lib/types'
 import { useNodeStore } from '@/store/useNodeStore'
 import { Error } from '@kindelia/lib/ui'
+import { stringify } from 'querystring'
 
 interface BlockIndexProps {
   blocks?: BlockInfoJson[]
@@ -16,9 +17,11 @@ const BlockIndex: NextPage<BlockIndexProps> = ({ blocks, error }) => {
 
   return (
     <div className="flex flex-col space-y-5">
-      {blocks.map((block) => (
-        <Block key={block.hash} {...block} />
-      ))}
+      {blocks
+        .sort((a, b) => b.height - a.height)
+        .map((block) => (
+          <Block key={block.hash} {...block} />
+        ))}
     </div>
   )
 }
