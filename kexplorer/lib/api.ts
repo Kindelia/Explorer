@@ -21,7 +21,7 @@ const fetch_api = async <T>(
   node: string = config.nodes[0],
   cfg?: AxiosRequestConfig
 ): Promise<T> => {
-  let host = `http://${node}:8000` ?? 'http://localhost:8000'
+  let host = `http://${node}:8000` ?? 'http://127.0.0.1:8000'
 
   // TODO: remove this after SSL is implemented
   if (typeof window === 'undefined') {
