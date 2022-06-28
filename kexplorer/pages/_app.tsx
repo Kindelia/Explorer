@@ -12,7 +12,7 @@ config.autoAddCss = false
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider attribute="class">
+    <ThemeProvider attribute="class" defaultTheme="light">
       <Navbar />
       <Head>
         <title>Kind Explorer</title>
