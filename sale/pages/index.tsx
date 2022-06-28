@@ -61,7 +61,13 @@ const Home: NextPage<HomeProps> = ({ kind, hvm }) => {
               <a href={explorer_url} target="_blank" rel="noreferrer">
                 <Button>Explore</Button>
               </a>
-              <Button variant="outline">Join us</Button>
+              <a
+                href="https://discord.gg/kindelia"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Button variant="outline">Join us</Button>
+              </a>
             </div>
           </div>
           <img src="/images/cta.png" alt="logo" />
