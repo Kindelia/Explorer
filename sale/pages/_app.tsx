@@ -3,15 +3,19 @@ import Head from 'next/head'
 
 import '@kindelia/lib/ui/globals.css'
 import { Main } from '@kindelia/lib/ui'
+import { Header } from '@/components/Header'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Main>
+    <>
       <Head>
         <title>Kindelia Sale</title>
       </Head>
-      <Component {...pageProps} />
-    </Main>
+      <>
+        <Header />
+        <Component {...pageProps} />
+      </>
+    </>
   )
 }
 

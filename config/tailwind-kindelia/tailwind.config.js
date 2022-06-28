@@ -14,6 +14,7 @@ module.exports = {
         102: '1.02',
       },
       height,
+      minHeight: height,
       borderWidth: {
         1: '1px',
       },
@@ -33,6 +34,24 @@ module.exports = {
         searchbar: {
           light: '#d4d4d8',
           dark: '#71717a',
+        },
+        primary: {
+          light: '#333333',
+        },
+        secondary: {
+          light: '#87878a',
+        },
+        tertiary: {
+          light: '#a3a4a8',
+        },
+        link: {
+          light: '#001d82',
+        },
+        inset: {
+          light: '#dddcda',
+        },
+        success: {
+          light: '#2aba13',
         },
       },
     },

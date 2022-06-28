@@ -21,7 +21,9 @@ const Home: NextPage<HomeProps> = ({ hvm, kind }) => {
           alt="Kindelia logo"
           src="kindelia_logo.svg"
         />
-        <Button className="h-11 self-center">Explore Kindelia</Button>
+        <Button variant="outline" className="h-11 self-center">
+          Explore Kindelia
+        </Button>
       </Section>
 
       <Section className="justify-evenly">

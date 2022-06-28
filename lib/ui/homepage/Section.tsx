@@ -11,7 +11,7 @@ export const Section: FC<SectionProps> = ({
   ...props
 }) => (
   <div
-    className={classNames(className, 'h-50-screen flex flex-col b-40')}
+    className={classNames(className, 'min-h-50-screen flex flex-col b-40')}
     {...props}
   >
     {children}
