@@ -6,6 +6,10 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**"]
     },
+    "build:sale": {
+      "dependsOn": ["^build:sale"],
+      "outputs": [".next/**"]
+    },
     "test": {
       "dependsOn": ["build"],
       "outputs": [],
