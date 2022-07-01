@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
-import { useNodeStore } from '@/store/useNodeStore'
+import { useNodeStore } from '@kindelia/lib/store/useNodeStore'
 import { classNames } from '@kindelia/lib/react/classNames'
 import { Menu } from '@headlessui/react'
 

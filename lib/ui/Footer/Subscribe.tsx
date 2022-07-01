@@ -1,6 +1,6 @@
 import { FC, FormEventHandler, HTMLAttributes, useRef } from 'react'
 
-import { useMailchimp } from '@/hooks/useMailchimp'
+import { useMailchimp } from '@kindelia/lib/hooks/useMailchimp'
 import { Button } from '@kindelia/lib/ui'
 import { classNames } from '@kindelia/lib/react/classNames'
 
