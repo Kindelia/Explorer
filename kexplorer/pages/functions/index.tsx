@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { Info } from '@/components/blocks/Block'
 import { get_functions } from '@/lib/api'
 import { Error } from '@kindelia/lib/ui'
-import { useNodeStore } from '@/store/useNodeStore'
+import { useNodeStore } from '@kindelia/lib/ui/Store/useNodeStore'
 
 interface FunctionIndexProps {
   functions?: string[]

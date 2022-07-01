@@ -9,7 +9,7 @@ import * as T from '@/lib/types'
 
 import { Codeblock } from '@/components/Codeblock'
 import { Statements } from '@/components/Statement'
-import { useNodeStore } from '@/store/useNodeStore'
+import { useNodeStore } from '@kindelia/lib/ui/Store/useNodeStore'
 import { Error } from '@kindelia/lib/ui'
 
 interface Props {
