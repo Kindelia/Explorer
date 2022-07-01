@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { ThemeProvider } from 'next-themes'
-import Navbar from '@/components/Navbar/'
+import Navbar from '@kindelia/lib/ui/Navbar/'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import '@kindelia/lib/ui/globals.css'
