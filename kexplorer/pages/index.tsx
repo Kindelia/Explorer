@@ -1,6 +1,5 @@
 import type { GetStaticProps, NextPage } from 'next'
-import { Card, Section, Socials } from '@kindelia/lib/ui/homepage'
-import { Subscribe } from '@/components/homepage/Subscribe'
+import { Card, Section } from '@kindelia/lib/ui/homepage'
 import {
   get_github_info,
   GithubInfo,
@@ -41,11 +40,6 @@ const Home: NextPage<HomeProps> = ({ hvm, kind }) => {
           reverse
           languageColor="#CA1E8E"
         />
-      </Section>
-
-      <Section className="justify-around">
-        <Subscribe />
-        <Socials />
       </Section>
     </div>
   )
