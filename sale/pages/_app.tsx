@@ -6,7 +6,7 @@ import { Main } from '@kindelia/lib/ui'
 import { Header } from '@/components/Header'
 import { ThemeProvider } from 'next-themes'
 import Footer from '@kindelia/lib/ui/Footer'
-import Navbar from '@kindelia/lib/ui/Navbar/'
+import Navbar from '@kindelia/lib/ui/Navbar/index2'
 
 
 function MyApp({ Component, pageProps }: AppProps) {
