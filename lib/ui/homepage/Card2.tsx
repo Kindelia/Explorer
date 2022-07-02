@@ -18,7 +18,7 @@ export const Card: FC<CardProps> = ({
   languageColor,
 }) => {
   return (
-    <div className="h-full text-primary-light">
+    <div className="h-full">
       <div className="flex flex-col justify-evenly h-full">
         <div className="space-y-2">
           <div className="text-3xl font-bold">{title}</div>

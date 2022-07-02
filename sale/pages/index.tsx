@@ -8,7 +8,7 @@ import {
 import { explorer_url } from '@/lib/config'
 import { FC } from 'react'
 import { Roadmap } from '@/components/Roadmap'
-import { Card } from '@/components/Card'
+import { Card } from '@kindelia/lib/ui/homepage/Card2'
 
 interface HomeProps {
   kind: GithubInfo
@@ -20,9 +20,8 @@ const Feature: FC<{ title: string; description: string }> = ({
   description,
 }) => (
   <div className="text-xl font-semibold">
-    <span className="text-primary-light">{title}</span>
-    <span className="text-secondary-light">
-      {` -> `}
+    <span className="">{title}</span>
+    <span className="font-light">
       {description}
     </span>
   </div>
@@ -36,7 +35,7 @@ const Home: NextPage<HomeProps> = ({ kind, hvm }) => {
           <div className="flex flex-col justify-between pr-10">
             <div className="space-y-2 font-semibold">
               <h1 className="font-bold text-4xl">Welcome to Kindelia</h1>
-              <h2 className="text-secondary-light text-xl leading-loose">
+              <h2 className="font-normal text-xl leading-loose">
                 A global virtual machine powered bu blockchain technology whose
                 goal is to solve the{' '}
                 <span className="underline">{`Zooko's triangle trillema`}</span>
@@ -44,16 +43,16 @@ const Home: NextPage<HomeProps> = ({ kind, hvm }) => {
             </div>
             <div className="space-y-3">
               <Feature
-                title="Decentralized"
-                description="Kindelia: a decentralized functional computer."
+                title="Decentralized -> Kindelia:"
+                description="A decentralized functional computer."
               />
               <Feature
-                title="Efficient"
-                description="HVM: an optimal, parallel, functional virtual machine."
+                title="Efficient -> HVM:"
+                description="An optimal, parallel, functional virtual machine."
               />
               <Feature
-                title="Secure"
-                description="Kind: a formal verification programming language."
+                title="Secure -> Kind:"
+                description="A formal verification programming language."
               />
             </div>
 
@@ -70,14 +69,14 @@ const Home: NextPage<HomeProps> = ({ kind, hvm }) => {
               </a>
             </div>
           </div>
-          <img src="/images/cta.png" alt="logo" />
+          <img src="/images/cta.png" alt="logo" className='dark:invert' />
         </div>
       </Section>
       <Section className="h-66-screen" id="details">
-        <div className="uppercase flex flex-shrink self-center px-24 bg-inset-light rounded-t-xl tracking-widest font-bold pt-3">
+        <div className="uppercase flex flex-shrink self-center px-24 bg-searchbar-light dark:bg-searchbar-dark rounded-t-xl tracking-widest font-bold pt-3">
           Details
         </div>
-        <div className="bg-inset-light w-full h-66-screen">
+        <div className="bg-searchbar-light dark:bg-searchbar-dark  w-full h-66-screen">
           <div className="mx-auto max-w-full lg:max-w-6xl px-2 sm:px-5 py-10 flex flex-row h-full items-center space-x-28">
             <Card
               title="Cheap state and computation"
@@ -100,10 +99,10 @@ const Home: NextPage<HomeProps> = ({ kind, hvm }) => {
       </Section>
 
       <Section className="-top-8 relative" id="roadmap">
-        <div className="uppercase flex flex-shrink self-center px-24 bg-bg-light rounded-t-xl tracking-widest font-bold pt-3">
+        <div className="uppercase flex flex-shrink self-center px-24 bg-bg-light dark:bg-bg-dark rounded-t-xl tracking-widest font-bold pt-3">
           Roadmap
         </div>
-        <div className="bg-bg-light w-full min-h-60-screen pt-20">
+        <div className="bg-bg-light dark:bg-bg-dark w-full min-h-60-screen pt-20">
           <div className="mx-auto max-w-full lg:max-w-6xl px-2 sm:px-5 py-10 flex flex-row h-full items-center space-x-20">
             <Roadmap />
           </div>

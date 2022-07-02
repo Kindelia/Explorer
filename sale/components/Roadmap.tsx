@@ -9,11 +9,11 @@ export const Roadmap: FC = () => {
   const handleSelectPhase = (phase: RoadmapPhase) => setSelected(phase)
 
   return (
-    <div className="flex flex-col flex-1 space-y-16 text-primary-light">
-      <div className="flex flex-row justify-between text-inset-light space-x-3">
+    <div className="flex flex-col flex-1 space-y-16 ">
+      <div className="flex flex-row justify-between  space-x-3">
         {roadmap.map((phase) => (
           <button
-            className="bg-primary-light flex flex-1 shadow-md rounded-md justify-center uppercase py-5 h-80 text-xl"
+            className="bg-searchbar-light dark:bg-searchbar-dark flex flex-1 shadow-md rounded-md justify-center uppercase py-5 h-80 text-xl"
             onClick={() => handleSelectPhase(phase)}
             key={phase.title}
           >
@@ -32,14 +32,14 @@ export const Roadmap: FC = () => {
               <div
                 className={classNames(
                   task.done ? '' : 'text-transparent',
-                  'bg-inset-light text-center flex items-center px-6 rounded-md font-bold text-xl'
+                  'bg-searchbar-light dark:bg-searchbar-dark text-center flex items-center px-6 rounded-md font-bold text-xl'
                 )}
               >
                 Done
               </div>
-              <div className="bg-inset-light flex flex-col flex-1 px-4 py-5 rounded-md">
+              <div className="bg-searchbar-light dark:bg-searchbar-dark flex flex-col flex-1 px-4 py-5 rounded-md">
                 <div className="text-xl font-bold">{task.title}</div>
-                <div className="text-secondary-light font-semibold text-lg">
+                <div className="font-semibold text-lg">
                   {task.description}
                 </div>
               </div>
