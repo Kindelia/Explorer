@@ -2,7 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 
-.Disclosure {
-  @apply ;
+
+.themeDefault {
+  @apply bg-bg-light dark:bg-bg-dark text-font-light dark:text-font-dark;
+}
+
+/* .themeDefault2 {
+
 } */
+
+@layer components {
+  .themeBorder {
+    @apply border-font-light dark:border-font-dark;
+  }
+}

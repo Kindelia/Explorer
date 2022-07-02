@@ -11,7 +11,7 @@ import { SelectNode } from './SelectNode'
 import ToggleTheme from './ToggleTheme'
 import ViewNotification from './ViewNotification'
 import { classNames } from '@kindelia/lib/react/classNames'
-import styles from './Navbar.module.css'
+
 
 
 
@@ -35,8 +35,8 @@ export default function Navigation(props) {
           <Link key={item.name} href={item.href}>
             <Disclosure.Button //on desktop should be a "<a"
               className={classNames(
-                item.current ? styles.btn_current : styles.btn,
-                'px-3 py-2 rounded-md font-medium text-base block transition-all'
+                item.current ? "border-font-light dark:border-font-dark border-2" : "border-transparent",
+                'px-3 py-2 rounded-md font-medium text-base block transition-all border-2 hover:bg-searchbar-light hover:dark:bg-searchbar-dark'
               )}
               aria-current={item.current ? 'page' : undefined}
             >
@@ -51,7 +51,7 @@ export default function Navigation(props) {
   return (
     <Disclosure
       as="nav"
-      className="sticky top-0 shadow z-10 bg-bg-light dark:bg-bg-dark"
+      className="sticky top-0 shadow z-10"
     >
       {({ open }) => (
         <>
