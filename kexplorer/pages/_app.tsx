@@ -9,7 +9,6 @@ import '@/styles/utils.css'
 import { Main } from '@kindelia/lib/ui'
 import Footer from '@kindelia/lib/ui/Footer'
 
-
 config.autoAddCss = false
 
 function MyApp({ Component, pageProps }: AppProps) {

@@ -30,6 +30,26 @@ export default function Navigation() {
     })
   }, [asPath])
 
+  function NavigationButtons() {
+    return (
+      <>
+        {navigation.map((item) => (
+          <Link key={item.name} href={item.href}>
+            <Disclosure.Button //on desktop should be a "<a"
+              className={classNames(
+                item.current ? styles.btn_current : styles.btn,
+                'px-3 py-2 rounded-md font-medium text-base block transition-all'
+              )}
+              aria-current={item.current ? 'page' : undefined}
+            >
+              {item.name}
+            </Disclosure.Button>
+          </Link>
+        ))}
+      </>
+    )
+  }
+
   return (
     <Disclosure
       as="nav"
@@ -39,7 +59,7 @@ export default function Navigation() {
         <>
           <div className="max-w-7xl m-auto px-2 sm:px-6 lg:px-8">
             <div className="relative flex items-center justify-between h-16">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+              <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
                 <Disclosure.Button className="">
                   <span className="sr-only">Open main menu</span>
@@ -64,24 +84,12 @@ export default function Navigation() {
                 </div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-2">
-                    {navigation.map((item) => (
-                      <Link key={item.name} href={item.href}>
-                        <a
-                          className={classNames(
-                            item.current ? styles.btn_current : styles.btn,
-                            'px-3 py-2 rounded-md font-medium transition-all'
-                          )}
-                          aria-current={item.current ? 'page' : undefined}
-                        >
-                          {item.name}
-                        </a>
-                      </Link>
-                    ))}
+                    <NavigationButtons />
                   </div>
                 </div>
               </div>
-              <div className="absolute inset-y-0 right-0 flex flex-1 justify-end items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <Searchbar className="hidden sm:block rounded-md mr-3 flex-1 max-w-xs" />
+              <div className="absolute inset-y-0 right-0 hidden sm:flex sm:flex-1 justify-end items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <Searchbar className="rounded-md mr-3 flex-1 max-w-xs" />
                 <SelectNode />
                 <ToggleTheme />
                 <ProfileDropdown />
@@ -91,21 +99,11 @@ export default function Navigation() {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              {navigation.map((item) => (
-                <Link key={item.name} href={item.href}>
-                  <Disclosure.Button
-                    as="a"
-                    className={classNames(
-                      item.current ? styles.btn_current : styles.btn,
-                      'block px-3 py-2 rounded-md text-base font-medium'
-                    )}
-                    aria-current={item.current ? 'page' : undefined}
-                  >
-                    {item.name}
-                  </Disclosure.Button>
-                </Link>
-              ))}
+              <NavigationButtons />
               <Searchbar className="rounded block w-full" />
+              <SelectNode />
+              <ToggleTheme />
+              <ProfileDropdown />
             </div>
           </Disclosure.Panel>
         </>
