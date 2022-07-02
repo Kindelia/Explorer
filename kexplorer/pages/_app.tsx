@@ -11,10 +11,16 @@ import Footer from '@kindelia/lib/ui/Footer'
 
 config.autoAddCss = false
 
+const nav = [
+  { name: 'Interact', href: '/interact', current: false },
+  { name: 'Blocks', href: '/blocks', current: false },
+  { name: 'Functions', href: '/functions', current: false },
+]
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider attribute="class" defaultTheme="light">
-      <Navbar />
+      <Navbar nav={nav} />
       <Head>
         <title>Kind Explorer</title>
       </Head>

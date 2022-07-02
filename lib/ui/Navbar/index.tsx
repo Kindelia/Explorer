@@ -13,13 +13,11 @@ import ViewNotification from './ViewNotification'
 import { classNames } from '@kindelia/lib/react/classNames'
 import styles from './Navbar.module.css'
 
-export default function Navigation() {
+
+
+export default function Navigation(props) {
   const { asPath } = useRouter()
-  const [navigation, setNavigation] = useState([
-    { name: 'Interact', href: '/interact', current: false },
-    { name: 'Blocks', href: '/blocks', current: false },
-    { name: 'Functions', href: '/functions', current: false },
-  ])
+  const [navigation, setNavigation] = useState(props.nav)
 
   useEffect(() => {
     setNavigation((prev) => {

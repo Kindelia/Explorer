@@ -5,13 +5,18 @@ import '@kindelia/lib/ui/globals.css'
 import { Main } from '@kindelia/lib/ui'
 import { ThemeProvider } from 'next-themes'
 import Footer from '@kindelia/lib/ui/Footer'
-import Navbar from '@kindelia/lib/ui/Navbar/index2'
+import Navbar from '@kindelia/lib/ui/Navbar/'
 
+const nav = [
+  { name: 'Explore', href: '#details', current: false },
+  { name: 'Details', href: '#details', current: false },
+  { name: 'Roadmap', href: '#roadmap', current: false },
+]
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider attribute="class" defaultTheme="light">
-      <Navbar />
+      <Navbar nav={nav} />
       <Head>
         <title>Kind Explorer</title>
       </Head>
