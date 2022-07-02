@@ -14,7 +14,6 @@ import { classNames } from '@kindelia/lib/react/classNames'
 
 
 
-
 export default function Navigation(props) {
   const { asPath } = useRouter()
   const [navigation, setNavigation] = useState(props.nav)
@@ -35,8 +34,8 @@ export default function Navigation(props) {
           <Link key={item.name} href={item.href}>
             <Disclosure.Button //on desktop should be a "<a"
               className={classNames(
-                item.current ? "border-font-light dark:border-font-dark border-2" : "border-transparent",
-                'px-3 py-2 rounded-md font-medium text-base block transition-all border-2 hover:bg-searchbar-light hover:dark:bg-searchbar-dark'
+                item.current ? "themeBorder" : "border-transparent",
+                'px-3 py-2 rounded-md font-medium text-base block transition-all border-2 themeHover'
               )}
               aria-current={item.current ? 'page' : undefined}
             >
@@ -51,7 +50,7 @@ export default function Navigation(props) {
   return (
     <Disclosure
       as="nav"
-      className="sticky top-0 shadow z-10"
+      className="sticky top-0 shadow z-10 themeDefault"
     >
       {({ open }) => (
         <>

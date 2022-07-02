@@ -10,8 +10,7 @@ export default function Searchbar(props: { className: any }) {
       value={search}
       placeholder="🔎 Search"
       className={classNames(
-        'bg-searchbar-light placeholder:text-fontPlaceHolder-light px-3 py-2',
-        'dark:bg-searchbar-dark dark:placeholder:text-fontPlaceHolder-dark',
+        'themeDefault2 px-3 py-2',
         props.className
       )}
     />

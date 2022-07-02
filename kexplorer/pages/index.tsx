@@ -20,7 +20,7 @@ const Home: NextPage<HomeProps> = ({ hvm, kind }) => {
           alt="Kindelia logo"
           src="kindelia_logo.svg"
         />
-        <Button variant="outline" className="h-11 self-center">
+        <Button variant="outline" className="h-11 self-center themeHover">
           Explore Kindelia
         </Button>
       </Section>

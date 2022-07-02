@@ -3,16 +3,19 @@
 @tailwind utilities;
 
 
-.themeDefault {
-  @apply bg-bg-light dark:bg-bg-dark text-font-light dark:text-font-dark;
+.themeDefault, #__next {
+  @apply bg-bg-light dark:bg-bg-dark text-font-light dark:text-font-dark ring-font-light dark:ring-font-dark;
 }
 
-/* .themeDefault2 {
+.themeDefault2 {
+  @apply bg-searchbar-light dark:bg-searchbar-dark dark:placeholder:text-font-dark placeholder:text-font-light;
+}
 
-} */
 
-@layer components {
-  .themeBorder {
+.themeBorder {
     @apply border-font-light dark:border-font-dark;
-  }
+}
+
+.themeHover:hover {
+  @apply bg-searchbar-light dark:bg-searchbar-dark;
 }

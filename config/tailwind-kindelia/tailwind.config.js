@@ -27,10 +27,6 @@ module.exports = {
           light: '#1c1917',
           dark: '#fafafa',
         },
-        fontPlaceHolder: {
-          light: '#1c1917',
-          dark: '#fafafa',
-        },
         searchbar: {
           light: '#d4d4d8',
           dark: '#71717a',
