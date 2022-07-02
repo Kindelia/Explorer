@@ -61,10 +61,10 @@ const Home: NextPage<HomeProps> = ({ kind, hvm }) => {
         </div>
       </Section>
       <Section className="h-66-screen" id="details">
-        <div className="uppercase flex flex-shrink self-center px-24 bg-searchbar-light dark:bg-searchbar-dark rounded-t-xl tracking-widest font-bold pt-3">
+        <div className="uppercase flex flex-shrink self-center px-24 themeDefault2 rounded-t-xl tracking-widest font-bold pt-3">
           Details
         </div>
-        <div className="bg-searchbar-light dark:bg-searchbar-dark  w-full h-66-screen">
+        <div className="themeDefault2  w-full h-66-screen">
           <div className="mx-auto max-w-full lg:max-w-6xl px-2 sm:px-5 py-10 flex flex-row h-full items-center space-x-28">
             <Card
               title="Cheap state and computation"
@@ -73,7 +73,7 @@ const Home: NextPage<HomeProps> = ({ kind, hvm }) => {
               languageColor="#ffaf82"
             />
 
-            <div className="bg-bg-light h-full w-1" />
+            <div className="bg-bg-light dark:bg-bg-dark h-full w-1" />
 
             <Card
               title="0-bug contracts"
@@ -87,10 +87,10 @@ const Home: NextPage<HomeProps> = ({ kind, hvm }) => {
       </Section>
 
       <Section className="-top-8 relative" id="roadmap">
-        <div className="uppercase flex flex-shrink self-center px-24 bg-bg-light dark:bg-bg-dark rounded-t-xl tracking-widest font-bold pt-3">
+        <div className="uppercase flex flex-shrink self-center px-24 themeDefault rounded-t-xl tracking-widest font-bold pt-3">
           Roadmap
         </div>
-        <div className="bg-bg-light dark:bg-bg-dark w-full min-h-60-screen pt-20">
+        <div className="themeDefault w-full min-h-60-screen pt-20">
           <div className="mx-auto max-w-full lg:max-w-6xl px-2 sm:px-5 py-10 flex flex-row h-full items-center space-x-20">
             <Roadmap />
           </div>

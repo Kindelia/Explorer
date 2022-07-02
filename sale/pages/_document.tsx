@@ -8,7 +8,7 @@ class MyDocument extends Document {
         <Head>
           <link rel="shortcut icon" href="/kindelia_icon.svg" />
         </Head>
-        <body className="bg-bg-light dark:bg-bg-dark text-font-light dark:text-font-dark">
+        <body className="">
           <Main />
           <NextScript />
         </body>
