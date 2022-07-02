@@ -36,7 +36,7 @@ const Home: NextPage<HomeProps> = ({ kind, hvm }) => {
             <div className="space-y-2 font-semibold">
               <h1 className="font-bold text-4xl">Welcome to Kindelia</h1>
               <h2 className="font-normal text-xl leading-loose">
-                A global virtual machine powered bu blockchain technology whose
+                A global virtual machine powered by blockchain technology whose
                 goal is to solve the{' '}
                 <span className="underline">{`Zooko's triangle trillema`}</span>
               </h2>
@@ -56,18 +56,6 @@ const Home: NextPage<HomeProps> = ({ kind, hvm }) => {
               />
             </div>
 
-            <div className="space-x-4">
-              <a href={explorer_url} target="_blank" rel="noreferrer">
-                <Button>Explore</Button>
-              </a>
-              <a
-                href="https://discord.gg/kindelia"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Button variant="outline">Join us</Button>
-              </a>
-            </div>
           </div>
           <img src="/images/cta.png" alt="logo" className='dark:invert' />
         </div>
