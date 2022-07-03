@@ -17,10 +17,18 @@ const nav = [
   { name: 'Functions', href: '/functions', current: false },
 ]
 
+const plugins = {
+  Searchbar: true,
+  ProfileDropdown: true,
+  SelectNode: true,
+  ToggleTheme: true,
+  ViewNotification: false,
+}
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider attribute="class" defaultTheme="light">
-      <Navbar nav={nav} />
+      <Navbar nav={nav} plugins={plugins} />
       <Head>
         <title>Kind Explorer</title>
       </Head>

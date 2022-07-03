@@ -15,6 +15,7 @@ import { classNames } from '@kindelia/lib/react/classNames'
 
 
 export default function Navigation(props) {
+  const useSearchbar = true
   const { asPath } = useRouter()
   const [navigation, setNavigation] = useState(props.nav)
 
@@ -86,10 +87,11 @@ export default function Navigation(props) {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 hidden sm:flex sm:flex-1 justify-end items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <Searchbar className="rounded-md mr-3 flex-1 max-w-xs" />
-                <SelectNode />
-                <ToggleTheme />
-                <ProfileDropdown />
+                { props.plugins.Searchbar &&   <Searchbar className="rounded-md mr-3 flex-1 max-w-xs" /> }
+                { props.plugins.SelecNode && <SelectNode /> }
+                { props.plugins.ToggleTheme && <ToggleTheme /> }
+                { props.plugins.ViewNotification && <ViewNotification /> }
+                { props.plugins.ProfileDropdown && <ProfileDropdown /> }
               </div>
             </div>
           </div>
@@ -97,10 +99,11 @@ export default function Navigation(props) {
           <Disclosure.Panel className="sm:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
               <NavigationButtons />
-              <Searchbar className="rounded block w-full" />
-              <SelectNode />
-              <ToggleTheme />
-              <ProfileDropdown />
+              { props.plugins.Searchbar &&  <Searchbar className="rounded block w-full" /> }
+              { props.plugins.SelecNode && <SelectNode /> }
+              { props.plugins.ToggleTheme && <ToggleTheme /> }
+              { props.plugins.ViewNotification && <ViewNotification /> }
+              { props.plugins.ProfileDropdown && <ProfileDropdown /> }
             </div>
           </Disclosure.Panel>
         </>
