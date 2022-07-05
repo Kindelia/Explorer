@@ -29,7 +29,7 @@ const domainFunctionCount = (tokenId: bigint) => {
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const tokenId = req.query.tokenId as unknown as bigint
+  const tokenId = BigInt(req.query.tokenId as string)
 
   const letterCount = domainLetterCount(tokenId)
 
