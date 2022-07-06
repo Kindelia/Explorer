@@ -1,5 +1,3 @@
-type Class = string | null | undefined
+import cx from 'classnames'
 
-export function classNames(...classes: Class[]) {
-  return classes.filter(Boolean).join(' ')
-}
+export const classNames = cx

@@ -5,14 +5,17 @@ import { useEffect, useState } from 'react'
 import { Disclosure, Menu } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 
-import ProfileDropdown from './ProfileDropdown'
 import Searchbar from './Searchbar'
 import { SelectNode } from './SelectNode'
 import ToggleTheme from './ToggleTheme'
 import ViewNotification from './ViewNotification'
 import { classNames } from '@kindelia/lib/react/classNames'
 
+import dynamic from 'next/dynamic'
 
+const ProfileDropdown = dynamic(() => import('./ProfileDropdown'), {
+  ssr: false,
+})
 
 export default function Navigation(props) {
   const useSearchbar = true
