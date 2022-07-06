@@ -1,0 +1,58 @@
+name: Publish on Netlify
+
+on: push
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  deploy:
+    strategy:
+      matrix:
+        include:
+          - folder: kexplorer
+            id: 6a3238a0-ebd2-4893-8abe-ec152302efad
+          # - folder: sale
+          #   id: # TODO: ADD SALE ID HERE
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with: 
+        fetch-depth: 0
+
+    - uses: nrwl/last-successful-commit-action@v1
+      id: last_successful_commit
+      with:
+        branch: 'main'
+        workflow_id: 'deploy.yml'
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+
+    - run: echo "::set-output name=IGNORE::$(git diff --quiet $(git rev-parse --short ${{ steps.last_successful_commit.outputs.commit_hash }}) $(git rev-parse --short ${{ github.sha }}) -- ${{ matrix.folder }} lib config || echo "false")"
+      id: diff
+
+    - uses: actions/setup-node@v3
+      if: ${{ steps.diff.outputs.IGNORE == 'false' }}
+      with:
+        node-version: '16'
+        cache: 'yarn'
+
+    - uses: actions/cache@v3
+      if: ${{ steps.diff.outputs.IGNORE == 'false' }}
+      with:
+        path: |
+          ${{ github.workspace }}/node_modules/.cache/turbo
+          ${{ github.workspace }}/${{ matrix.folder }}/.netlify/cache
+        key: ${{ runner.os }}-${{ matrix.folder }}-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('${{ matrix.folder }}/**.[jt]sx?', '${{ matrix.folder }}/**.json', 'lib/**.[jt]sx?') }}
+        restore-keys: |
+          ${{ runner.os }}-${{ matrix.folder }}-${{ hashFiles('**/yarn.lock') }}-
+
+    - run: yarn install --immutable
+      if: ${{ steps.diff.outputs.IGNORE == 'false' }}
+
+    - run: yarn deploy:${{ matrix.folder }}
+      if: ${{ steps.diff.outputs.IGNORE == 'false' }}
+      env:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ matrix.id }}
