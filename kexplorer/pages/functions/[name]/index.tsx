@@ -1,13 +1,14 @@
 import type { NextPage } from 'next'
 import { FC, ReactNode } from 'react'
 import { get_function, get_function_state } from '@/lib/api'
-import { FunctionId, TermJson } from '@/lib/types'
+import { FuncJson, FunctionId, TermJson } from '@/lib/types'
 import { Error } from '@kindelia/lib/ui'
-import { read_term } from '@/lib/hvm'
+import { read_block_content, read_term } from '@/lib/hvm'
 import { Term } from '@/components/Statement'
 import { useNodeStore } from '@/../lib/ui/Store/useNodeStore'
 import { Option } from '@kindelia/lib/utils'
-
+import { Codeblock } from '@/components/Codeblock'
+import { Statements } from '@/components/Statement'
 interface BlockProps {
   title: string
   children: ReactNode
@@ -22,7 +23,7 @@ const Block: FC<BlockProps> = ({ title, children }) => (
 
 interface SingleFunctionProps {
   state: Option<TermJson>
-  fun?: any
+  fun: Option<FuncJson>
   error?: string
   name: FunctionId
 }
@@ -34,11 +35,25 @@ const SingleFunction: NextPage<SingleFunctionProps> = ({
   name,
 }) => {
   if (error) return <Error message={error} />
-
   return (
     <div className="flex flex-col">
       <h2 className="text-2xl">{name?.toString()}</h2>
-      WIP {JSON.stringify(fun)}
+      {fun && (
+        <Codeblock>
+          <Statements
+            statements={read_block_content([
+              {
+                Fun: {
+                  func: fun.func.rules,
+                  name: name as any,
+                  args: [],
+                  init: state!,
+                },
+              },
+            ])}
+          />
+        </Codeblock>
+      )}
       {state && (
         <Block title="State">
           <Term {...read_term(state, 0)} />
@@ -54,17 +69,10 @@ SingleFunction.getInitialProps = async (ctx) => {
     const node = useNodeStore.getState().selectedNode.url
     const fun = await get_function(name, node)
 
-    if (!fun)
-      return {
-        error: `Function ${name} not found`,
-        name,
-        state: null,
-      }
-
     const state = await get_function_state(name, node)
 
     return {
-      fun,
+      fun: fun,
       state,
       name,
     }

@@ -53,6 +53,12 @@ export interface StmtFunJson {
   func: RuleJson[]
   init: TermJson
 }
+
+export interface FuncJson {
+  func: {
+    rules: RuleJson[]
+  }
+}
 export interface StmtRunJson {
   body: TermJson
 }
