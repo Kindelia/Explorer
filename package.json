@@ -10,13 +10,16 @@
     "build": "turbo run build",
     "test": "turbo run test",
     "lint": "turbo run lint",
-    "dev": "turbo run dev --parallel"
+    "dev": "turbo run dev --parallel",
+    "deploy:kexplorer": "cd kexplorer && netlify deploy --build --prod",
+    "deploy:sale": "cd sale && netlify deploy --build --prod"
   },
   "devDependencies": {
     "@types/tailwindcss": "^3.0.10",
     "autoprefixer": "^10.4.7",
     "eslint": "^8.18.0",
     "eslint-config-kindelia": "*",
+    "netlify-cli": "^10.7.1",
     "postcss": "^8.4.14",
     "prettier": "^2.7.1",
     "tailwindcss": "^3.1.4",
