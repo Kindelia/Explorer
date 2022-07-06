@@ -13,7 +13,7 @@ export type ApiResponse<T> =
     }
   | {
       status: 'error'
-      error: string
+      error: string // TODO: rename to `message` or `msg`
     }
 
 const fetch_api = async <T>(

@@ -9,7 +9,7 @@ export default async function handler(
   try {
     const blocks = await get_blocks()
     res.status(200).json({ data: blocks, status: 'ok' })
-  } catch (err) {
+  } catch (err: any) {
     res.status(500).json({ error: err.message, status: 'error' })
   }
 }

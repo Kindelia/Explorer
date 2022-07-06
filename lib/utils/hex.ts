@@ -3,7 +3,7 @@ import { Option, Tagged } from './enum'
 export type Hex = Tagged<'Hex', string>
 export type HashHex = Tagged<'Hash', string>
 
-const HASH_HEX_LENGTH = 64 + 2 // '0x' + 64 hex chars
+const HASH_HEX_LENGTH = 64 + 2 // '0x' + 64 hex chars (256-bits)
 
 export function hex_str_from(_txt: string): Option<Hex> {
   let txt = _txt.toLowerCase()
