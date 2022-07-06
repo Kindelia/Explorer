@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import { FC, ReactNode } from 'react'
 import { get_function, get_function_state } from '@/lib/api'
-import { FuncJson, FunctionId, TermJson } from '@/lib/types'
+import { FuncJson, FunctionId, StrNum, TermJson } from '@/lib/types'
 import { Error } from '@kindelia/lib/ui'
 import { read_block_content, read_term } from '@/lib/hvm'
 import { Term } from '@/components/Statement'
@@ -28,6 +28,8 @@ interface SingleFunctionProps {
   name: FunctionId
 }
 
+// TODO: Render initial state when API is done
+
 const SingleFunction: NextPage<SingleFunctionProps> = ({
   fun,
   state,
@@ -47,7 +49,7 @@ const SingleFunction: NextPage<SingleFunctionProps> = ({
                   func: fun.func.rules,
                   name: name as any,
                   args: [],
-                  init: state!,
+                  init: { Num: { numb: '0' as StrNum } },
                 },
               },
             ])}
