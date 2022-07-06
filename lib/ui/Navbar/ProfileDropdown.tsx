@@ -84,7 +84,7 @@ export default function ProfileDropdown() {
                     'block px-4 py-2 text-sm text-gray-700 w-full'
                   )}
                 >
-                  Login Metamask
+                  {window.ethereum ? 'Login Metamask' : 'Metamask not found'}
                 </button>
               )}
             </Menu.Item>
