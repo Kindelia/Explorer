@@ -16,7 +16,7 @@ const FunctionsIndex: NextPage<FunctionIndexProps> = ({ functions, error }) => {
 
   return (
     <div className="flex flex-col space-y-5 ">
-      {functions.map((name) => (
+      {functions?.map((name) => (
         <Link href={`/functions/${name}`} key={name}>
           <a className="flex justify-between border-2 px-4 py-2 border-gray-500">
             <Info title="Name" className="w-1/3">
@@ -34,7 +34,7 @@ FunctionsIndex.getInitialProps = async () => {
     return {
       functions: await get_functions(useNodeStore.getState().selectedNode.url),
     }
-  } catch (err) {
+  } catch (err: any) {
     return {
       error: err.message,
     }

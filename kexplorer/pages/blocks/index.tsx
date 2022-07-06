@@ -2,10 +2,9 @@ import type { NextPage } from 'next'
 
 import { Block } from '@/components/blocks/Block'
 import { get_blocks } from '@/lib/api'
-import { BlockInfoJson, BlockJson } from '@/lib/types'
+import { BlockInfoJson } from '@/lib/types'
 import { useNodeStore } from '@kindelia/lib/ui/Store/useNodeStore'
 import { Error } from '@kindelia/lib/ui'
-import { stringify } from 'querystring'
 
 interface BlockIndexProps {
   blocks?: BlockInfoJson[]
@@ -18,7 +17,7 @@ const BlockIndex: NextPage<BlockIndexProps> = ({ blocks, error }) => {
   return (
     <div className="flex flex-col space-y-5">
       {blocks
-        .sort((a, b) => b.height - a.height)
+        ?.sort((a, b) => b.height - a.height)
         .map((block) => (
           <Block key={block.hash} {...block} />
         ))}
@@ -31,7 +30,7 @@ BlockIndex.getInitialProps = async () => {
     return {
       blocks: await get_blocks(useNodeStore.getState().selectedNode.url),
     }
-  } catch (err) {
+  } catch (err: any) {
     return { error: err.message }
   }
 }

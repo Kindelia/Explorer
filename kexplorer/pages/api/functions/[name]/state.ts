@@ -1,17 +1,18 @@
-import { hash_hex_from } from '@kindelia/lib/utils/hex'
 import { get_function_state, ApiResponse } from '@/lib/api'
-import { TermJson } from '@/lib/types'
+import { FunctionId, TermJson } from '@/lib/types'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { Option } from '@kindelia/lib/utils'
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ApiResponse<TermJson>>
+  res: NextApiResponse<ApiResponse<Option<TermJson>>>
 ) {
   try {
-    const name = req.query.name as string
-    const state = await get_function_state(name as any)
+    const name = req.query.name as FunctionId
+    const state = await get_function_state(name)
+
     res.status(200).json({ data: state, status: 'ok' })
-  } catch (err) {
+  } catch (err: any) {
     res.status(500).json({ error: err.message, status: 'error' })
   }
 }

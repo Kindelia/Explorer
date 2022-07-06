@@ -17,13 +17,15 @@ const ProfileDropdown = dynamic(() => import('./ProfileDropdown'), {
   ssr: false,
 })
 
-export default function Navigation(props) {
+// TODO: create NavigationProps interface
+
+export default function Navigation(props: any) {
   const useSearchbar = true
   const { asPath } = useRouter()
-  const [navigation, setNavigation] = useState(props.nav)
+  const [navigation, setNavigation] = useState<any>(props.nav)
 
   useEffect(() => {
-    setNavigation((prev) => {
+    setNavigation((prev: any) => {
       return [...prev].map((nav) => {
         nav.current = nav.href === asPath
         return nav
@@ -34,7 +36,7 @@ export default function Navigation(props) {
   function NavigationButtons() {
     return (
       <>
-        {navigation.map((item) => (
+        {navigation.map((item: any) => (
           <Link key={item.name} href={item.href}>
             <Disclosure.Button //on desktop should be a "<a"
               className={classNames(

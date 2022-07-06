@@ -63,7 +63,9 @@ export const get_block = (hex: T.BlockId, node?: string) =>
 export const get_functions = (node?: string) =>
   fetch_api<T.Name[]>('/functions', node)
 
-// export const get_function = (id: FunctionId) => fetch_api<T.Function>(`/functions/${id}`)
+// TODO: Function Type
+export const get_function = (id: T.FunctionId, node?: string) =>
+  fetch_api<Option<any>>(`/functions/${id}`, node)
 
-export const get_function_state = (id: T.FunctionId) =>
-  fetch_api<T.TermJson>(`/functions/${id}/state`)
+export const get_function_state = (id: T.FunctionId, node?: string) =>
+  fetch_api<Option<T.TermJson>>(`/functions/${id}/state`, node)
