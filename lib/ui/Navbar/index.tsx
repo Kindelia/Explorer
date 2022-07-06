@@ -88,7 +88,7 @@ export default function Navigation(props) {
               </div>
               <div className="absolute inset-y-0 right-0 hidden sm:flex sm:flex-1 justify-end items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 { props.plugins.Searchbar &&   <Searchbar className="rounded-md mr-3 flex-1 max-w-xs" /> }
-                { props.plugins.SelecNode && <SelectNode /> }
+                { props.plugins.SelectNode && <SelectNode /> }
                 { props.plugins.ToggleTheme && <ToggleTheme /> }
                 { props.plugins.ViewNotification && <ViewNotification /> }
                 { props.plugins.ProfileDropdown && <ProfileDropdown /> }
@@ -100,7 +100,7 @@ export default function Navigation(props) {
             <div className="px-2 pt-2 pb-3 space-y-1">
               <NavigationButtons />
               { props.plugins.Searchbar &&  <Searchbar className="rounded block w-full" /> }
-              { props.plugins.SelecNode && <SelectNode /> }
+              { props.plugins.SelectNode && <SelectNode /> }
               { props.plugins.ToggleTheme && <ToggleTheme /> }
               { props.plugins.ViewNotification && <ViewNotification /> }
               { props.plugins.ProfileDropdown && <ProfileDropdown /> }
