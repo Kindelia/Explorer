@@ -1,6 +1,11 @@
 import { useEffect } from 'react'
 import { classNames } from '@kindelia/lib/react/classNames'
 import { Menu } from '@headlessui/react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faWallet
+} from '@fortawesome/free-solid-svg-icons'
+
 import { DropdownTransition } from './DropdownTransition'
 import { useMetamaskStore } from '../../metamask/useMetamaskStore'
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
@@ -37,16 +42,12 @@ export default function ProfileDropdown() {
   return (
     <Menu as="div" className="ml-3 relative">
       <div>
-        <Menu.Button className="w-8 bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+        <Menu.Button className="w-8 flex text-sm rounded-full ">
           <span className="sr-only">Open user menu</span>
           {account ? (
             <Jazzicon diameter={32} seed={jsNumberForAddress(account)} />
           ) : (
-            <img
-              className="h-8 w-8 rounded-full"
-              src="https://isaojose.com.br/wp-content/uploads/2020/12/blank-profile-picture-mystery-man-avatar-973460.jpg"
-              alt=""
-            />
+            <FontAwesomeIcon size="lg" icon={faWallet} />
           )}
         </Menu.Button>
       </div>
