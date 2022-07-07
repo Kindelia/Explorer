@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - folder: kexplorer
+          - folder: explorer
             id: 6a3238a0-ebd2-4893-8abe-ec152302efad
           # - folder: sale
           #   id: # TODO: ADD SALE ID HERE
