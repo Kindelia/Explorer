@@ -9,8 +9,8 @@
     "test": "turbo run test",
     "lint": "turbo run lint",
     "dev": "turbo run dev --parallel",
-    "deploy:kexplorer": "cd kexplorer && netlify deploy --build --prod",
-    "deploy:sale": "cd sale && netlify deploy --build --prod"
+    "deploy:explorer": "cd apps/explorer && netlify deploy --build --prod",
+    "deploy:sale": "cd apps/sale && netlify deploy --build --prod"
   },
   "devDependencies": {
     "@types/tailwindcss": "^3.0.10",
