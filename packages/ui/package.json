@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "author": "Kelvin Santos",
   "license": "MIT",
+  "scripts": {
+    "lint": "eslint *.ts*"
+  },
   "private": true,
   "devDependencies": {
     "@metamask/providers": "^9.0.0",
