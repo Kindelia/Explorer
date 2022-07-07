@@ -10,7 +10,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - folder: explorer
+          - name: explorer
+            folder: apps/explorer
             id: 6a3238a0-ebd2-4893-8abe-ec152302efad
           # - folder: sale
           #   id: # TODO: ADD SALE ID HERE
@@ -45,14 +46,14 @@ jobs:
         path: |
           ${{ github.workspace }}/node_modules/.cache/turbo
           ${{ github.workspace }}/${{ matrix.folder }}/.netlify/cache
-        key: ${{ runner.os }}-${{ matrix.folder }}-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('${{ matrix.folder }}/**.[jt]sx?', '${{ matrix.folder }}/**.json', 'lib/**.[jt]sx?') }}
+        key: ${{ runner.os }}-${{ matrix.name }}-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('${{ matrix.folder }}/**.[jt]sx?', '${{ matrix.folder }}/**.json', 'lib/**.[jt]sx?') }}
         restore-keys: |
-          ${{ runner.os }}-${{ matrix.folder }}-${{ hashFiles('**/yarn.lock') }}-
+          ${{ runner.os }}-${{ matrix.name }}-${{ hashFiles('**/yarn.lock') }}-
 
     - run: yarn install --immutable
       if: ${{ steps.diff.outputs.IGNORE == 'false' || steps.last_successful_commit.outputs.commit_hash == '' }}
 
-    - run: yarn deploy:${{ matrix.folder }}
+    - run: yarn deploy:${{ matrix.name }}
       if: ${{ steps.diff.outputs.IGNORE == 'false' || steps.last_successful_commit.outputs.commit_hash == '' }}
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
