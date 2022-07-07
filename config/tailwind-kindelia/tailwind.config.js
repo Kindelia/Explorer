@@ -5,7 +5,7 @@ module.exports = {
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
-    '../lib/ui/**/*.{ts,tsx}',
+    '../../lib/ui/**/*.{ts,tsx}',
   ],
   darkMode: 'class',
   theme: {
