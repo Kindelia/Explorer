@@ -1,1 +1,1 @@
-module.exports = require('tailwind-kindelia/postcss.config')
+module.exports = require('tailwind/postcss.config')

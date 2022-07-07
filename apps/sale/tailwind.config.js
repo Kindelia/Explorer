@@ -1,1 +1,1 @@
-module.exports = require('tailwind-kindelia/tailwind.config')
+module.exports = require('tailwind/tailwind.config')
