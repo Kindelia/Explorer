@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import styles from './Navbar.module.css'
-import { classNames } from '@kindelia/lib/react/classNames'
+import { classNames } from 'ui/react/classNames'
 
 export default function Searchbar(props: { className: any }) {
   const [search, setSearch] = useState('')

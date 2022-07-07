@@ -1,0 +1,56 @@
+Arguments: 
+  /usr/bin/node /home/toor/PublicShare/kindelia/1now/Explorer/.yarn/releases/yarn-1.22.19.cjs
+
+PATH: 
+  /home/toor/.asdf/shims:/opt/asdf-vm/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/games:/usr/games/bin:/usr/lib64/kde4/libexec:/usr/lib64/qt/bin:/usr/lib64/ruby/gems/2.1.0:/usr/lib64/ruby/gems/2.1.0/gems/jekyll-3.7.3/exe:/usr/lib64/ruby/gems/2.1.0/gems/bundler-1.16.1/exe:/usr/lib64/python2.7/site-packages:/usr/lib64:/usr/share/texmf/bin:/usr/share/spectrwm/:/src/sbin:/opt/bin:/opt/andoid-sdk/tools:/opt/andoid-sdk/platform-tools:/opt/andoird-sdk/tools:/opt/andoird-sdk/platform-tools:/opt/blender:/home/linuxbrew/.linuxbrew/bin:/usr/lib/emscripten:/home/toor/.gem/ruby/2.1.0/bin:/home/toor/.gem/ruby/2.4.0/bin:/home/toor/.gem/ruby/2.6.0/bin:/home/toor/.gem/ruby/3.0.0/bin:/home/toor/.bin:/home/toor/.scripts:/home/toor/.go/bin:/home/toor/.yarn/bin:/home/toor/.config/yarn/global/node_modules/.bin:/home/toor/.local/bin:/home/toor/.rvm/bin:/home/toor/.rvm/rubies/ruby-2.7.1/lib/ruby/gems/2.7.0/gems/mailcatcher-0.7.1/bin:/home/toor/.rvm/rubies/ruby-2.7.1/lib/ruby/gems/2.7.0/gems/thin-1.5.1/lib:/home/toor/.cargo/bin:.
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  18.4.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  SyntaxError: /home/toor/PublicShare/kindelia/1now/Explorer/apps/sale/package.json: Unexpected token , in JSON at position 371
+      at JSON.parse (<anonymous>)
+      at /home/toor/PublicShare/kindelia/1now/Explorer/.yarn/releases/yarn-1.22.19.cjs:1104:57
+      at Generator.next (<anonymous>)
+      at step (/home/toor/PublicShare/kindelia/1now/Explorer/.yarn/releases/yarn-1.22.19.cjs:310:30)
+      at /home/toor/PublicShare/kindelia/1now/Explorer/.yarn/releases/yarn-1.22.19.cjs:321:13
+
+npm manifest: 
+  {
+    "private": true,
+    "workspaces": [
+      "apps/*",
+      "packages/*"
+    ],
+    "scripts": {
+      "build": "turbo run build",
+      "test": "turbo run test",
+      "lint": "turbo run lint",
+      "dev": "turbo run dev --parallel",
+      "deploy:kexplorer": "cd kexplorer && netlify deploy --build --prod",
+      "deploy:sale": "cd sale && netlify deploy --build --prod"
+    },
+    "devDependencies": {
+      "@types/tailwindcss": "^3.0.10",
+      "autoprefixer": "^10.4.7",
+      "eslint": "^8.18.0",
+      "eslint-config-kindelia": "*",
+      "netlify-cli": "^10.7.1",
+      "postcss": "^8.4.14",
+      "prettier": "^2.7.1",
+      "tailwindcss": "^3.1.4",
+      "turbo": "^1.2.16"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

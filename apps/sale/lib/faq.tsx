@@ -1,4 +1,4 @@
-import { FAQProps } from '@kindelia/lib/ui/homepage/FAQ'
+import { FAQProps } from 'ui/homepage/FAQ'
 
 export const FAQs: FAQProps[] = [
   {

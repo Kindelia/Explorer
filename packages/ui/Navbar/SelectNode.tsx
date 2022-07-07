@@ -1,7 +1,7 @@
 import { FC, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
-import { useNodeStore } from '@kindelia/lib/ui/Store/useNodeStore'
-import { classNames } from '@kindelia/lib/react/classNames'
+import { useNodeStore } from 'ui/Store/useNodeStore'
+import { classNames } from 'ui/react/classNames'
 import { Menu } from '@headlessui/react'
 
 import { DropdownTransition } from './DropdownTransition'

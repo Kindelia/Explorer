@@ -6,7 +6,7 @@ import { getFunction, Function } from '@/calls/getFunction'
 import { Codeblock } from '@/components/Codeblock'
 import { get_function_state } from '@/lib/api'
 import { TermJson } from '@/lib/types'
-import { Error } from '@kindelia/lib/ui'
+import { Error } from 'ui'
 import { read_term } from '@/lib/hvm'
 import { Term } from '@/components/Statement'
 

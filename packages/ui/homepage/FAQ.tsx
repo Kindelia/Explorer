@@ -1,5 +1,5 @@
 import { FC, useState, ReactNode } from 'react'
-import { classNames } from '../../react/classNames'
+import { classNames } from 'ui/react/classNames'
 
 export interface FAQProps {
   question: string

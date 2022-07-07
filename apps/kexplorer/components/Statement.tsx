@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { FC } from 'react'
 import styles from './Statement.module.css'
-import { flatten_enum } from '@kindelia/lib/utils/enum'
+import { flatten_enum } from 'ui/utils/enum'
 
 import { num_to_name, num_to_oper } from '@/lib/hvm'
 import * as T from '@/lib/types'

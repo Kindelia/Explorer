@@ -9,7 +9,7 @@ import Searchbar from './Searchbar'
 import { SelectNode } from './SelectNode'
 import ToggleTheme from './ToggleTheme'
 import ViewNotification from './ViewNotification'
-import { classNames } from '@kindelia/lib/react/classNames'
+import { classNames } from 'ui/react/classNames'
 
 import dynamic from 'next/dynamic'
 

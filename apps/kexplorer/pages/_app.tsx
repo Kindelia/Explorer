@@ -1,13 +1,13 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { ThemeProvider } from 'next-themes'
-import Navbar from '@kindelia/lib/ui/Navbar/'
+import Navbar from 'ui/Navbar/'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
-import '@kindelia/lib/ui/globals.css'
+import 'ui/globals.css'
 import '@/styles/utils.css'
-import { Main } from '@kindelia/lib/ui'
-import Footer from '@kindelia/lib/ui/Footer'
+import { Main } from 'ui'
+import Footer from 'ui/Footer'
 
 config.autoAddCss = false
 

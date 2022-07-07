@@ -1,4 +1,4 @@
-import { classNames } from '@kindelia/lib/react/classNames'
+import { classNames } from 'ui/react/classNames'
 import { RoadmapPhase } from '@/lib/roadmap'
 import { FC, useState } from 'react'
 import { roadmap } from '@/lib/roadmap'

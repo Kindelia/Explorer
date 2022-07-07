@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { classNames } from '@kindelia/lib/react/classNames'
+import { classNames } from 'ui/react/classNames'
 import { Menu } from '@headlessui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -7,7 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 import { DropdownTransition } from './DropdownTransition'
-import { useMetamaskStore } from '../../metamask/useMetamaskStore'
+import { useMetamaskStore } from 'ui/metamask/useMetamaskStore'
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 import { useRouter } from 'next/router'
 

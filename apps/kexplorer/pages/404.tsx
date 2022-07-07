@@ -1,4 +1,4 @@
-import { Error } from '@kindelia/lib/ui'
+import { Error } from 'ui'
 
 export default function NotFound() {
   return (

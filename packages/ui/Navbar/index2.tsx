@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { explorer_url } from '@kindelia/lib/ui/Store/config'
+import { explorer_url } from 'ui/Store/config'
 import { AnchorHTMLAttributes, FC, ReactNode } from 'react'
 
 const Nav: FC<AnchorHTMLAttributes<HTMLAnchorElement>> = ({

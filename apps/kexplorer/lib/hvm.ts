@@ -1,5 +1,5 @@
 import * as T from './types'
-import { flatten_enum } from '@kindelia/lib/utils/enum'
+import { flatten_enum } from 'ui/utils/enum'
 
 // TODO: bigint literals
 

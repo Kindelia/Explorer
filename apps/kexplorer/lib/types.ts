@@ -1,4 +1,4 @@
-import { Tagged, Enum } from '@kindelia/lib/utils/enum'
+import { Tagged, Enum } from 'ui/utils/enum'
 
 // TODO: comment
 export type StrNum = Tagged<'StrNum', string>
