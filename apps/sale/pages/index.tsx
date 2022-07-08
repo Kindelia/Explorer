@@ -1,14 +1,16 @@
+import { FC } from 'react'
 import type { GetStaticProps, NextPage } from 'next'
-import { Button } from 'ui'
+
 import { Section } from 'ui/homepage'
+import { Card } from 'ui/homepage/Card2'
 import {
   get_github_info,
   GithubInfo,
 } from 'ui/github/get_github_info'
-import { explorer_url } from '@/lib/config'
-import { FC } from 'react'
+import { Socials } from 'ui/Socials'
+import { Subscribe } from 'ui/subscribe/Subscribe'
+
 import { Roadmap } from '@/components/Roadmap'
-import { Card } from 'ui/homepage/Card2'
 
 interface HomeProps {
   kind: GithubInfo
@@ -96,6 +98,9 @@ const Home: NextPage<HomeProps> = ({ kind, hvm }) => {
           </div>
         </div>
       </Section>
+      
+      <Subscribe />
+      <Socials />
     </div>
   )
 }

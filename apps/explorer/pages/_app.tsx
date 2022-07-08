@@ -1,13 +1,15 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { ThemeProvider } from 'next-themes'
-import Navbar from 'ui/Navbar/'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
+
 import 'ui/globals.css'
-import '@/styles/utils.css'
 import { Main } from 'ui'
+import Navbar from 'ui/Navbar'
 import Footer from 'ui/Footer'
+
+import '@/styles/utils.css'
 
 config.autoAddCss = false
 

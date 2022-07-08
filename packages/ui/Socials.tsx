@@ -21,7 +21,7 @@ const socials: SocialProps[] = [
     icon: faGithub,
   },
   {
-    href: 'https://discord.gg/kindelia',
+    href: 'https://discord.gg/Kindelia',
     alt: 'Discord',
     icon: faDiscord,
   },
