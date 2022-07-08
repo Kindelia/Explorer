@@ -1,6 +1,8 @@
 name: Publish on Netlify
 
-on: push
+on:
+  push:
+    branches: [ "preview", "preview-*" ]
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
