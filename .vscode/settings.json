@@ -1,6 +1,32 @@
 {
   "cSpell.words": [
-    "kexplorer",
     "kindelia"
-  ]
+  ],
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "eslint.packageManager": "yarn",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": ["javascript"],
+  "files.exclude": {
+    "**/.yarn": true,
+    "**/.next": true,
+    "**/.turbo": true,
+    "**/*.lock": true,
+    "**/node_modules": true,
+    "**/package.json": true,
+    "**/turbo.json": true,
+    ".vscode": true,
+    ".eslintignore": true,
+    ".eslintrc.js": true,
+    ".prettierrc.js": true,
+    ".prettierignore": true,
+    ".yarnrc": true,
+    "apps/**/postcss.config.js": true,
+    "apps/**/tailwind.config.js": true,
+    "apps/**/tsconfig.json": true,
+    "packages/**/tsconfig.json": true
+  }
+
 }

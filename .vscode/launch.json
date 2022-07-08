@@ -1,0 +1,29 @@
+{
+  "configurations": [
+    {
+      "name": "Launch via `yarn run dev`",
+      "request": "launch",
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
+      "runtimeExecutable": "yarn",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node",
+    },
+    {
+      "name": "Next.js: debug full stack",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "yarn run dev",
+      // "console": "integratedTerminal",
+      // "serverReadyAction": {
+      //   "pattern": "started server on .+, url: (https?://.+)",
+      //   "uriFormat": "%s",
+      //   "action": "debugWithChrome"
+      // }
+    },
+  ]
+}
