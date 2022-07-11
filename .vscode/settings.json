@@ -23,10 +23,12 @@
     ".prettierrc.js": true,
     ".prettierignore": true,
     ".yarnrc": true,
+    "**/.gitignore": true,
     "apps/**/postcss.config.js": true,
     "apps/**/tailwind.config.js": true,
     "apps/**/tsconfig.json": true,
     "packages/**/tsconfig.json": true
-  }
+  },
+  "files.insertFinalNewline": true
 
 }
