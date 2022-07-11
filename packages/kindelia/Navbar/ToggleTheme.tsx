@@ -1,6 +1,7 @@
-import { classNames } from 'kindelia/react/classNames'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
+
+import { classNames } from 'kindelia/react/classNames'
 
 export default function ToggleTheme() {
   const [mounted, setMounted] = useState(false)

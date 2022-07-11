@@ -26,6 +26,7 @@
 **/yarn-error.log*
 **/.pnpm-debug.log*
 **/yarn.lock
+!yarn.lock
 **/.yarn
 
 # local env files

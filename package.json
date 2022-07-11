@@ -7,10 +7,13 @@
   "scripts": {
     "build": "turbo run build",
     "test": "turbo run test",
-    "lint": "turbo run lint",
+    "lint2": "turbo run lint",
     "dev": "turbo run dev --parallel",
     "deploy:explorer": "cd apps/explorer && netlify deploy --build --prod",
-    "deploy:sale": "cd apps/sale && netlify deploy --build --prod"
+    "deploy:sale": "cd apps/sale && netlify deploy --build --prod",
+    "format": "prettier --write './**/*.{tsx,ts}'",
+    "lint": "eslint --ext .ts,.tsx --fix --max-warnings 0 .",
+    "type-check": "tsc -p ."
   },
   "devDependencies": {
     "@types/tailwindcss": "^3.0.10",

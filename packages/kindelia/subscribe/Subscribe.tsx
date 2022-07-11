@@ -39,7 +39,9 @@ export const Subscribe: FC<SubscribeProps> = ({ className, ...props }) => {
       {...props}
     >
       {/* <div className="uppercase font-bold text-3xl">NEWSLETTER</div> */}
-      <div className="pb-4 text-center">Keep up with our latest news and events.</div>
+      <div className="pb-4 text-center">
+        Keep up with our latest news and events.
+      </div>
       <div className="sm:space-x-4 flex sm:flex-row flex-col justify-center items-center space-y-2 sm:space-y-0 w-full">
         <input
           placeholder="Email Address"

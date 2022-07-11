@@ -3,10 +3,12 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 
 import 'kindelia/globals.css'
-import { explorer_url } from '@/lib/config'
+
 import { Main } from 'kindelia'
 import Footer from 'kindelia/Footer'
 import Navbar from 'kindelia/Navbar/'
+
+import { explorer_url } from '@/lib/config'
 
 const nav = [
   { name: 'Explore', href: explorer_url, current: false },

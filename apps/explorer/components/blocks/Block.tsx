@@ -1,6 +1,9 @@
 import Link from 'next/link'
 import { FC, HTMLAttributes, ReactNode } from 'react'
 
+import { if_let, match } from 'kindelia/utils/enum'
+import { const_ } from 'kindelia/utils/functional'
+
 import { read_num } from '@/lib/hvm'
 import {
   BlockContentJson,
@@ -8,9 +11,6 @@ import {
   BlockResultsJson,
   StmtRunInfoJson,
 } from '@/lib/types'
-
-import { if_let, match } from 'kindelia/utils/enum'
-import { const_ } from 'kindelia/utils/functional'
 
 interface InfoProps extends HTMLAttributes<HTMLDivElement> {
   title: string

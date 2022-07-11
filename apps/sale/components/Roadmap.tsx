@@ -1,8 +1,9 @@
 import { FC, useState } from 'react'
 
+import { classNames } from 'kindelia/react/classNames'
+
 import { RoadmapPhase } from '@/lib/roadmap'
 import { roadmap } from '@/lib/roadmap'
-import { classNames } from 'kindelia/react/classNames'
 
 export const Roadmap: FC = () => {
   const [selected, setSelected] = useState(roadmap[0])

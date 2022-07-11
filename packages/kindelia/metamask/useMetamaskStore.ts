@@ -1,6 +1,6 @@
+import { getProvider } from './getProvider'
 import create from 'zustand'
 import { persist } from 'zustand/middleware'
-import { getProvider } from './getProvider'
 
 type MetamaskStore = {
   account?: string

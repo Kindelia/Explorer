@@ -1,12 +1,11 @@
 import Link from 'next/link'
 import { FC } from 'react'
 
-import { num_to_name, num_to_oper } from '@/lib/hvm'
-import * as T from '@/lib/types'
-
 import { flatten_enum } from 'kindelia/utils/enum'
 
 import styles from './Statement.module.css'
+import { num_to_name, num_to_oper } from '@/lib/hvm'
+import * as T from '@/lib/types'
 
 const StmtCtr: FC<T.StmtCtr> = (ctr) => {
   return (

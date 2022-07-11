@@ -1,7 +1,9 @@
+import type { NextApiRequest, NextApiResponse } from 'next'
+
 import { hash_hex_from } from 'kindelia/utils/hex'
+
 import { get_function_state, ApiResponse } from '@/lib/api'
 import { TermJson } from '@/lib/types'
-import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(
   req: NextApiRequest,

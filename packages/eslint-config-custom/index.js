@@ -5,16 +5,14 @@ module.exports = {
   rules: {
     'prettier/prettier': 'warn',
     '@next/next/no-img-element': 'off',
+    '@next/next/no-html-link-for-pages': 'off',
     'import-helpers/order-imports': [
       'warn',
       {
         newlinesBetween: 'always', // new line between groups
         groups: [
           ['/^react/', '/^next/'],
-          'module',
-          ['/^kindelia/'],
-          '/^@shared/',
-          ['parent', 'sibling', 'index'],
+          ['/^kindelia/', '/^explorer/', '/^sale/'],
         ],
         alphabetize: { order: 'asc', ignoreCase: true },
       },

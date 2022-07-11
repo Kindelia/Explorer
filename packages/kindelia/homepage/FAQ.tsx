@@ -1,4 +1,5 @@
 import { FC, useState, ReactNode } from 'react'
+
 import { classNames } from 'kindelia/react/classNames'
 
 export interface FAQProps {

@@ -3,15 +3,14 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 
-import 'kindelia/globals.css'
 import '@/styles/utils.css'
-import { config } from '@fortawesome/fontawesome-svg-core'
 
 import { Main } from 'kindelia'
 import Footer from 'kindelia/Footer'
 import Navbar from 'kindelia/Navbar'
+import 'kindelia/globals.css'
 
-import '@/styles/utils.css'
+import { config } from '@fortawesome/fontawesome-svg-core'
 
 config.autoAddCss = false
 

@@ -33,7 +33,7 @@ interface NamedToken extends BaseToken {
 
 export const extract_token = (token_id: bigint): Token => {
   const named_byte = token_id >> ((32n - 1n) * 8n)
-  const num_chars = token_id >> ((32n - 2n) * 8n) & 0xFFn
+  const num_chars = (token_id >> ((32n - 2n) * 8n)) & 0xffn
   console.log(named_byte)
   console.log(num_chars)
   if (named_byte > 0) {
@@ -41,7 +41,7 @@ export const extract_token = (token_id: bigint): Token => {
       id: token_id,
       named: true,
       num_chars: num_chars,
-      name: "[WIP]", // TODO
+      name: '[WIP]', // TODO
     }
   }
   return {
@@ -68,7 +68,7 @@ export const make_metadata = (token: Token) => {
       trait_type: 'Rarity',
       value: `${MAX_CHARS - num_chars}`,
     },
-  ];
+  ]
   if (token.named) {
     name = name + `: ${token.name}`
     attributes.push({

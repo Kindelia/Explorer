@@ -3,15 +3,14 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import { Disclosure, Menu } from '@headlessui/react'
-import { MenuIcon, XIcon } from '@heroicons/react/outline'
-
 import { classNames } from 'kindelia/react/classNames'
 
 import Searchbar from './Searchbar'
 import { SelectNode } from './SelectNode'
 import ToggleTheme from './ToggleTheme'
 import ViewNotification from './ViewNotification'
+import { Disclosure, Menu } from '@headlessui/react'
+import { MenuIcon, XIcon } from '@heroicons/react/outline'
 
 const ProfileDropdown = dynamic(() => import('./ProfileDropdown'), {
   ssr: false,

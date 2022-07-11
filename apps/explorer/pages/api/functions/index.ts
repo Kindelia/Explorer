@@ -1,6 +1,7 @@
+import type { NextApiRequest, NextApiResponse } from 'next'
+
 import { ApiResponse, get_functions } from '@/lib/api'
 import { Name } from '@/lib/types'
-import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(
   req: NextApiRequest,
