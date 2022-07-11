@@ -1,11 +1,8 @@
 import type { GetStaticProps, NextPage } from 'next'
 
 import { Button } from 'ui'
+import { get_github_info, GithubInfo } from 'ui/github/get_github_info'
 import { Card, Section } from 'ui/homepage'
-import {
-  get_github_info,
-  GithubInfo,
-} from 'ui/github/get_github_info'
 import { Socials } from 'ui/Socials'
 import { Subscribe } from 'ui/subscribe/Subscribe'
 
