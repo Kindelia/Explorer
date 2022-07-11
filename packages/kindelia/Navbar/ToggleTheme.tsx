@@ -1,4 +1,4 @@
-import { classNames } from 'ui/react/classNames'
+import { classNames } from 'kindelia/react/classNames'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 

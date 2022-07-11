@@ -1,10 +1,10 @@
 import axios from 'axios'
 import { AxiosRequestConfig } from 'axios'
 
-import { Option } from 'ui/utils/enum'
+import { Option } from 'kindelia/utils/enum'
 
-import * as T from './types'
 import { config } from './config'
+import * as T from './types'
 
 export type ApiResponse<T> =
   | {

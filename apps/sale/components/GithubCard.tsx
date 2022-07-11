@@ -1,8 +1,8 @@
 import { FC } from 'react'
 
-import { GithubInfo } from 'ui/github/get_github_info'
 import { faCodeFork, faStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { GithubInfo } from 'kindelia/github/get_github_info'
 
 export interface GithubCardProps extends GithubInfo {
   languageColor: string

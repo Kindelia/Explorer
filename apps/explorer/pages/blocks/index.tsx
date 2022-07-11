@@ -3,8 +3,8 @@ import type { NextPage } from 'next'
 import { Block } from '@/components/blocks/Block'
 import { get_blocks } from '@/lib/api'
 import { BlockInfoJson, BlockJson } from '@/lib/types'
-import { useNodeStore } from 'ui/Store/useNodeStore'
-import { Error } from 'ui'
+import { useNodeStore } from 'kindelia/Store/useNodeStore'
+import { Error } from 'kindelia'
 import { stringify } from 'querystring'
 
 interface BlockIndexProps {

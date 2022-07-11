@@ -1,4 +1,4 @@
-import { hash_hex_from } from 'ui/utils/hex'
+import { hash_hex_from } from 'kindelia/utils/hex'
 import { ApiResponse, get_block } from '@/lib/api'
 import { BlockInfoJson } from '@/lib/types'
 import type { NextApiRequest, NextApiResponse } from 'next'

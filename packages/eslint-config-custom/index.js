@@ -12,7 +12,7 @@ module.exports = {
         groups: [
           ['/^react/', '/^next/'],
           'module',
-          ['/^ui/'],
+          ['/^kindelia/'],
           '/^@shared/',
           ['parent', 'sibling', 'index'],
         ],

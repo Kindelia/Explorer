@@ -3,8 +3,8 @@ import Link from 'next/link'
 
 import { Info } from '@/components/blocks/Block'
 import { get_functions } from '@/lib/api'
-import { Error } from 'ui'
-import { useNodeStore } from 'ui/Store/useNodeStore'
+import { Error } from 'kindelia'
+import { useNodeStore } from 'kindelia/Store/useNodeStore'
 
 interface FunctionIndexProps {
   functions?: string[]

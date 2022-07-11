@@ -1,5 +1,6 @@
 import { ButtonHTMLAttributes, FC } from 'react'
-import { classNames } from 'ui/react/classNames'
+
+import { classNames } from 'kindelia/react/classNames'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant
@@ -11,9 +12,7 @@ export const Button: FC<ButtonProps> = ({ className, variant, ...props }) => (
   <button
     {...props}
     className={classNames(
-      variant === 'outline'
-        ? ''
-        : '',
+      variant === 'outline' ? '' : '',
       'border-font-light dark:border-font-dark border-x border-y px-5 py-1 rounded transition-colors',
       className
     )}

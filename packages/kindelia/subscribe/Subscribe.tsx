@@ -1,7 +1,7 @@
 import { FC, FormEventHandler, HTMLAttributes, useRef } from 'react'
 
-import { Button } from 'ui'
-import { classNames } from 'ui/react/classNames'
+import { Button } from 'kindelia'
+import { classNames } from 'kindelia/react/classNames'
 
 import { useMailchimp } from './useMailchimp'
 

@@ -1,13 +1,12 @@
+import { ThemeProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
-import { ThemeProvider } from 'next-themes'
 
-import 'ui/globals.css'
-import { Main } from 'ui'
-import Footer from 'ui/Footer'
-import Navbar from 'ui/Navbar/'
-
+import 'kindelia/globals.css'
 import { explorer_url } from '@/lib/config'
+import { Main } from 'kindelia'
+import Footer from 'kindelia/Footer'
+import Navbar from 'kindelia/Navbar/'
 
 const nav = [
   { name: 'Explore', href: explorer_url, current: false },

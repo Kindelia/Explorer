@@ -1,16 +1,12 @@
-import { FC } from 'react'
 import type { GetStaticProps, NextPage } from 'next'
-
-import { Section } from 'ui/homepage'
-import { Card } from 'ui/homepage/Card2'
-import {
-  get_github_info,
-  GithubInfo,
-} from 'ui/github/get_github_info'
-import { Socials } from 'ui/Socials'
-import { Subscribe } from 'ui/subscribe/Subscribe'
+import { FC } from 'react'
 
 import { Roadmap } from '@/components/Roadmap'
+import { get_github_info, GithubInfo } from 'kindelia/github/get_github_info'
+import { Section } from 'kindelia/homepage'
+import { Card } from 'kindelia/homepage/Card2'
+import { Socials } from 'kindelia/Socials'
+import { Subscribe } from 'kindelia/subscribe/Subscribe'
 
 interface HomeProps {
   kind: GithubInfo
@@ -23,9 +19,7 @@ const Feature: FC<{ title: string; description: string }> = ({
 }) => (
   <div className="text-xl font-semibold">
     <span className="">{title}</span>
-    <span className="font-light">
-      {description}
-    </span>
+    <span className="font-light">{description}</span>
   </div>
 )
 
@@ -57,9 +51,8 @@ const Home: NextPage<HomeProps> = ({ kind, hvm }) => {
                 description="A formal verification programming language."
               />
             </div>
-
           </div>
-          <img src="/images/cta.png" alt="logo" className='dark:invert' />
+          <img src="/images/cta.png" alt="logo" className="dark:invert" />
         </div>
       </Section>
       <Section className="h-66-screen" id="details">
@@ -98,7 +91,7 @@ const Home: NextPage<HomeProps> = ({ kind, hvm }) => {
           </div>
         </div>
       </Section>
-      
+
       <Subscribe />
       <Socials />
     </div>

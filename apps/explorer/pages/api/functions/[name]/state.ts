@@ -1,4 +1,4 @@
-import { hash_hex_from } from 'ui/utils/hex'
+import { hash_hex_from } from 'kindelia/utils/hex'
 import { get_function_state, ApiResponse } from '@/lib/api'
 import { TermJson } from '@/lib/types'
 import type { NextApiRequest, NextApiResponse } from 'next'

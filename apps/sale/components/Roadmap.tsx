@@ -1,7 +1,8 @@
-import { classNames } from 'ui/react/classNames'
-import { RoadmapPhase } from '@/lib/roadmap'
 import { FC, useState } from 'react'
+
+import { RoadmapPhase } from '@/lib/roadmap'
 import { roadmap } from '@/lib/roadmap'
+import { classNames } from 'kindelia/react/classNames'
 
 export const Roadmap: FC = () => {
   const [selected, setSelected] = useState(roadmap[0])
@@ -39,9 +40,7 @@ export const Roadmap: FC = () => {
               </div>
               <div className="themeDefault2 flex flex-col flex-1 px-4 py-5 rounded-md">
                 <div className="text-xl font-bold">{task.title}</div>
-                <div className="font-semibold text-lg">
-                  {task.description}
-                </div>
+                <div className="font-semibold text-lg">{task.description}</div>
               </div>
             </div>
           ))}

@@ -1,10 +1,10 @@
 import type { GetStaticProps, NextPage } from 'next'
 
-import { Button } from 'ui'
-import { get_github_info, GithubInfo } from 'ui/github/get_github_info'
-import { Card, Section } from 'ui/homepage'
-import { Socials } from 'ui/Socials'
-import { Subscribe } from 'ui/subscribe/Subscribe'
+import { Button } from 'kindelia'
+import { get_github_info, GithubInfo } from 'kindelia/github/get_github_info'
+import { Card, Section } from 'kindelia/homepage'
+import { Socials } from 'kindelia/Socials'
+import { Subscribe } from 'kindelia/subscribe/Subscribe'
 
 interface HomeProps {
   kind: GithubInfo

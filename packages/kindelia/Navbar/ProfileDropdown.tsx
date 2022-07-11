@@ -1,15 +1,15 @@
+import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { classNames } from 'ui/react/classNames'
-import { Menu } from '@headlessui/react'
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
+
+import { faWallet } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faWallet
-} from '@fortawesome/free-solid-svg-icons'
+import { Menu } from '@headlessui/react'
+
+import { useMetamaskStore } from 'kindelia/metamask/useMetamaskStore'
+import { classNames } from 'kindelia/react/classNames'
 
 import { DropdownTransition } from './DropdownTransition'
-import { useMetamaskStore } from 'ui/metamask/useMetamaskStore'
-import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
-import { useRouter } from 'next/router'
 
 export default function ProfileDropdown() {
   const router = useRouter()

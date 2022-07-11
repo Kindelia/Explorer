@@ -5,7 +5,7 @@ module.exports = {
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
-    '../../packages/ui/**/*.{ts,tsx}',
+    '../../packages/kindelia/**/*.{ts,tsx}',
   ],
   darkMode: 'class',
   theme: {

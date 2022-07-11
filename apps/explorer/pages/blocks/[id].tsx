@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Link from 'next/link'
 
-import { hash_hex_from } from 'ui/utils/hex'
+import { hash_hex_from } from 'kindelia/utils/hex'
 
 import * as api from '@/lib/api'
 import * as hvm from '@/lib/hvm'
@@ -9,8 +9,8 @@ import * as T from '@/lib/types'
 
 import { Codeblock } from '@/components/Codeblock'
 import { Statements } from '@/components/Statement'
-import { useNodeStore } from 'ui/Store/useNodeStore'
-import { Error } from 'ui'
+import { useNodeStore } from 'kindelia/Store/useNodeStore'
+import { Error } from 'kindelia'
 
 interface Props {
   block_info?: T.BlockInfoJson

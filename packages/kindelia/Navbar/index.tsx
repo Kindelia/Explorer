@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import { Disclosure, Menu } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 
-import { classNames } from 'ui/react/classNames'
+import { classNames } from 'kindelia/react/classNames'
 
 import Searchbar from './Searchbar'
 import { SelectNode } from './SelectNode'
