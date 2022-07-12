@@ -15,10 +15,25 @@
     "lint": "eslint --ext .ts,.tsx --fix --max-warnings 0 .",
     "type-check": "tsc -p ."
   },
+  "husky": {
+  "hooks": {
+    "pre-commit": "lint-staged"
+  }
+},
+"lint-staged": {
+  "./**/*.{js,jsx,ts,tsx,css,json}": [
+    "prettier --config ./.prettierrc.js --write"
+  ],
+  "./**/*.{js,jsx,ts,tsx}": [
+    "eslint --fix"
+  ]
+},
   "devDependencies": {
     "@types/tailwindcss": "^3.0.10",
     "autoprefixer": "^10.4.7",
     "eslint": "^8.18.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "netlify-cli": "^10.7.1",
     "postcss": "^8.4.14",
     "prettier": "^2.7.1",
