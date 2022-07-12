@@ -39,7 +39,7 @@
 **/.vercel
 
 # typescript
-**/.tsbuildinfo
+**/*.tsbuildinfo
 
 # locks
 **/package-lock.json

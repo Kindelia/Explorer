@@ -22,22 +22,21 @@
     "**/.turbo": true,
     "**/*.lock": true,
     "**/node_modules": true,
-    "**/package.json": true,
+    "**/package.json": false,
     "**/turbo.json": true,
     ".vscode": true,
     ".husky": true,
-    ".github": true,
+    ".github": false,
     ".eslintignore": true,
     ".eslintrc.js": true,
     ".prettierrc.js": true,
     ".prettierignore": true,
     ".yarnrc": true,
     "**/.gitignore": true,
-    "apps/**/postcss.config.js": true,
-    "apps/**/tailwind.config.js": true,
-    "apps/**/tsconfig.json": true,
-    "packages/**/tsconfig.json": true
+    "apps/**/postcss.config.js": false,
+    "apps/**/tailwind.config.js": false,
+    "apps/**/tsconfig.json": false,
+    "packages/**/tsconfig.json": false
   },
   "files.insertFinalNewline": true
-
 }
