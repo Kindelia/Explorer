@@ -25,6 +25,8 @@
     "**/package.json": true,
     "**/turbo.json": true,
     ".vscode": true,
+    ".husky": true,
+    ".github": true,
     ".eslintignore": true,
     ".eslintrc.js": true,
     ".prettierrc.js": true,
