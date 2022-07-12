@@ -5,6 +5,7 @@
     "packages/*"
   ],
   "scripts": {
+    "prepare": "npx husky install",
     "build": "turbo run build",
     "test": "turbo run test",
     "lint2": "turbo run lint",
