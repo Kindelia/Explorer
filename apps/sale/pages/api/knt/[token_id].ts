@@ -1,6 +1,25 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-// 0x0104000000000000000000000000000000000000000000000000000000000000
+function u128_to_name(num: bigint): string {
+  let chars: string[] = []
+  while (num > 0) {
+    const ch = num % 64n
+    num = num / 64n
+    if (ch == 0n) {
+      chars.push('.')
+    } else if (ch <= 10n) {
+      chars.push(String.fromCharCode(Number(ch - 1n + 48n)))
+    } else if (ch <= 36n) {
+      chars.push(String.fromCharCode(Number(ch - 11n + 65n)))
+    } else if (ch <= 62n) {
+      chars.push(String.fromCharCode(Number(ch - 37n + 97n)))
+    } else {
+      throw Error('Impossible character value.')
+    }
+  }
+  chars.reverse()
+  return chars.join('')
+}
 
 const MAX_CHARS = 20n
 const BASE = 64n
@@ -14,7 +33,7 @@ const capacity_of = (num_chars: bigint): bigint => {
   }
 }
 
-type Token = UnamedToken | NamedToken
+type Token = UnnamedToken | NamedToken
 
 interface BaseToken {
   id: bigint
@@ -22,8 +41,9 @@ interface BaseToken {
   num_chars: bigint
 }
 
-interface UnamedToken extends BaseToken {
+interface UnnamedToken extends BaseToken {
   named: false
+  idx: bigint
 }
 
 interface NamedToken extends BaseToken {
@@ -34,20 +54,24 @@ interface NamedToken extends BaseToken {
 export const extract_token = (token_id: bigint): Token => {
   const named_byte = token_id >> ((32n - 1n) * 8n)
   const num_chars = (token_id >> ((32n - 2n) * 8n)) & 0xffn
+  const rest = token_id & 0xffffffffffffffffffffffffffffffffn
   console.log(named_byte)
   console.log(num_chars)
   if (named_byte > 0) {
+    const name = u128_to_name(rest)
     return {
       id: token_id,
       named: true,
-      num_chars: num_chars,
-      name: '[WIP]', // TODO
+      num_chars,
+      name,
     }
   }
+  const idx = rest
   return {
     id: token_id,
     named: false,
-    num_chars: num_chars,
+    num_chars,
+    idx,
   }
 }
 
