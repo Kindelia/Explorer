@@ -1,5 +1,6 @@
-import { config } from './config'
 import create from 'zustand'
+
+import { config } from './config'
 
 type Node = {
   name: string

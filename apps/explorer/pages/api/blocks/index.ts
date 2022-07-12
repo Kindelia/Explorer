@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { ApiResponse, get_blocks } from '@/lib/api'
 import { BlockInfoJson } from '@/lib/types'
+import { ApiResponse, get_blocks } from '@/lib/api'
 
 export default async function handler(
   req: NextApiRequest,

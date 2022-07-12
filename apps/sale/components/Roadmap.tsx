@@ -1,7 +1,6 @@
 import { FC, useState } from 'react'
 
 import { classNames } from 'kindelia/react/classNames'
-
 import { RoadmapPhase } from '@/lib/roadmap'
 import { roadmap } from '@/lib/roadmap'
 

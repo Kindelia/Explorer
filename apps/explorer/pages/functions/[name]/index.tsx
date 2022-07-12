@@ -1,15 +1,14 @@
-import type { NextPage } from 'next'
-import Link from 'next/link'
 import { FC, ReactNode } from 'react'
+import Link from 'next/link'
+import type { NextPage } from 'next'
 
 import { Error } from 'kindelia'
-
-import { getFunction, Function } from '@/calls/getFunction'
-import { Codeblock } from '@/components/Codeblock'
-import { Term } from '@/components/Statement'
-import { get_function_state } from '@/lib/api'
-import { read_term } from '@/lib/hvm'
 import { TermJson } from '@/lib/types'
+import { read_term } from '@/lib/hvm'
+import { get_function_state } from '@/lib/api'
+import { Term } from '@/components/Statement'
+import { Codeblock } from '@/components/Codeblock'
+import { getFunction, Function } from '@/calls/getFunction'
 
 interface BlockProps {
   title: string

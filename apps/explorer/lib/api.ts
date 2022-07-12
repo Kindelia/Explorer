@@ -1,9 +1,9 @@
-import { Option } from 'kindelia/utils/enum'
-
-import { config } from './config'
-import * as T from './types'
 import { AxiosRequestConfig } from 'axios'
 import axios from 'axios'
+
+import { Option } from 'kindelia/utils/enum'
+import * as T from './types'
+import { config } from './config'
 
 export type ApiResponse<T> =
   | {

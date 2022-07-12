@@ -1,12 +1,12 @@
 import type { NextPage } from 'next'
 
-import { Error } from 'kindelia'
-import { useNodeStore } from 'kindelia/Store/useNodeStore'
-
-import { Block } from '@/components/blocks/Block'
-import { get_blocks } from '@/lib/api'
-import { BlockInfoJson, BlockJson } from '@/lib/types'
 import { stringify } from 'querystring'
+
+import { useNodeStore } from 'kindelia/Store/useNodeStore'
+import { Error } from 'kindelia'
+import { BlockInfoJson, BlockJson } from '@/lib/types'
+import { get_blocks } from '@/lib/api'
+import { Block } from '@/components/blocks/Block'
 
 interface BlockIndexProps {
   blocks?: BlockInfoJson[]

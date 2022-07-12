@@ -2,6 +2,7 @@
 module.exports = {
   extends: ['next/core-web-vitals', 'plugin:prettier/recommended'],
   plugins: ['eslint-plugin-import-helpers'],
+  parser: '@typescript-eslint/parser',
   rules: {
     'prettier/prettier': 'warn',
     '@next/next/no-img-element': 'off',
@@ -12,9 +13,10 @@ module.exports = {
         newlinesBetween: 'always', // new line between groups
         groups: [
           ['/^react/', '/^next/'],
-          ['/^kindelia/', '/^explorer/', '/^sale/'],
+          ['module', '/^@shared/'],
+          ['/^kindelia/', '/^@//', 'parent', 'sibling', 'index'],
         ],
-        alphabetize: { order: 'asc', ignoreCase: true },
+        alphabetize: { order: 'desc', ignoreCase: true },
       },
     ],
   },

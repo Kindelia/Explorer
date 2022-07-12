@@ -1,7 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { config } from '@/lib/config'
 import axios from 'axios'
+
+import { config } from '@/lib/config'
 
 export type MailchimpResponse =
   | {

@@ -1,7 +1,6 @@
 import { useState } from 'react'
 
 import { classNames } from 'kindelia/react/classNames'
-
 import styles from './Navbar.module.css'
 
 export default function Searchbar(props: { className: any }) {
