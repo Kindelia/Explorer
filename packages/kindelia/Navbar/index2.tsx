@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { AnchorHTMLAttributes, FC, ReactNode } from 'react'
 
-import { explorer_url } from 'kindelia/Store/config'
+import { explorer_url } from 'sale/lib/config'
 
 const Nav: FC<AnchorHTMLAttributes<HTMLAnchorElement>> = ({
   children,
@@ -24,7 +24,7 @@ export const Header: FC = () => {
           <Nav href="#details">Details</Nav>
           <Nav href="#roadmap">Roadmap</Nav>
           <a
-            href="#"
+            href="/#"
             className="bg-success-light text-bg-light px-2 py-1 rounded-lg shadow-md"
           >
             Support Us

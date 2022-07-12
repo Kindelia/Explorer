@@ -4,8 +4,9 @@ module.exports = {
     'next/core-web-vitals',
     'plugin:prettier/recommended',
     'plugin:react-hooks/recommended',
+    'plugin:jsx-a11y/recommended',
   ],
-  plugins: ['eslint-plugin-import-helpers'],
+  plugins: ['eslint-plugin-import-helpers', 'jsx-a11y'],
   parser: '@typescript-eslint/parser',
   rules: {
     'prettier/prettier': 'warn',
@@ -21,6 +22,14 @@ module.exports = {
           ['/^kindelia/', '/^@//', 'parent', 'sibling', 'index'],
         ],
         alphabetize: { order: 'desc', ignoreCase: true },
+      },
+    ],
+    'jsx-a11y/anchor-is-valid': [
+      'error',
+      {
+        components: ['Link'],
+        specialLink: ['hrefLeft', 'hrefRight'],
+        aspects: ['invalidHref', 'preferButton'],
       },
     ],
   },
