@@ -1,6 +1,10 @@
 /** @type {import('eslint').Linter.BaseConfig} */
 module.exports = {
-  extends: ['next/core-web-vitals', 'plugin:prettier/recommended'],
+  extends: [
+    'next/core-web-vitals',
+    'plugin:prettier/recommended',
+    'plugin:react-hooks/recommended',
+  ],
   plugins: ['eslint-plugin-import-helpers'],
   parser: '@typescript-eslint/parser',
   rules: {

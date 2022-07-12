@@ -10,11 +10,14 @@
     "prps"
   ],
   "editor.tabSize": 2,
-  "editor.formatOnSave": true,
-  "eslint.packageManager": "yarn",
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
+    "source.fixAll": true,
+    "source.fixAll.eslint": true,
+},
+"editor.formatOnSave": true,
+"editor.formatOnPaste": true,
+"javascript.format.enable": false,
+"eslint.packageManager": "yarn",
   "eslint.validate": ["javascript"],
   "files.exclude": {
     "**/.yarn": true,
