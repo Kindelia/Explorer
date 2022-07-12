@@ -7,7 +7,7 @@ export const Error: React.FC<ErrorProps> = ({ code, message }) => {
   return (
     <div className="center-vertical-screen space-y-5">
       <img
-        className="h-28 sm:h-48"
+        className="h-28 sm:h-48 dark:invert"
         alt="Kindelia logo"
         src="/kindelia_logo.svg"
       />

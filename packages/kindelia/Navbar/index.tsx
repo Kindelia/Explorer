@@ -81,8 +81,8 @@ export default function Navigation(props: {
                   <Link href="/">
                     <a>
                       <img
-                        className="block h-8 w-auto"
-                        src="/kindelia_icon.svg"
+                        className="block h-8 w-auto dark:invert"
+                        src="/kindelia_logo.svg"
                         alt="Kindelia logo"
                       />
                     </a>
