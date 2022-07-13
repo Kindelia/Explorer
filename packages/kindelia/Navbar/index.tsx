@@ -19,11 +19,11 @@ const ProfileDropdown = dynamic(() => import('./ProfileDropdown'), {
 export default function Navigation(props: {
   nav: any
   plugins: {
-    Searchbar: any
-    SelectNode: any
-    ToggleTheme: any
-    ViewNotification: any
-    ProfileDropdown: any
+    Searchbar: boolean
+    SelectNode: boolean
+    ToggleTheme: boolean
+    ViewNotification: boolean
+    ProfileDropdown: boolean
   }
 }) {
   const useSearchbar = true
@@ -42,7 +42,7 @@ export default function Navigation(props: {
   function NavigationButtons() {
     return (
       <>
-        {navigation.map((item) => (
+        {navigation.map((item: any) => (
           <Link key={item.name} href={item.href}>
             <Disclosure.Button //on desktop should be a "<a"
               className={classNames(
