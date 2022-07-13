@@ -68,7 +68,7 @@ const Home: NextPage<HomeProps> = ({ kind, hvm }) => {
               languageColor="#ffaf82"
             />
 
-            <div className="bg-bg-light dark:bg-bg-dark h-full w-1" />
+            <div className="h-full w-1" />
 
             <Card
               title="0-bug contracts"
