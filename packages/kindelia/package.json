@@ -8,13 +8,35 @@
   },
   "private": true,
   "devDependencies": {
+    "tsconfig": "*",
     "@metamask/providers": "^9.0.0",
-    "tsconfig": "*"
+    "@types/node": "17.0.35",
+    "@types/react": "18.0.9",
+    "@types/react-dom": "18.0.5",
+    "@types/react-syntax-highlighter": "^15.5.1",
+    "@types/tailwindcss": "^3.0.10",
+    "next-transpile-modules": "^9.0.0",
+    "typescript": "4.7.2"
   },
   "dependencies": {
     "classnames": "^2.3.1",
     "ethers": "^5.6.9",
     "react-jazzicon": "^1.0.4",
-    "zustand": "^4.0.0-rc.1"
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-brands-svg-icons": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@headlessui/react": "^1.6.4",
+    "@heroicons/react": "^1.0.6",
+    "@monaco-editor/react": "^4.4.5",
+    "axios": "^0.27.2",
+    "next": "latest",
+    "next-themes": "^0.2.0",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
+    "react-syntax-highlighter": "^15.5.0",
+    "zustand": "^4.0.0-rc.1",
+    "tailwindcss": "^3.1.4",
+    "postcss": "^8.4.14"
   }
 }
