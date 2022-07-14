@@ -1,14 +1,14 @@
 name: Publish on Netlify
 
 on:
+  workflow_dispatch:
   push:
-    branches: [ "preview", "preview-*" ]
+    branches: ["preview", "preview-*"]
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-
   deploy:
     environment: preview
 
@@ -24,42 +24,42 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-      with: 
-        fetch-depth: 0
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-    - uses: nrwl/last-successful-commit-action@v1
-      id: last_successful_commit
-      with:
-        branch: 'main'
-        workflow_id: 'deploy.yml'
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: nrwl/last-successful-commit-action@v1
+        id: last_successful_commit
+        with:
+          branch: "main"
+          workflow_id: "deploy.yml"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
-    - run: echo "::set-output name=IGNORE::$(git diff --quiet $(git rev-parse --short ${{ steps.last_successful_commit.outputs.commit_hash }}) $(git rev-parse --short ${{ github.sha }}) -- ${{ matrix.folder }} lib config || echo "false")"
-      id: diff
-      if: ${{ steps.last_successful_commit.outputs.commit_hash != '' }} #TODO: remove after 1st successfull run
+      - run: echo "::set-output name=IGNORE::$(git diff --quiet $(git rev-parse --short ${{ steps.last_successful_commit.outputs.commit_hash }}) $(git rev-parse --short ${{ github.sha }}) -- ${{ matrix.folder }} lib config || echo "false")"
+        id: diff
+        if: ${{ steps.last_successful_commit.outputs.commit_hash != '' }} #TODO: remove after 1st successfull run
 
-    - uses: actions/setup-node@v3
-      if: ${{ steps.diff.outputs.IGNORE == 'false' || steps.last_successful_commit.outputs.commit_hash == '' }}
-      with:
-        node-version: '16'
-        cache: 'yarn'
+      - uses: actions/setup-node@v3
+        if: ${{ steps.diff.outputs.IGNORE == 'false' || steps.last_successful_commit.outputs.commit_hash == '' }}
+        with:
+          node-version: "16"
+          cache: "yarn"
 
-    - uses: actions/cache@v3
-      if: ${{ steps.diff.outputs.IGNORE == 'false' || steps.last_successful_commit.outputs.commit_hash == '' }}
-      with:
-        path: |
-          ${{ github.workspace }}/node_modules/.cache/turbo
-          ${{ github.workspace }}/${{ matrix.folder }}/.netlify/cache
-        key: ${{ runner.os }}-${{ matrix.name }}-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('${{ matrix.folder }}/**.[jt]sx?', '${{ matrix.folder }}/**.json', 'lib/**.[jt]sx?') }}
-        restore-keys: |
-          ${{ runner.os }}-${{ matrix.name }}-${{ hashFiles('**/yarn.lock') }}-
+      - uses: actions/cache@v3
+        if: ${{ steps.diff.outputs.IGNORE == 'false' || steps.last_successful_commit.outputs.commit_hash == '' }}
+        with:
+          path: |
+            ${{ github.workspace }}/node_modules/.cache/turbo
+            ${{ github.workspace }}/${{ matrix.folder }}/.netlify/cache
+          key: ${{ runner.os }}-${{ matrix.name }}-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('${{ matrix.folder }}/**.[jt]sx?', '${{ matrix.folder }}/**.json', 'lib/**.[jt]sx?') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.name }}-${{ hashFiles('**/yarn.lock') }}-
 
-    - run: yarn install --immutable
-      if: ${{ steps.diff.outputs.IGNORE == 'false' || steps.last_successful_commit.outputs.commit_hash == '' }}
+      - run: yarn install --immutable
+        if: ${{ steps.diff.outputs.IGNORE == 'false' || steps.last_successful_commit.outputs.commit_hash == '' }}
 
-    - run: yarn deploy:${{ matrix.name }}
-      if: ${{ steps.diff.outputs.IGNORE == 'false' || steps.last_successful_commit.outputs.commit_hash == '' }}
-      env:
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        NETLIFY_SITE_ID: ${{ matrix.id }}
+      - run: yarn deploy:${{ matrix.name }}
+        if: ${{ steps.diff.outputs.IGNORE == 'false' || steps.last_successful_commit.outputs.commit_hash == '' }}
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ matrix.id }}
