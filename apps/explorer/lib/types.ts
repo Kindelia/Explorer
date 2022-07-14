@@ -1,3 +1,4 @@
+import { Option } from 'kindelia/utils'
 import { Tagged, Enum } from 'kindelia/utils/enum'
 
 // TODO: comment
@@ -23,7 +24,7 @@ export interface BlockInfoJson {
   hash: HashHex
   height: number
   content: BlockContentJson
-  results: BlockResultsJson[]
+  results: Option<BlockResultsJson[]>
 }
 
 export interface BlockJson {
@@ -51,6 +52,12 @@ export interface StmtFunJson {
   args: Name[]
   func: RuleJson[]
   init: TermJson
+}
+
+export interface FuncJson {
+  func: {
+    rules: RuleJson[]
+  }
 }
 export interface StmtRunJson {
   body: TermJson

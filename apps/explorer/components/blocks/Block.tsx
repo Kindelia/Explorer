@@ -35,8 +35,6 @@ export const Block: FC<BlockInfoJson> = ({
   height,
   results,
 }) => {
-  let mana = calculate_mana(results)
-  let size = calculate_size(results)
   let { ctrs, funs, runs } = count_statements(content)
   return (
     <Link href={`/blocks/${hash}`}>
@@ -49,11 +47,11 @@ export const Block: FC<BlockInfoJson> = ({
             {hash.substring(0, 8)}
           </Info>
           <Info className="w-20" title="Mana">
-            {mana.toString()}
+            <>{results && calculate_mana(results).toString()}</>
           </Info>
           <Info className="w-20" title="Space">
             {/* {size > 0 && '+'} */}
-            {size.toString()}
+            <>{results && calculate_size(results).toString()}</>
           </Info>
           <Info title="Ctrs">{ctrs}</Info>
           <Info title="Funs">{funs}</Info>

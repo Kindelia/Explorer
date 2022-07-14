@@ -1,14 +1,16 @@
-import { FC, ReactNode } from 'react'
-import Link from 'next/link'
 import type { NextPage } from 'next'
+import { FC, ReactNode } from 'react'
 
 import { Error } from 'kindelia'
-import { TermJson } from '@/lib/types'
-import { read_term } from '@/lib/hvm'
-import { get_function_state } from '@/lib/api'
-import { Term } from '@/components/Statement'
+import { Option } from 'kindelia/utils'
+import { useNodeStore } from 'kindelia/Store/useNodeStore'
+
+import { FuncJson, FunctionId, StrNum, TermJson } from '@/lib/types'
+import { read_block_content, read_term } from '@/lib/hvm'
+import { get_function, get_function_state } from '@/lib/api'
+
 import { Codeblock } from '@/components/Codeblock'
-import { getFunction, Function } from '@/calls/getFunction'
+import { Statements } from '@/components/Statement'
 
 interface BlockProps {
   title: string
@@ -23,57 +25,68 @@ const Block: FC<BlockProps> = ({ title, children }) => (
 )
 
 interface SingleFunctionProps {
-  state?: TermJson
-  fun?: Function
+  state: Option<TermJson>
+  fun: Option<FuncJson>
   error?: string
+  name: FunctionId
 }
+
+// TODO: Render initial state when API is done
 
 const SingleFunction: NextPage<SingleFunctionProps> = ({
   fun,
   state,
   error,
+  name,
 }) => {
   if (error) return <Error message={error} />
-
-  const { code, history, name } = fun
-  const teste = read_term(state, 0)
-
   return (
     <div className="flex flex-col">
-      <h2 className="text-2xl">{name}</h2>
-      <Block title="Code">
-        <Codeblock>{code}</Codeblock>
-      </Block>
-      <Block title="State">
-        <Term {...teste} />
-      </Block>
-      <Block title="History">
-        <div className="flex flex-col">
-          {history.map((run) => (
-            <Link href={`/functions/${name}/${run.id}`} key={run.id}>
-              <a>{run.name}</a>
-            </Link>
-          ))}
-        </div>
-      </Block>
+      <h2 className="text-2xl">{name?.toString()}</h2>
+      {fun && (
+        <Codeblock>
+          <Statements
+            statements={read_block_content([
+              {
+                Fun: {
+                  func: fun.func.rules,
+                  name: name as any,
+                  args: [],
+                  init: { Num: { numb: '0' as StrNum } },
+                },
+              },
+            ])}
+          />
+        </Codeblock>
+      )}
+      {state && (
+        <Block title="State">
+          {/* <Term {...read_term(state, 0)} /> */}
+        </Block>
+      )}
     </div>
   )
 }
 
 SingleFunction.getInitialProps = async (ctx) => {
+  const name = ctx.query.name as FunctionId
   try {
-    const name = ctx.query.name as string
+    const node = useNodeStore.getState().selectedNode.url
+    const fun = await get_function(name, node)
 
-    const state = await get_function_state(name as any)
-    const fun = await getFunction({ name })
+    const state = await get_function_state(name, node)
 
     return {
-      fun,
+      fun: fun,
       state,
+      name,
     }
-  } catch (err) {
+  } catch (err: any) {
     return {
       error: err.message,
+      name,
+      state: null,
+      fun: null,
     }
   }
 }

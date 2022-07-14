@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
 
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
-import { Disclosure, Menu } from '@headlessui/react'
+import { Disclosure } from '@headlessui/react'
 
 import { classNames } from 'kindelia/react/classNames'
 import ViewNotification from './ViewNotification'
@@ -26,9 +26,8 @@ export default function Navigation(props: {
     ProfileDropdown: boolean
   }
 }) {
-  const useSearchbar = true
   const { asPath } = useRouter()
-  const [navigation, setNavigation] = useState(props.nav)
+  const [navigation, setNavigation] = useState<any>(props.nav)
 
   useEffect(() => {
     setNavigation((prev: any) => {
