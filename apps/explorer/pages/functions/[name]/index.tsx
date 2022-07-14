@@ -2,15 +2,14 @@ import type { NextPage } from 'next'
 import { FC, ReactNode } from 'react'
 
 import { Error } from 'kindelia'
-import { Option } from 'kindelia/utils'
 import { useNodeStore } from 'kindelia/Store/useNodeStore'
-
-import { FuncJson, FunctionId, StrNum, TermJson } from '@/lib/types'
-import { read_block_content, read_term } from '@/lib/hvm'
-import { get_function, get_function_state } from '@/lib/api'
+import { Option } from 'kindelia/utils'
 
 import { Codeblock } from '@/components/Codeblock'
 import { Statements } from '@/components/Statement'
+import { get_function, get_function_state } from '@/lib/api'
+import { read_block_content, read_term } from '@/lib/hvm'
+import { FuncJson, FunctionId, StrNum, TermJson } from '@/lib/types'
 
 interface BlockProps {
   title: string
@@ -60,9 +59,7 @@ const SingleFunction: NextPage<SingleFunctionProps> = ({
         </Codeblock>
       )}
       {state && (
-        <Block title="State">
-          {/* <Term {...read_term(state, 0)} /> */}
-        </Block>
+        <Block title="State">{/* <Term {...read_term(state, 0)} /> */}</Block>
       )}
     </div>
   )

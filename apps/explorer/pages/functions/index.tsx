@@ -1,10 +1,11 @@
-import Link from 'next/link'
 import type { GetServerSideProps, NextPage } from 'next'
+import Link from 'next/link'
 
-import { useNodeStore } from 'kindelia/Store/useNodeStore'
 import { Error } from 'kindelia'
-import { get_functions } from '@/lib/api'
+import { useNodeStore } from 'kindelia/Store/useNodeStore'
+
 import { Info } from '@/components/blocks/Block'
+import { get_functions } from '@/lib/api'
 
 interface FunctionIndexProps {
   functions?: string[]

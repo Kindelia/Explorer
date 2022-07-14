@@ -1,11 +1,12 @@
-import { FC } from 'react'
 import type { GetStaticProps, NextPage } from 'next'
+import { FC } from 'react'
 
-import { Subscribe } from 'kindelia/subscribe/Subscribe'
-import { Socials } from 'kindelia/Socials'
-import { Card } from 'kindelia/homepage/Card2'
-import { Section } from 'kindelia/homepage'
 import { get_github_info, GithubInfo } from 'kindelia/github/get_github_info'
+import { Section } from 'kindelia/homepage'
+import { Card } from 'kindelia/homepage/Card2'
+import { Socials } from 'kindelia/Socials'
+import { Subscribe } from 'kindelia/subscribe/Subscribe'
+
 import { Roadmap } from '@/components/Roadmap'
 
 interface HomeProps {

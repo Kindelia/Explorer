@@ -1,6 +1,3 @@
-import { FC, ImgHTMLAttributes } from 'react'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faGithub,
   faDiscord,
@@ -9,6 +6,8 @@ import {
   faTelegram,
   IconDefinition,
 } from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FC, ImgHTMLAttributes } from 'react'
 
 interface SocialProps extends ImgHTMLAttributes<HTMLImageElement> {
   href: string

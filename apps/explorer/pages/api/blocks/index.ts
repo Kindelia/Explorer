@@ -1,8 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+
 import { Option } from 'kindelia/utils'
 
-import { BlockInfoJson } from '@/lib/types'
 import { ApiResponse, get_blocks } from '@/lib/api'
+import { BlockInfoJson } from '@/lib/types'
 
 export default async function handler(
   req: NextApiRequest,

@@ -3,9 +3,10 @@ import { stringify } from 'querystring'
 
 import { Error } from 'kindelia'
 import { useNodeStore } from 'kindelia/Store/useNodeStore'
-import { BlockInfoJson } from '@/lib/types'
-import { get_blocks } from '@/lib/api'
+
 import { Block } from '@/components/blocks/Block'
+import { get_blocks } from '@/lib/api'
+import { BlockInfoJson } from '@/lib/types'
 
 interface BlockIndexProps {
   blocks?: BlockInfoJson[]

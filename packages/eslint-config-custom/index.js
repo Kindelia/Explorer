@@ -17,11 +17,11 @@ module.exports = {
       {
         newlinesBetween: 'always', // new line between groups
         groups: [
-          ['/^react/', '/^next/'],
-          ['module', '/^@shared/'],
-          ['/^kindelia/', '/^@//', 'parent', 'sibling', 'index'],
+          ['module'],
+          ['/^kindelia/'],
+          ['parent', 'sibling', 'index', '/^@//'],
         ],
-        alphabetize: { order: 'desc', ignoreCase: true },
+        alphabetize: { order: 'asc', ignoreCase: true },
       },
     ],
     'jsx-a11y/anchor-is-valid': [

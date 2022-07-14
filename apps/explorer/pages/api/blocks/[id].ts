@@ -1,9 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { Option } from '@kindelia/lib/utils'
 
+import { Option } from 'kindelia/utils'
 import { hash_hex_from } from 'kindelia/utils/hex'
-import { BlockInfoJson } from '@/lib/types'
+
 import { ApiResponse, get_block } from '@/lib/api'
+import { BlockInfoJson } from '@/lib/types'
 
 export default async function handler(
   req: NextApiRequest,

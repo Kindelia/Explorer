@@ -1,8 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { Option } from 'kindelia/utils'
-import { FunctionId, TermJson } from '@/lib/types'
+
 import { get_function_state, ApiResponse } from '@/lib/api'
+import { FunctionId, TermJson } from '@/lib/types'
 
 export default async function handler(
   req: NextApiRequest,

@@ -1,7 +1,6 @@
-import { useRef } from 'react'
-import type { NextPage } from 'next'
-
 import Editor from '@monaco-editor/react'
+import type { NextPage } from 'next'
+import { useRef } from 'react'
 
 import { Button } from 'kindelia'
 

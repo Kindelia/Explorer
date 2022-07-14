@@ -1,7 +1,8 @@
 import { FC, FormEventHandler, HTMLAttributes, useRef } from 'react'
 
-import { classNames } from 'kindelia/react/classNames'
 import { Button } from 'kindelia'
+import { classNames } from 'kindelia/react/classNames'
+
 import { useMailchimp } from './useMailchimp'
 
 interface SubscribeProps extends HTMLAttributes<HTMLFormElement> {}

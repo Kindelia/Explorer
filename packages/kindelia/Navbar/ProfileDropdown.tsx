@@ -1,13 +1,13 @@
-import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
-
-import { Menu } from '@headlessui/react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWallet } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Menu } from '@headlessui/react'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
-import { classNames } from 'kindelia/react/classNames'
 import { useMetamaskStore } from 'kindelia/metamask/useMetamaskStore'
+import { classNames } from 'kindelia/react/classNames'
+
 import { DropdownTransition } from './DropdownTransition'
 
 export default function ProfileDropdown() {

@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { AnchorHTMLAttributes, FC, ReactNode } from 'react'
-
 import { explorer_url } from 'sale/lib/config'
 
 const Nav: FC<AnchorHTMLAttributes<HTMLAnchorElement>> = ({

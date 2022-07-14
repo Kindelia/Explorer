@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-
 import axios from 'axios'
+import { useEffect, useRef, useState } from 'react'
 
 export type MailchimpResponse =
   | {
