@@ -114,6 +114,22 @@ export interface NumJson {
   numb: StrNum
 }
 
+// Block Results
+// -------------
+
+export type BlockResultsJson = Result<StatementInfoJson, { err: string }>
+export type BlockResultsJson_Variants = Result_Variants<
+  StatementInfoJson,
+  { err: string }
+>
+
+export type StatementInfoJson = Enum<StatementInfoJson_Variants>
+export interface StatementInfoJson_Variants {
+  Ctr: StmtCtrInfoJson
+  Fun: StmtFunInfoJson
+  Run: StmtRunInfoJson
+}
+
 export interface StmtCtrInfoJson {
   name: Name
   args: Name[]
@@ -130,19 +146,6 @@ export interface StmtRunInfoJson {
   size_diff: StrNum
   used_mana: StrNum
 }
-
-export type StatementInfoJson = Enum<StatementInfoJson_Variants>
-export interface StatementInfoJson_Variants {
-  Ctr: StmtCtrInfoJson
-  Fun: StmtFunInfoJson
-  Run: StmtRunInfoJson
-}
-
-export type BlockResultsJson = Result<StatementInfoJson, { err: string }>
-export type BlockResultsJson_Variants = Result_Variants<
-  StatementInfoJson,
-  { err: string }
->
 
 // Kindelia Types
 // ==============

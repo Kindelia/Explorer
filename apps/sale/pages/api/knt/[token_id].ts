@@ -21,8 +21,8 @@ function u128_to_name(num: bigint): string {
   return chars.join('')
 }
 
-const MAX_CHARS = 20n
-const BASE = 64n
+const MAX_CHARS = 12n
+const BASE = 63n
 
 const capacity_of = (num_chars: bigint): bigint => {
   const remaining_chars = MAX_CHARS - num_chars - 1n
