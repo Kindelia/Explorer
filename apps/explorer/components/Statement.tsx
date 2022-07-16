@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { FC } from 'react'
 
-import { flatten_enum } from 'kindelia/utils/enum'
+import { flatten_enum, match } from 'kindelia/utils/enum'
 
 import styles from './Statement.module.css'
 import { num_to_name, num_to_oper } from '@/lib/hvm'
@@ -87,6 +87,8 @@ export const Term: FC<T.Term> = (term) => {
       return <Lam {...value} />
     case 'Dup':
       return <Dup {...value} />
+    case 'IO':
+      return <IO {...value} />
     default:
       return <span>Another</span>
   }
@@ -101,11 +103,6 @@ const Num: FC<T.Num> = (num) => {
 }
 
 const Ctr: FC<T.Ctr> = (ctr) => {
-  // Pretty prints
-  if (ctr.name.startsWith('IO')) {
-    return <IO {...ctr} />
-  }
-
   // Default
   return (
     <>
@@ -122,88 +119,7 @@ const Ctr: FC<T.Ctr> = (ctr) => {
   )
 }
 
-// Pretty print of IO args
-const IO_ARGS: FC<{ term: T.Term; io: T.Ctr }> = ({ term, io }) => {
-  let value = flatten_enum<T.Term_Variants>(term)
-  if (io.name === 'IO.CALL' && value.$ === 'Num') {
-    let name = num_to_name(value.numb)
-    return (
-      <Link href={`/functions/${name}`}>
-        <a className={styles.statement_reference}>{name}</a>
-      </Link>
-    )
-  } else if (
-    io.name === 'IO.CALL' &&
-    value.$ === 'Ctr' &&
-    value.name.startsWith('Tuple')
-  ) {
-    let leng = value.args.length
-    return (
-      <>
-        <span>[</span>
-        {value.args.map((arg, i) => (
-          <div className="inline" key={i}>
-            <Term {...arg} />
-            {i < leng - 1 ? <span>, </span> : null}
-          </div>
-        ))}
-        <span>]</span>
-      </>
-    )
-  } else {
-    return <Term {...term} />
-  }
-}
-
-const IO: FC<T.Ctr> = (ctr) => {
-  let name = ctr.name.substring(3).toLowerCase()
-  let leng = ctr.args.length
-  let prps = ctr.args.slice(0, leng - 1)
-  let cont = ctr.args[leng - 1]
-
-  let value = flatten_enum<T.Term_Variants>(cont)
-
-  if (value.$ === 'Lam') {
-    let lamb_name = value.name === '___' ? '~' : value.name
-    return (
-      <>
-        <span className={styles.statement_io}>{`!${name}`}</span>
-        <span> </span>
-        <span>{lamb_name}</span>
-        {/* TODO: first term is function id, prettify to name */}
-        {prps.map((prop, i) => (
-          <div className="inline" key={i}>
-            {` `}
-            <IO_ARGS term={prop} io={ctr} />
-          </div>
-        ))}
-        <br />
-        <Indent n={4}>
-          <Term {...value.body} />
-        </Indent>
-      </>
-    )
-  } else {
-    return (
-      <>
-        <span className={styles.statement_io}>{`!${name}`}</span>
-        {ctr.args.map((arg, i) => (
-          <div className="inline" key={i}>
-            {` `}
-            <Term {...arg} />
-          </div>
-        ))}
-      </>
-    )
-  }
-}
-
 const Fun: FC<T.Fun> = (fun) => {
-  // Pretty prints
-  if (fun.name.startsWith('IO')) {
-    return <IO {...fun} />
-  }
-
   return (
     <>
       <span>(</span>
@@ -274,6 +190,115 @@ const Dup: FC<T.Dup> = (dup) => {
       <Indent n={4}>
         <Term {...dup.body} />
       </Indent>
+    </>
+  )
+}
+
+const format_varv = (name: T.Name) => (name === '___' ? 'ask' : `ask ${name} =`)
+
+const IO: FC<T.IO> = (io) => {
+  return match(io)({
+    Call: (call) => <Call {...call} />,
+    Take: (take) => <Take {...take} />,
+    Done: (done) => <Done {...done} />,
+    Load: (load) => <Load {...load} />,
+    Save: (save) => <Save {...save} />,
+  })
+}
+
+const Call: FC<T.Call> = (call) => {
+  return (
+    <>
+      <span>{format_varv(call.varv)}</span>
+      <span> </span>
+      <span>{'('}</span>
+      <Link href={`/functions/Call`}>
+        <a className={styles.statement_io}>{`Call`}</a>
+      </Link>
+      <span> </span>
+      <span>{`'`}</span>
+      <Link href={`/functions/${call.func}`}>
+        <a className={styles.statement_fun}>{`${call.func}`}</a>
+      </Link>
+      <span>{`'`}</span>
+      {call.args.map((arg, i) => (
+        <div className="inline" key={i}>
+          {` `}
+          <Term {...arg} />
+        </div>
+      ))}
+      <span>{`)`}</span>
+      <br />
+      <Indent n={4}>
+        <IO {...call.body} />
+      </Indent>
+    </>
+  )
+}
+
+const Take: FC<T.Take> = (take) => {
+  return (
+    <>
+      <span>{format_varv(take.varv)}</span>
+      <span> </span>
+      <span>{'('}</span>
+      <Link href={`/functions/Take`}>
+        <a className={styles.statement_io}>{`Take`}</a>
+      </Link>
+      <span>{')'}</span>
+      <br />
+      <Indent n={4}>
+        <IO {...take.body} />
+      </Indent>
+    </>
+  )
+}
+
+const Load: FC<T.Load> = (load) => {
+  return (
+    <>
+      <span>{format_varv(load.varv)}</span>
+      <span> </span>
+      <span>{'('}</span>
+      <Link href={`/functions/Load`}>
+        <a className={styles.statement_io}>{`Load`}</a>
+      </Link>
+      <span>{')'}</span>
+      <br />
+      <Indent n={4}>
+        <IO {...load.body} />
+      </Indent>
+    </>
+  )
+}
+
+const Save: FC<T.Save> = (save) => {
+  return (
+    <>
+      <span>{format_varv(save.varv)}</span>
+      <span> </span>
+      <span>{'('}</span>
+      <Link href={`/functions/Save`}>
+        <a className={styles.statement_io}>{`Save`}</a>
+      </Link>
+      <span> </span>
+      <Term {...save.term} />
+      <span>{`)`}</span>
+      <br />
+      <Indent n={4}>
+        <IO {...save.body} />
+      </Indent>
+    </>
+  )
+}
+
+const Done: FC<T.Done> = (done) => {
+  return (
+    <>
+      <span className={styles.statement_io}>{`(Done`}</span>
+      <span> </span>
+      <Term {...done.term} />
+      <span>{`)`}</span>
     </>
   )
 }
