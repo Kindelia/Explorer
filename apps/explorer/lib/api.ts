@@ -32,8 +32,6 @@ const fetch_api = async <T>(
       : `http://${node}:8000` ?? 'http://localhost:8000'
   }
 
-  host = 'http://127.0.0.1:8000'
-
   let axios_config: AxiosRequestConfig = {
     url: `${host}${endpoint}`,
     method: 'get', // default
