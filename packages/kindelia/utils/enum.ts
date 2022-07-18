@@ -41,9 +41,11 @@ export function flatten_enum<V>(value: Enum<V>): FlatEnum<V> {
 
 export function flatten_enum_2<E>(value: E): FlatEnumFrom<E> {
   for (let key in value) {
-    let _result = value[key]
-    let result = { $: key, val: _result }
-    return result as unknown as FlatEnumFrom<E>
+    if (key !== '$') {
+      let _result = value[key]
+      let result = { $: key, val: _result }
+      return result as unknown as FlatEnumFrom<E>
+    }
   }
   throw new Error(`Variant is empty: '${value}'.`)
 }

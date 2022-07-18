@@ -202,6 +202,7 @@ export interface Term_Variants {
   Fun: Fun
   Num: Num
   Op2: Op2
+  IO: IO
 }
 export type Term = Enum<Term_Variants>
 
@@ -244,4 +245,41 @@ export interface Op2 {
   oper: bigint // TODO: parse this tag
   val0: Term
   val1: Term
+}
+
+export interface IO_Variants {
+  Call: Call
+  Take: Take
+  Save: Save
+  Load: Load
+  Done: Done
+}
+
+export type IO = Enum<IO_Variants>
+
+export interface Call {
+  func: Name
+  args: Term[]
+  varv: Name
+  body: IO
+}
+
+export interface Take {
+  varv: Name
+  body: IO
+}
+
+export interface Save {
+  term: Term
+  varv: Name
+  body: IO
+}
+
+export interface Load {
+  varv: Name
+  body: IO
+}
+
+export interface Done {
+  term: Term
 }
