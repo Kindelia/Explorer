@@ -1,4 +1,4 @@
-import { flatten_enum } from 'kindelia/utils/enum'
+import { flatten_enum, if_let, match } from 'kindelia/utils/enum'
 
 import * as T from './types'
 
@@ -197,19 +197,37 @@ export function read_term(_term: T.TermJson, depth: number): T.Term {
           },
         }
       case 'App':
-        return {
-          App: {
-            argm: read_term(value.argm, depth + 1),
-            func: read_term(value.func, depth + 1),
+        const func = value.func
+        const argm = value.argm
+        return match(read_io(_term, depth))<T.Term>({
+          Ok: (io) => ({
+            IO: io,
+          }),
+          Err: () => {
+            return {
+              App: {
+                func: read_term(func, depth + 1),
+                argm: read_term(argm, depth + 1),
+              },
+            }
           },
-        }
+        })
       case 'Ctr':
-        return {
-          Ctr: {
-            name: value.name,
-            args: value.args.map((arg) => read_term(arg, depth + 1)),
+        const name = value.name
+        const args = value.args
+        return match(read_io(_term, depth))<T.Term>({
+          Ok: (io) => ({
+            IO: io,
+          }),
+          Err: () => {
+            return {
+              Ctr: {
+                name: name,
+                args: args.map((arg) => read_term(arg, depth + 1)),
+              },
+            }
           },
-        }
+        })
       case 'Fun':
         return {
           Fun: {
@@ -232,5 +250,179 @@ export function read_term(_term: T.TermJson, depth: number): T.Term {
           },
         }
     }
+  }
+}
+
+export function read_io(
+  _term: T.TermJson,
+  depth: number
+): T.Result<T.IO, string> {
+  const term = flatten_enum<T.TermJson_Variants>(_term)
+  switch (term.$) {
+    case 'App':
+      const func = flatten_enum<T.TermJson_Variants>(term.func)
+      const argm = flatten_enum<T.TermJson_Variants>(term.argm)
+      if (func.$ === 'Fun' && argm.$ === 'Lam') {
+        return read_io_app(func, argm, depth)
+      } else {
+        return {
+          Err: 'not a valid aplication in io',
+        }
+      }
+    case 'Ctr':
+      if (term.name === 'DONE') {
+        return read_io_ctr(term.args, depth)
+      } else {
+        return {
+          Err: 'not a valid constructor in io',
+        }
+      }
+    default:
+      return {
+        Err: `read_io: ${term.$}`,
+      }
+  }
+}
+
+export function read_io_app(
+  func: T.FunJson,
+  argm: T.LamJson,
+  depth: number
+): T.Result<T.IO, string> {
+  const body = read_io(argm.body, depth + 1)
+  return match(body)<T.Result<T.IO, string>>({
+    Ok: (body) => {
+      switch (func.name) {
+        case 'Call':
+          return read_io_call(func, argm, body, depth)
+        case 'Save':
+          return read_io_save(func, argm, body, depth)
+        case 'Load':
+          return read_io_load(func, argm, body, depth)
+        case 'Take':
+          return read_io_take(func, argm, body, depth)
+        default:
+          return {
+            Err: `no an io: ${func.name}`,
+          }
+      }
+    },
+    Err: (err) => {
+      return {
+        Err: err,
+      }
+    },
+  })
+}
+
+export function read_io_call(
+  func: T.FunJson,
+  argm: T.LamJson,
+  body: T.IO,
+  depth: number
+): T.Result<T.IO, string> {
+  if (func.args.length !== 2) {
+    return {
+      Err: 'not a valid call in io',
+    }
+  }
+  const name = func.args[0]
+  const tupl = func.args[1]
+  return if_let(name)('Num')<T.Result<T.IO, string>>((name) => {
+    return if_let(tupl)('Ctr')<T.Result<T.IO, string>>((tupl) => ({
+      Ok: {
+        Call: {
+          func: num_to_name(read_num(name.numb)),
+          args: tupl.args.map((arg) => read_term(arg, depth + 1)),
+          varv: argm.name,
+          body: body,
+        },
+      },
+    }))(() => ({
+      Err: 'not a valid call in io',
+    }))
+  })(() => ({
+    Err: 'not a valid call in io',
+  }))
+}
+
+export function read_io_save(
+  func: T.FunJson,
+  argm: T.LamJson,
+  body: T.IO,
+  depth: number
+): T.Result<T.IO, string> {
+  if (func.args.length !== 1) {
+    return {
+      Err: 'not a valid save in io',
+    }
+  }
+  const term = func.args[0]
+  return {
+    Ok: {
+      Save: {
+        body: body,
+        varv: argm.name,
+        term: read_term(term, depth + 1),
+      },
+    },
+  }
+}
+
+export function read_io_take(
+  func: T.FunJson,
+  argm: T.LamJson,
+  body: T.IO,
+  depth: number
+): T.Result<T.IO, string> {
+  if (func.args.length !== 0) {
+    return {
+      Err: 'not a valid take in io',
+    }
+  }
+  return {
+    Ok: {
+      Take: {
+        body: body,
+        varv: argm.name,
+      },
+    },
+  }
+}
+
+export function read_io_load(
+  func: T.FunJson,
+  argm: T.LamJson,
+  body: T.IO,
+  depth: number
+): T.Result<T.IO, string> {
+  if (func.args.length !== 0) {
+    return {
+      Err: 'not a valid load in io',
+    }
+  }
+  return {
+    Ok: {
+      Load: {
+        body: body,
+        varv: argm.name,
+      },
+    },
+  }
+}
+
+export function read_io_ctr(
+  args: T.TermJson[],
+  depth: number
+): T.Result<T.IO, string> {
+  if (args.length !== 1) {
+    return { Err: 'not a valid constructor in io' }
+  }
+  return {
+    Ok: {
+      Done: {
+        term: read_term(args[0], depth + 1),
+      },
+    },
   }
 }
