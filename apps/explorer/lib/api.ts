@@ -1,5 +1,5 @@
+import axios, { AxiosResponse } from 'axios'
 import { AxiosRequestConfig } from 'axios'
-import axios from 'axios'
 
 import { Option } from 'kindelia/utils/enum'
 
@@ -32,7 +32,14 @@ const fetch_api = async <T>(
       : `http://${node}:8000` ?? 'http://localhost:8000'
   }
 
-  const response = await axios.get<ApiResponse<T>>(`${host}${endpoint}`, cfg)
+  host = 'http://127.0.0.1:8000'
+
+  let axios_config: AxiosRequestConfig = {
+    url: `${host}${endpoint}`,
+    method: 'get', // default
+    ...cfg,
+  }
+  const response: AxiosResponse<ApiResponse<T>> = await axios(axios_config)
   // TODO: handle response error
 
   let body = response.data
@@ -67,5 +74,25 @@ export const get_functions = (node?: string) =>
 export const get_function = (id: T.FunctionId, node?: string) =>
   fetch_api<Option<T.FuncJson>>(`/functions/${id}`, node)
 
-export const get_function_state = (id: T.FunctionId, node?: string) =>
-  fetch_api<Option<T.TermJson>>(`/functions/${id}/state`, node)
+export const get_function_state = (id: T.FunctionId) =>
+  fetch_api<T.TermJson>(`/functions/${id}/state`)
+
+// Interact
+
+export const post_interact_test = (code: string, node?: string) =>
+  fetch_api<T.BlockResultsJson[]>(`/code/test`, node, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'text/plain',
+    },
+    data: code,
+  })
+
+export const post_interact_send = (code: string, node?: string) =>
+  fetch_api<any>(`/code/send`, node, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'text/plain',
+    },
+    data: code,
+  })
