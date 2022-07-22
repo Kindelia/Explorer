@@ -1,0 +1,31 @@
+{
+  "name": "confignator",
+  "version": "1.0.0",
+  "description": "Type-safe configuration loading.",
+  "repository": "https://github.com/steinerkelvin/confignator",
+  "author": "Kelvin Steiner <me@steinerkelvin.dev>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "exports": {
+    ".": {
+      "default": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./json": {
+      "default": "./dist/json.js",
+      "types": "./dist/json.d.ts"
+    },
+    "./numbers": {
+      "default": "./dist/numbers.js",
+      "types": "./dist/numbers.d.ts"
+    },
+    "./address": {
+      "default": "./dist/address.js",
+      "types": "./dist/address.d.ts"
+    }
+  }
+}
