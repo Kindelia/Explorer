@@ -13,15 +13,18 @@
     "deploy:explorer": "cd apps/explorer && netlify deploy --build --prod",
     "deploy:sale": "cd apps/sale && netlify deploy --build --prod",
     "format": "prettier --write './**/*.{tsx,ts}'",
-    "lint": "eslint --ext .ts,.tsx --fix --max-warnings 0 .",
+    "lint": "eslint --ext .ts,.tsx .",
+    "lint-fix": "eslint --ext .ts,.tsx --fix --max-warnings 0 .",
     "type-check": "tsc -p ."
   },
   "lint-staged": {
-    "./**/*.{js,jsx,ts,tsx,css,json}": [
-      "prettier --config ./.prettierrc.js --write"
-    ],
     "./**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix"
+      "eslint --ext .ts,.tsx"
+    ]
+  },
+  "//": {
+    "./**/*.{js,jsx,ts,tsx,css,json}": [
+      "prettier --config ./.prettierrc.js"
     ]
   },
   "devDependencies": {
