@@ -13,7 +13,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "kindelia": "*"
+    "kindelia": "*",
+    "confignator": "*"
   },
   "devDependencies": {}
 }

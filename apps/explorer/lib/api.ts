@@ -18,22 +18,22 @@ export type ApiResponse<T> =
 
 const fetch_api = async <T>(
   endpoint: string,
-  node: string = config.nodes[0],
+  node: string = config.backend_nodes[0],
   cfg?: AxiosRequestConfig
 ): Promise<T> => {
-  let host = `http://${node}:8000` ?? 'http://127.0.0.1:8000'
+  let base_url = `http://${node}:8000` ?? 'http://127.0.0.1:8000'
 
   // TODO: remove this after SSL is implemented
   if (typeof window === 'undefined') {
-    host = `http://${config.nodes[0]}:8000`
+    base_url = `http://${config.backend_nodes[0]}:8000`
   } else {
-    host = node.includes('api')
+    base_url = node.includes('api')
       ? node
       : `http://${node}:8000` ?? 'http://localhost:8000'
   }
 
   let axios_config: AxiosRequestConfig = {
-    url: `${host}${endpoint}`,
+    url: `${base_url}${endpoint}`,
     method: 'get', // default
     ...cfg,
   }
@@ -72,8 +72,8 @@ export const get_functions = (node?: string) =>
 export const get_function = (id: T.FunctionId, node?: string) =>
   fetch_api<Option<T.FuncJson>>(`/functions/${id}`, node)
 
-export const get_function_state = (id: T.FunctionId) =>
-  fetch_api<T.TermJson>(`/functions/${id}/state`)
+export const get_function_state = (id: T.FunctionId, node?: string) =>
+  fetch_api<T.TermJson>(`/functions/${id}/state`, node)
 
 // Interact
 

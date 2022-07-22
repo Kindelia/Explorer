@@ -8,7 +8,7 @@ export type Hex = Tagged<'Hex', string>
 export type HashHex = Tagged<'Hash', string>
 
 export type BlockId = HashHex
-export type FunctionId = Name | bigint
+export type FunctionId = Name
 
 export type Result<T, E> = Enum<Result_Variants<T, E>>
 export interface Result_Variants<T, E> {

@@ -69,8 +69,8 @@ SingleFunction.getInitialProps = async (ctx) => {
   const name = ctx.query.name as FunctionId
   try {
     const node = useNodeStore.getState().selectedNode.url
-    const fun = await get_function(name, node)
 
+    const fun = await get_function(name, node)
     const state = await get_function_state(name, node)
 
     return {
